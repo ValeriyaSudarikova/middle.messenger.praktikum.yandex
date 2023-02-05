@@ -1,0 +1,29 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "study project ",
+  "scripts": {
+    "dev" : "parcel index.hbs --no-cache",
+    "build": "parcel index.hbs --no-cache",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValeriyaSudarikova/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "messenger",
+    "messangery"
+  ],
+  "author": "Valeriya Sudarikova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValeriyaSudarikova/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/ValeriyaSudarikova/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
+    "parcel": "^2.8.3"
+  }
+}
