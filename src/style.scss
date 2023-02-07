@@ -1,0 +1,30 @@
+@import "./styles/base/variables";
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url(https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2) format('woff2');
+}
+
+* {
+  font-family: Comfortaa;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: $mainColor;
+}
+
+.container {
+  margin: 0 auto;
+  width: 1200px;
+  height: 100vh;
+  position: relative;
+}
+
+.fz-30 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 33px;
+}
+
+@import "styles/homepage";
+@import "styles/btn";

@@ -1,0 +1,22 @@
+.btn {
+  margin-top: 140px;
+  width: 304px;
+  height: 60px;
+  background-color: #5B6976;
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 15px;
+  box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  border: none;
+  z-index: 3;
+  cursor: pointer;
+}
+.btn:nth-child(2) {
+  margin-left: 23px;
+}
+.btn:hover {
+  border: #FFFFFF solid 1px;
+  box-shadow: -8px 8px 4px rgba(110, 109, 109, 0.25);
+}
