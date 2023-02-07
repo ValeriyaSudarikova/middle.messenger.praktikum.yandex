@@ -14,10 +14,30 @@
 <body>
     <div class="background">
         <div class="main">
-            <nav class="main__navigation">
-
+            <nav class="main__navigation small">
+                <div class="main__navigation_header">
+                    <img src="../img/user2.png" alt="иконка юзера" class="main__navigation_header-img">
+                    <div class="main__navigation_header-text hidden">
+                        <h3 class="fz-20">
+                            Валерия Сударикова
+                        </h3>
+                        <span class="fz-20 colored">
+                            cейчас онлайн
+                        </span>
+                    </div>
+                </div>
+                {{>navItem link="chats" iconPath="../icons/message.hbs.svg" iconAlt="иконка сообщений" text="Активные чаты"}}
+                {{>navItem link="contacts" iconPath="../icons/friends.svg" iconAlt="иконка чатов" text="Список контактов"}}
+                {{>navItem link="settings" iconPath="../icons/settings.svg" iconAlt="иконка сообщений" text="Настройки"}}
+                {{>btnSubmit class="main__navigation-close hidden" label="Скрыть меню"}}
+                <button type="button" class="main__navigation-open">
+                    <img src="../icons/next.svg" alt="далее"/>
+                </button>
             </nav>
-            {{choosePage}}
+<!--            {{>choosePage path="../icons/menu.svg" alt="выберете раздел"}}-->
+<!--            {{>choosePage path="../icons/404.svg" alt="ошибка 404"}}-->
+            {{>contacts}}
+
         </div>
     </div>
 </body>

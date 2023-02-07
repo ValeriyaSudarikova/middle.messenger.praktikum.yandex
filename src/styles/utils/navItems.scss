@@ -1,0 +1,25 @@
+@import "../base/variables";
+
+.nav__item {
+  width: 95%;
+  height: 66px;
+  padding: 7px 27px;
+  margin-bottom: 46px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid $mainColor;
+  box-shadow: -4px 3px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 38px 38px 0px;
+  text-decoration: none;
+  color: black;
+  &-img {
+    margin-right: 18px;
+  }
+}
+.nav__item:hover {
+  background: rgba(185, 227, 225, 0.6);
+}
+.hidden {
+  display: none;
+}

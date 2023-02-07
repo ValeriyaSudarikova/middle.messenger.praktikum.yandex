@@ -23,6 +23,8 @@
   }
 }
 .background {
+  width: 100%;
+  height: 100vh;
   background: $mainColor;
 }
 .white {
@@ -46,6 +48,16 @@
   font-size: 32px;
   line-height: 49px;
 }
+.fz-20 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  padding-bottom: 6px;
+}
+.colored {
+  color: $light;
+}
+
 
 
 @import "styles/utils/btn";
@@ -54,3 +66,7 @@
 @import "styles/partials/signin";
 @import "styles/partials/registration";
 @import "styles/partials/resetPassword";
+@import "styles/utils/navItems";
+@import "styles/utils/choosePage";
+@import "styles/partials/menu";
+@import "styles/partials/contacts";
