@@ -10,7 +10,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: $mainColor;
+  //background-color: $mainColor;
 }
 
 .container {
@@ -18,13 +18,39 @@
   width: 1200px;
   height: 100vh;
   position: relative;
+  &.white {
+    background: $subColor;
+  }
 }
-
+.background {
+  background: $mainColor;
+}
+.white {
+  background: $subColor;
+}
+.fz-24 {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+}
 .fz-30 {
   font-weight: 300;
   font-size: 30px;
   line-height: 33px;
+  &.colored {
+    color: #B9E3E1;
+  }
+}
+.fz-32 {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 49px;
 }
 
-@import "styles/homepage";
-@import "styles/btn";
+
+@import "styles/utils/btn";
+@import "styles/utils/input";
+@import "styles/partials/homepage";
+@import "styles/partials/signin";
+@import "styles/partials/registration";
+@import "styles/partials/resetPassword";

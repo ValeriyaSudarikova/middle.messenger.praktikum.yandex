@@ -12,21 +12,18 @@
     <link rel="stylesheet" href="../style.scss">
 </head>
 <body>
-    <div class="background">
-        <div class="container">
-            <div class="signin">
-                <div class="signin__circle">
-                    <form class="signin__form">
-                        {{>input type="text" label="введите логин" }}
+    <div class="white">
+        <div class="container white">
+            <div class="reset">
+                <img src="../img/logo_black.svg" alt="logo" class="registration__img">
+                <div class="reset__circle">
+                    <form class="reset__form">
+                        {{>input type="email" label="введите e-mail" }}
                         {{>input type="password" label="введите пароль" }}
-                        {{>btn href="./menu.hbs" type="button" class="signin__form_submit" label="Войти"}}
-<!--                        {{>btnSubmit class="signin__form_submit" label="Войти"}}-->
+                        {{>input type="password" label="повторите пароль" }}
+                        {{>btnSubmit class="submit" label="сбросить пароль"}}
                     </form>
                 </div>
-                <img class="signin__logo" src="../img/logo.svg"/>
-                <a href="./resetPasword.hbs" class="signin__link fz-30 colored">
-                    Забыли пароль?
-                </a>
             </div>
         </div>
     </div>

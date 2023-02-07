@@ -12,6 +12,11 @@
   border: none;
   z-index: 3;
   cursor: pointer;
+  &.submit {
+    display: block;
+    margin: 25px auto;
+    padding: 5px;
+  }
 }
 .btn:nth-child(2) {
   margin-left: 23px;
