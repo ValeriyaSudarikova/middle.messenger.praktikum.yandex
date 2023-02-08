@@ -1,0 +1,31 @@
+<div class="settings">
+    <div class="settings__header">
+        <div class="settings__header-avatar">
+            <img src="../img/user1.png" alt="аватар пользователя">
+            <div class="settings__header-avatar input__wrapper fz-25">
+                <label for="input__file">
+                    <span class="input__file--title">Изменить аватар</span>
+                </label>
+                <span class="input__wrapper-add fz-15"> выберете файл </span>
+                <input type="file" name="file" class="input__wrapper-add file" />
+            </div>
+            <div class="input__header-container">
+                {{>settingsInput label="имя" name="name" placeholder="введите имя" value="Валерия"}}
+                {{>settingsInput label="фамилия" name="surname" placeholder="введите фамилию" value=""}}
+            </div>
+        </div>
+    </div>
+    <form class="settings__inputs">
+        {{>settingsInput type="text" subtitle="Имя, по которому вас можно будет найти в поиске" label="имя пользователя" name="login" placeholder="введите имя пользователя" value=""}}
+        {{>settingsInput type="email" subtitle="адрес эл. почты введенный при регистрации" label="адрес эл. почты" name="email" placeholder="адрес эл. почты" value=""}}
+        {{>settingsInput type="text" subtitle="" label="имя пользователя" name="login" placeholder="введите имя пользователя" value=""}}
+        {{>settingsInput type="date" subtitle="" label="дата рождения" name="date" placeholder="" value=""}}
+        {{>settingsInput type="password" subtitle="Введите старый пароль" label="старый пароль" name="oldpass" placeholder="" value="password"}}
+        {{>settingsInput type="password" subtitle="Введите новый пароль, рекомендуется использовать буквы и символы для надежности" label="новый пароль" name="newpass" placeholder="введите пароль" value=""}}
+        {{>settingsInput type="password" subtitle="" label="повторите пароль" name="repeatpass" placeholder="повторите пароль" value=""}}
+        <div class="settings__inputs-submit">
+            {{>btnSubmit type="reset" class="input__reset" label="отменить изменения"}}
+            {{>btnSubmit type="submit" class="input__submit" label="cохранить"}}
+        </div>
+    </form>
+</div>
