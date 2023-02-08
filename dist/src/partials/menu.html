@@ -25,17 +25,17 @@
                         </span>
                     </div>
                 </div>
-                <a href="chats" class="nav__item">
+                <a href="/src/partials/chat.html" class="nav__item">
                     <img src="/message.d0157a52.svg" alt="иконка сообщений" class="nav__item-img">
                     <span class="nav__item-text fz-20 hidden">
                         Активные чаты
                     </span>
-                </a>                <a href="contacts" class="nav__item">
+                </a>                <a href="/src/partials/contacts.html" class="nav__item">
                     <img src="/friends.46408210.svg" alt="иконка чатов" class="nav__item-img">
                     <span class="nav__item-text fz-20 hidden">
                         Список контактов
                     </span>
-                </a>                <a href="settings" class="nav__item">
+                </a>                <a href="/src/partials/settings.html" class="nav__item">
                     <img src="/settings.39c66e00.svg" alt="иконка сообщений" class="nav__item-img">
                     <span class="nav__item-text fz-20 hidden">
                         Настройки
@@ -52,17 +52,17 @@
 <div class="choose__page_img">
     <img src="../icons/404.svg" alt="ошибка 404"/>
 </div>-->
-            <div class="contacts small">
-                <h3 class="contacts__header fz-24 hidden">
+            <div class="contacts ">
+                <h3 class="contacts__header fz-24 ">
                     Мои контакты
                 </h3>
                 <div class="contacts__list">
                     <div class="contacts__list_item">
                         <img src="/user1.f889a263.png" alt="изображение пользователя" class="user">
                         <div class="status online"></div>
-                        <div class="contacts__list_item-wrapper hidden">
+                        <div class="contacts__list_item-wrapper">
                             <div class="contacts__list_item-text">
-                                Иванов Иван
+                                Иванова Мария
                                 <span class="online"> сейчас онлайн </span>
                             </div>
                             <button type="button" class="contacts__list_item-btn mess">
@@ -75,9 +75,9 @@
                     </div>        <div class="contacts__list_item">
                         <img src="/user1.f889a263.png" alt="изображение пользователя" class="user">
                         <div class="status online"></div>
-                        <div class="contacts__list_item-wrapper hidden">
+                        <div class="contacts__list_item-wrapper">
                             <div class="contacts__list_item-text">
-                                Иванов Иван
+                                Сидорова Катя
                                 <span class="online"> сейчас онлайн </span>
                             </div>
                             <button type="button" class="contacts__list_item-btn mess">
@@ -90,7 +90,7 @@
                     </div>        <div class="contacts__list_item">
                         <img src="/user1.f889a263.png" alt="изображение пользователя" class="user">
                         <div class="status offline"></div>
-                        <div class="contacts__list_item-wrapper hidden">
+                        <div class="contacts__list_item-wrapper">
                             <div class="contacts__list_item-text">
                                 Иванов Иван
                                 <span class="offline"> не в сети </span>
@@ -103,6 +103,49 @@
                             </button>
                         </div>
                     </div>    </div>
+            </div>            <div class="chat">
+                <div class="chat__title">
+                    <div class="contacts__list_item">
+                        <img src="/user1.f889a263.png" alt="изображение пользователя" class="user">
+                        <div class="status online"></div>
+                        <div class="contacts__list_item-wrapper">
+                            <div class="contacts__list_item-text">
+                                Иванова Мария
+                                <span class="online"> в сети </span>
+                            </div>
+                            <button type="button" class="contacts__list_item-btn mess">
+                                <img src="/message.d0157a52.svg" alt="сообщение">
+                            </button>
+                            <button type="button" class="contacts__list_item-btn trash">
+                                <img src="/trash.10cff513.svg" alt="удаление">
+                            </button>
+                        </div>
+                    </div>    </div>
+                <div class="chat__wrapper">
+                    <div class="message to">
+                        <img src="/user1.f889a263.png" alt="аватарка пользователя">
+                        <span class="message__inner ">Hi there!</span>
+                    </div>        <div class="message from">
+                        <img src="/user2.b09095be.png" alt="аватарка пользователя">
+                        <span class="message__inner ">Hey dude!</span>
+                    </div>    </div>
+                <form class="chat__form">
+                    <div class="input__wrapper">
+                        <input name="file" type="file" id="input__file" class="input input__file" multiple="">
+                        <label for="input__file" class="input__file-button">
+                            <span class="input__file-icon-wrapper"><img class="input__file-icon" src="/add.478de987.svg" alt="Выбрать файл" width="25"></span>
+                            <span class="input__file-button-text "> 3 </span>
+                        </label>
+                    </div>
+                    <input type="text" class="chat__input-mess">
+                    <button type="submit" class="chat__input-submit">
+                        <img src="/send.77c6b977.svg">
+                    </button>
+                </form>
+            <!--    <form>-->
+            <!--        -->
+            <!--    </form>-->
+            
             </div>        </div>
     </div>
 <script src="/menu.41cbc921.js"></script></body>
