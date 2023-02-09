@@ -18,9 +18,9 @@
                 <img src="../img/logo_black.svg" alt="logo" class="registration__img">
                 <div class="reset__circle">
                     <form class="reset__form">
-                        {{>input type="email" label="введите e-mail" }}
-                        {{>input type="password" label="введите пароль" }}
-                        {{>input type="password" label="повторите пароль" }}
+                        {{>input type="email" label="введите e-mail" name="email"}}
+                        {{>input type="password" label="введите пароль"  name="newPassword"}}
+                        {{>input type="password" label="повторите пароль"  name="password"}}
                         {{>btnSubmit class="submit" label="сбросить пароль"}}
                     </form>
                 </div>
