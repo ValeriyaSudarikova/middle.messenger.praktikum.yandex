@@ -4,7 +4,7 @@
   "description": "study project ",
   "scripts": {
     "dev": "parcel index.hbs -p 3000 --no-cache",
-    "start": "node ./server.js",
+    "start": "node ./server.js -p 3000",
     "build": "node ./server.js"
   },
   "repository": {
