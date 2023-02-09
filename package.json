@@ -4,9 +4,8 @@
   "description": "study project ",
   "scripts": {
     "dev": "parcel index.hbs -p 3000 --no-cache",
-    "build": "parcel index.hbs --no-cache",
-    "test": "node ./.github/workflows/tests.yml",
-    "start": "node ./server.js"
+    "start": "node ./server.js",
+    "build": "node ./server.js"
   },
   "repository": {
     "type": "git",
