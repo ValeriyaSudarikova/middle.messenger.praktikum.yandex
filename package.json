@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel index.hbs -p 3000 --no-cache",
     "start": "node ./server.js -p 3000",
-    "build": "node ./server.js"
+    "build": "parcel build public/index.html"
   },
   "repository": {
     "type": "git",
