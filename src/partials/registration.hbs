@@ -19,16 +19,16 @@
                 <div class="registration__circle">
                     <form class="registration__form">
                         <div class="registration__form_inputs active">
-                            {{>input type="text" label="введите имя" }}
-                            {{>input type="text" label="введите фамию" }}
+                            {{>input type="text" label="введите имя" name="first_name"}}
+                            {{>input type="text" label="введите фамию" name="second_name"}}
                         </div>
                         <div class="registration__form_inputs ">
-                            {{>input type="tel" label="введите телефон" }}
-                            {{>input type="email" label="введите e-mail" }}
+                            {{>input type="tel" label="введите телефон" name="phone"}}
+                            {{>input type="email" label="введите e-mail" name="email"}}
                         </div>
                         <div class="registration__form_inputs ">
-                            {{>input type="text" label="введите логин" }}
-                            {{>input type="password" label="введите пароль" }}
+                            {{>input type="text" label="введите логин" name="login"}}
+                            {{>input type="password" label="введите пароль" name="password"}}
                         </div>
                         <div class="registration__form_pagination-wrapper">
                             <div class="registration__form_pagination">
