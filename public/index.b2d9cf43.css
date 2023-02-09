@@ -303,6 +303,9 @@
   border: 1px solid #fff;
   margin-bottom: 40px;
 }
+.registration input:focus {
+  background: #363a44;
+}
 
 .reset__circle {
   width: 100%;
