@@ -174,6 +174,7 @@
   z-index: 1;
   display: block;
   margin: 0 auto;
+  margin-top: -50px;
 }
 
 .homepage__btns {
@@ -210,7 +211,8 @@
 
 .signin__logo {
   position: relative;
-  transform: translateX(28%);
+  transform: translateX(30%);
+  margin-top: -50px;
 }
 
 .signin__link {
@@ -218,6 +220,7 @@
   cursor: pointer;
   text-decoration: underline;
   display: block;
+  margin-top: -20px;
 }
 
 .registration__img {
@@ -373,7 +376,7 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  padding: 39px;
+  padding: 40px 10px;
   display: flex;
 }
 
@@ -402,10 +405,11 @@
 
 .main__navigation-close {
   cursor: pointer;
+  width: 250px;
   text-align: center;
   margin-left: 40px;
   padding: 13px 46px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 28px;
   position: absolute;
@@ -724,7 +728,7 @@
 }
 
 .settings {
-  width: 98vw;
+  width: 88vw;
   height: 90vh;
   background: #fff;
   border-radius: 30px;
@@ -773,12 +777,9 @@
 }
 
 .settings__inputs-submit button {
+  width: 200px;
   height: 45px;
   padding: 10px;
-}
-
-.settings__inputs-submit button.input__reset {
-  width: 400px;
 }
 
 .input__wrapper-add {
@@ -803,10 +804,11 @@
 }
 
 .settings__input-wrapper {
+  display: flex;
   justify-content: flex-end;
   align-items: baseline;
   margin-bottom: 25px;
-  display: flex;
+  text-align: right;
 }
 
 .settings__input-wrapper input {

@@ -16,11 +16,11 @@
             <nav class="main__navigation small">
                 <div class="main__navigation_header">
                     <img src="../icons/user2.b09095be.png" alt="иконка юзера" class="main__navigation_header-img">
-                    <div class="main__navigation_header-text hidden">
-                        <h3 class="fz-20">
+                    <div class="main__navigation_header-text">
+                        <h3 class="fz-20 hidden">
                             Валерия Сударикова
                         </h3>
-                        <span class="fz-20 colored">
+                        <span class="fz-20 colored hidden">
                             cейчас онлайн
                         </span>
                     </div>
@@ -43,7 +43,8 @@
                         Настройки
                     </span>
                 </a>
-                <button type="button" class="btn fz-30 main__navigation-close hidden">Скрыть меню</button>                <button type="button" class="main__navigation-open">
+                <button type="button" class="btn fz-30 main__navigation-close hidden">Скрыть меню</button>
+                <button type="button" class="main__navigation-open ">
                     <img src="../icons/next.47c7f88f.svg" alt="далее">
                 </button>
             </nav>
@@ -54,103 +55,103 @@
 <!--<div class="choose__page_img">-->
 <!--    <img src="../icons/404.svg" alt="ошибка 404"/>-->
 <!--</div>-->
-<div class="contacts ">
-    <h3 class="contacts__header fz-24 ">
-        Мои контакты
-    </h3>
-    <div class="contacts__list">
-        <div class="contacts__list_item">
-            <img src="../icons/user1.f889a263.png" alt="изображение пользователя" class="user"/>
-            <div class="status online"></div>
-            <div class="contacts__list_item-wrapper">
-                <div class="contacts__list_item-text">
-                    Иванова Мария
-                    <span class="online"> сейчас онлайн </span>
-                </div>
-                <button type="button" class="contacts__list_item-btn mess">
-                    <img src="../icons/message.d0157a52.svg" alt="сообщение">
-                </button>
-                <button type="button" class="contacts__list_item-btn trash">
-                    <img src="../icons/trash.10cff513.svg" alt="удаление">
-                </button>
-            </div>
-        </div>
-        <div class="contacts__list_item">
-            <img src="../icons/user2.b09095be.png" alt="изображение пользователя" class="user"/>
-            <div class="status online"></div>
-            <div class="contacts__list_item-wrapper">
-                <div class="contacts__list_item-text">
-                    Сидорова Катя
-                    <span class="online"> сейчас онлайн </span>
-                </div>
-                <button type="button" class="contacts__list_item-btn mess">
-                    <img src="../icons/message.d0157a52.svg" alt="сообщение">
-                </button>
-                <button type="button" class="contacts__list_item-btn trash">
-                    <img src="../icons/trash.10cff513.svg" alt="удаление">
-                </button>
-            </div>
-        </div>
-        <div class="contacts__list_item">
-            <img src="../icons/user2.b09095be.png" alt="изображение пользователя" class="user"/>
-            <div class="status offline"></div>
-            <div class="contacts__list_item-wrapper">
-                <div class="contacts__list_item-text">
-                    Иванов Иван
-                    <span class="offline"> не в сети </span>
-                </div>
-                <button type="button" class="contacts__list_item-btn mess">
-                    <img src="../icons/message.d0157a52.svg" alt="сообщение">
-                </button>
-                <button type="button" class="contacts__list_item-btn trash">
-                    <img src="../icons/trash.10cff513.svg" alt="удаление">
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="chat">
-    <div class="chat__title">
-        <div class="contacts__list_item">
-            <img src="../icons/user1.f889a263.png" alt="изображение пользователя" class="user"/>
-            <div class="status online"></div>
-            <div class="contacts__list_item-wrapper">
-                <div class="contacts__list_item-text">
-                    Иванова Мария
-                    <span class="online"> в сети </span>
-                </div>
-                <button type="button" class="contacts__list_item-btn mess">
-                    <img src="../icons/message.d0157a52.svg" alt="сообщение">
-                </button>
-                <button type="button" class="contacts__list_item-btn trash">
-                    <img src="../icons/trash.10cff513.svg" alt="удаление">
-                </button>
-            </div>
-        </div>    </div>
-    <div class="chat__wrapper">
-        <div class="message to">
-            <img src="../icons/user1.f889a263.png" alt="аватарка пользователя">
-            <span class="message__inner ">Hi there!</span>
-        </div>
-        <div class="message from">
-            <img src="../icons/user2.b09095be.png" alt="аватарка пользователя">
-            <span class="message__inner ">Hey dude!</span>
-        </div>
-    </div>
-    <form class="chat__form">
-        <div class="input__wrapper">
-            <input name="file" type="file" id="input__file" class="input input__file" multiple>
-            <label for="input__file" class="input__file-button">
-                <span class="input__file-icon-wrapper"><img class="input__file-icon" src="../icons/add.478de987.svg" alt="Выбрать файл" width="25"></span>
-                <span class="input__file-button-text "> 3 </span>
-            </label>
-        </div>
-        <input type="text" class="chat__input-mess"/>
-        <button type="submit" class="chat__input-submit">
-            <img src="../icons/send.77c6b977.svg">
-        </button>
-    </form>
-</div>
+<!--<div class="contacts ">-->
+<!--    <h3 class="contacts__header fz-24 ">-->
+<!--        Мои контакты-->
+<!--    </h3>-->
+<!--    <div class="contacts__list">-->
+<!--        <div class="contacts__list_item">-->
+<!--            <img src="../icons/user1.f889a263.png" alt="изображение пользователя" class="user"/>-->
+<!--            <div class="status online"></div>-->
+<!--            <div class="contacts__list_item-wrapper">-->
+<!--                <div class="contacts__list_item-text">-->
+<!--                    Иванова Мария-->
+<!--                    <span class="online"> сейчас онлайн </span>-->
+<!--                </div>-->
+<!--                <button type="button" class="contacts__list_item-btn mess">-->
+<!--                    <img src="../icons/message.d0157a52.svg" alt="сообщение">-->
+<!--                </button>-->
+<!--                <button type="button" class="contacts__list_item-btn trash">-->
+<!--                    <img src="../icons/trash.10cff513.svg" alt="удаление">-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="contacts__list_item">-->
+<!--            <img src="../icons/user2.b09095be.png" alt="изображение пользователя" class="user"/>-->
+<!--            <div class="status online"></div>-->
+<!--            <div class="contacts__list_item-wrapper">-->
+<!--                <div class="contacts__list_item-text">-->
+<!--                    Сидорова Катя-->
+<!--                    <span class="online"> сейчас онлайн </span>-->
+<!--                </div>-->
+<!--                <button type="button" class="contacts__list_item-btn mess">-->
+<!--                    <img src="../icons/message.d0157a52.svg" alt="сообщение">-->
+<!--                </button>-->
+<!--                <button type="button" class="contacts__list_item-btn trash">-->
+<!--                    <img src="../icons/trash.10cff513.svg" alt="удаление">-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="contacts__list_item">-->
+<!--            <img src="../icons/user2.b09095be.png" alt="изображение пользователя" class="user"/>-->
+<!--            <div class="status offline"></div>-->
+<!--            <div class="contacts__list_item-wrapper">-->
+<!--                <div class="contacts__list_item-text">-->
+<!--                    Иванов Иван-->
+<!--                    <span class="offline"> не в сети </span>-->
+<!--                </div>-->
+<!--                <button type="button" class="contacts__list_item-btn mess">-->
+<!--                    <img src="../icons/message.d0157a52.svg" alt="сообщение">-->
+<!--                </button>-->
+<!--                <button type="button" class="contacts__list_item-btn trash">-->
+<!--                    <img src="../icons/trash.10cff513.svg" alt="удаление">-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="chat">-->
+<!--    <div class="chat__title">-->
+<!--        <div class="contacts__list_item">-->
+<!--            <img src="../icons/user1.f889a263.png" alt="изображение пользователя" class="user"/>-->
+<!--            <div class="status online"></div>-->
+<!--            <div class="contacts__list_item-wrapper">-->
+<!--                <div class="contacts__list_item-text">-->
+<!--                    Иванова Мария-->
+<!--                    <span class="online"> в сети </span>-->
+<!--                </div>-->
+<!--                <button type="button" class="contacts__list_item-btn mess">-->
+<!--                    <img src="../icons/message.d0157a52.svg" alt="сообщение">-->
+<!--                </button>-->
+<!--                <button type="button" class="contacts__list_item-btn trash">-->
+<!--                    <img src="../icons/trash.10cff513.svg" alt="удаление">-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>    </div>-->
+<!--    <div class="chat__wrapper">-->
+<!--        <div class="message to">-->
+<!--            <img src="../icons/user1.f889a263.png" alt="аватарка пользователя">-->
+<!--            <span class="message__inner ">Hi there!</span>-->
+<!--        </div>-->
+<!--        <div class="message from">-->
+<!--            <img src="../icons/user2.b09095be.png" alt="аватарка пользователя">-->
+<!--            <span class="message__inner ">Hey dude!</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <form class="chat__form">-->
+<!--        <div class="input__wrapper">-->
+<!--            <input name="file" type="file" id="input__file" class="input input__file" multiple>-->
+<!--            <label for="input__file" class="input__file-button">-->
+<!--                <span class="input__file-icon-wrapper"><img class="input__file-icon" src="../icons/add.478de987.svg" alt="Выбрать файл" width="25"></span>-->
+<!--                <span class="input__file-button-text "> 3 </span>-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <input type="text" class="chat__input-mess"/>-->
+<!--        <button type="submit" class="chat__input-submit">-->
+<!--            <img src="../icons/send.77c6b977.svg">-->
+<!--        </button>-->
+<!--    </form>-->
+<!--</div>-->
 <!--<div class="popup__layout">-->
 <!--    <div class="popup__open">-->
 <!--        <span class="popup__open-text fz-40b">-->
@@ -162,91 +163,91 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-<!--            <div class="settings">-->
-<!--                <div class="settings__header">-->
-<!--                    <div class="settings__header-avatar">-->
-<!--                        <img src="../icons/user1.f889a263.png" alt="аватар пользователя">-->
-<!--                        <div class="settings__header-avatar input__wrapper fz-25">-->
-<!--                            <label for="input__file-set">-->
-<!--                                <span class="input__file&#45;&#45;title">Изменить аватар</span>-->
-<!--                            </label>-->
-<!--                            <span class="input__wrapper-add fz-15"> выберете файл </span>-->
-<!--                            <input type="file" name="avatar" class="input__wrapper-add file" id="input__file-set">-->
-<!--                        </div>-->
-<!--                        <div class="input__header-container">-->
-<!--                            <div class="settings__input-wrapper">-->
-<!--                                <label class="settings__input-label fz-25">-->
-<!--                                    имя-->
-<!--                                    <span class="settings__input-label subtitle">  </span>-->
-<!--                                </label>-->
-<!--                                <input type="text" name="first_name" placeholder="введите имя" required="" value="Валерия">-->
-<!--                            </div>-->
-<!--                            <div class="settings__input-wrapper">-->
-<!--                                <label class="settings__input-label fz-25">-->
-<!--                                    фамилия-->
-<!--                                    <span class="settings__input-label subtitle">  </span>-->
-<!--                                </label>-->
-<!--                                <input type="text" name="second_name" placeholder="введите фамилию" required="" value="">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <form class="settings__inputs">-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            имя пользователя-->
-<!--                            <span class="settings__input-label subtitle"> логин, по которому вас можно будет найти в поиске </span>-->
-<!--                        </label>-->
-<!--                        <input type="text" name="login" placeholder="введите имя пользователя" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            адрес эл. почты-->
-<!--                            <span class="settings__input-label subtitle"> адрес эл. почты введенный при регистрации </span>-->
-<!--                        </label>-->
-<!--                        <input type="email" name="email" placeholder="адрес эл. почты" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            имя пользователя-->
-<!--                            <span class="settings__input-label subtitle"> имя для показа в чате </span>-->
-<!--                        </label>-->
-<!--                        <input type="text" name="login" placeholder="введите имя" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            номер телефона-->
-<!--                            <span class="settings__input-label subtitle">  </span>-->
-<!--                        </label>-->
-<!--                        <input type="phone" name="phone" placeholder="" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            старый пароль-->
-<!--                            <span class="settings__input-label subtitle"> Введите старый пароль </span>-->
-<!--                        </label>-->
-<!--                        <input type="password" name="oldPassword" placeholder="" required value="password">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            новый пароль-->
-<!--                            <span class="settings__input-label subtitle"> Введите новый пароль, рекомендуется использовать буквы и символы для надежности </span>-->
-<!--                        </label>-->
-<!--                        <input type="password" name="newPassword" placeholder="введите пароль" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__input-wrapper">-->
-<!--                        <label class="settings__input-label fz-25">-->
-<!--                            повторите пароль-->
-<!--                            <span class="settings__input-label subtitle">  </span>-->
-<!--                        </label>-->
-<!--                        <input type="password" name="repeats" placeholder="повторите пароль" required value="">-->
-<!--                    </div>-->
-<!--                    <div class="settings__inputs-submit">-->
-<!--                        <button type="reset" class="btn fz-30 input__reset">отменить изменения</button>-->
-<!--                        <button type="submit" class="btn fz-30 input__submit">cохранить</button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
+            <div class="settings">
+                <div class="settings__header">
+                    <div class="settings__header-avatar">
+                        <img src="../icons/user1.f889a263.png" alt="аватар пользователя">
+                        <div class="settings__header-avatar input__wrapper fz-25">
+                            <label for="input__file-set">
+                                <span class="input__file--title">Изменить аватар</span>
+                            </label>
+                            <span class="input__wrapper-add fz-15"> выберете файл </span>
+                            <input type="file" name="avatar" class="input__wrapper-add file" id="input__file-set">
+                        </div>
+                        <div class="input__header-container">
+                            <div class="settings__input-wrapper">
+                                <label class="settings__input-label fz-25">
+                                    имя
+                                    <span class="settings__input-label subtitle">  </span>
+                                </label>
+                                <input type="text" name="first_name" placeholder="введите имя" required="" value="Валерия">
+                            </div>
+                            <div class="settings__input-wrapper">
+                                <label class="settings__input-label fz-25">
+                                    фамилия
+                                    <span class="settings__input-label subtitle">  </span>
+                                </label>
+                                <input type="text" name="second_name" placeholder="введите фамилию" required="" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="settings__inputs">
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            имя пользователя
+                            <span class="settings__input-label subtitle"> логин, по которому вас можно будет найти в поиске </span>
+                        </label>
+                        <input type="text" name="login" placeholder="введите имя пользователя" required value="">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            адрес эл. почты
+                            <span class="settings__input-label subtitle"> адрес эл. почты введенный при регистрации </span>
+                        </label>
+                        <input type="email" name="email" placeholder="адрес эл. почты" required value="">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            имя пользователя
+                            <span class="settings__input-label subtitle"> имя для показа в чате </span>
+                        </label>
+                        <input type="text" name="login" placeholder="введите имя" required value="">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            номер телефона
+                            <span class="settings__input-label subtitle">  </span>
+                        </label>
+                        <input type="phone" name="phone" placeholder="" required value="">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            старый пароль
+                            <span class="settings__input-label subtitle"> Введите старый пароль </span>
+                        </label>
+                        <input type="password" name="oldPassword" placeholder="" required value="password">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            новый пароль
+                            <span class="settings__input-label subtitle"> Введите новый пароль, рекомендуется использовать буквы и символы для надежности </span>
+                        </label>
+                        <input type="password" name="newPassword" placeholder="введите пароль" required value="">
+                    </div>
+                    <div class="settings__input-wrapper">
+                        <label class="settings__input-label fz-25">
+                            повторите пароль
+                            <span class="settings__input-label subtitle">  </span>
+                        </label>
+                        <input type="password" name="repeats" placeholder="повторите пароль" required value="">
+                    </div>
+                    <div class="settings__inputs-submit">
+                        <button type="reset" class="btn fz-20 input__reset">отменить</button>
+                        <button type="submit" class="btn fz-20 input__submit">cохранить</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>
