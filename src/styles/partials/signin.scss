@@ -27,11 +27,13 @@
   &__logo {
     position: relative;
     transform: translateX(28%);
+    margin-top: -50px;
   }
   &__link {
-    display: block;
     text-align: center;
-    text-decoration: underline;
     cursor: pointer;
+    text-decoration: underline;
+    display: block;
+    margin-top: -20px;
   }
 }

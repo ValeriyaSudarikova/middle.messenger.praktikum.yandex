@@ -1,17 +1,17 @@
 .btn {
-  margin-top: 140px;
   width: 304px;
   height: 60px;
-  background-color: #5B6976;
-  color: #FFFFFF;
+  color: $subColor;
   text-align: center;
-  text-decoration: none;
-  padding-top: 15px;
-  box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
-  border: none;
   z-index: 3;
   cursor: pointer;
+  background-color: #5b6976;
+  border: none;
+  border-radius: 30px;
+  margin-top: 140px;
+  padding-top: 15px;
+  text-decoration: none;
+  box-shadow: -8px 8px 4px #00000040;
   &.submit {
     display: block;
     margin: 25px auto;
@@ -22,6 +22,6 @@
   margin-left: 23px;
 }
 .btn:hover {
-  border: #FFFFFF solid 1px;
+  border: $subColor solid 1px;
   box-shadow: -8px 8px 4px rgba(110, 109, 109, 0.25);
 }

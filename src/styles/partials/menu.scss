@@ -1,11 +1,10 @@
 @import "../base/variables";
 .main {
-  padding: 39px;
-  //position: flex;
-  display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
+  padding: 40px 10px;
+  display: flex;
   &__navigation {
     display: flex;
     flex-direction: column;
@@ -26,14 +25,15 @@
       }
     }
     &-close {
-      position: absolute;
       cursor: pointer;
-      margin-left: 40px;
+      width: 250px;
       text-align: center;
+      margin-left: 40px;
       padding: 13px 46px;
+      font-size: 20px;
       font-weight: 400;
-      font-size: 25px;
       line-height: 28px;
+      position: absolute;
       bottom: 21px;
     }
     &-open {

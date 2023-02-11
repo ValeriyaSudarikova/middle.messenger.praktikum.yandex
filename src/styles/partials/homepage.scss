@@ -3,35 +3,32 @@
 .homepage {
   margin-top: 0;
   &__circle {
-    display: block;
-    background-color: $subColor;
     width: 100%;
     height: 630px;
-    position: absolute;
-    top: 0;
     z-index: 2;
+    background-color: $subColor;
     border-radius: 0 0 720px 720px;
-    box-shadow: -4px 19px 67px rgba(0, 0, 0, 0.1);
+    display: block;
+    top: 0;
+    box-shadow: -4px 19px 67px #0000001a;
     &_img {
-      display: block;
       z-index: 3;
-      margin: -5 auto;
-      //margin-top: 40px;
-      fill: #fff;
+      fill: $subColor;
+      position: absolute;
+      top: -10px;
+      left: 25%;
+      display: block;
     }
   }
   &__logo {
-    position: absolute;
-    bottom: 17%;
-    transform: translateX(30%);
     z-index: 1;
+    display: block;
+    margin: 0 auto;
+    margin-top: -50px;
   }
   &__btns {
-    position: absolute;
-    bottom: 12%;
-    left: 20%;
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    display: flex;
   }
 }

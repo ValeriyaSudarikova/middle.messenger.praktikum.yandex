@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.scss">
+    <link rel="stylesheet" href="../../style.scss">
 </head>
 <body>
     <div class="background">
@@ -17,14 +17,14 @@
             <div class="signin">
                 <div class="signin__circle">
                     <form class="signin__form">
-                        {{>input type="text" label="введите логин" }}
-                        {{>input type="password" label="введите пароль" }}
-                        {{>btn href="./menu.hbs" type="button" class="signin__form_submit" label="Войти"}}
-<!--                        {{>btnSubmit class="signin__form_submit" label="Войти"}}-->
+                        {{>components/input type="text" name="login" label="введите логин" }}
+                        {{>components/input type="password" name="password" label="введите пароль" }}
+                        {{>components/btn href="./menu.hbs" type="button" class="signin__form_submit" label="Войти"}}
+<!--                        {{>components/btnSubmit class="signin__form_submit" label="Войти"}}-->
                     </form>
                 </div>
-                <img class="signin__logo" src="../img/logo.svg"/>
-                <a href="./resetPasword.hbs" class="signin__link fz-30 colored">
+                <img class="signin__logo" src="../../../public/src/icons/logo.svg"/>
+                <a href="resetPasword.hbs" class="signin__link fz-30 colored">
                     Забыли пароль?
                 </a>
             </div>
