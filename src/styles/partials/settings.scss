@@ -1,0 +1,71 @@
+@import "../base/variables";
+.settings {
+  width: 88vw;
+  height: 90vh;
+  background: $subColor;
+  margin-left: 20px;
+  box-shadow: -4px 17px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  position: relative;
+  &__header {
+    padding: 54px 64px 0 64px;
+    margin-bottom: 60px;
+    &-avatar {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: stretch;
+      &.input__wrapper {
+        width: 300px;
+        margin-right: 180px;
+        margin-left: 40px;
+      }
+      img {
+        width: 135px;
+        height: 135px;
+        object-fit: fill;
+        border-radius: 50%;
+      }
+    }
+  }
+  &__inputs {
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+    padding-left: 60px;
+    display: flex;
+    &-submit {
+      position: absolute;
+      bottom: 35px;
+      right: 60px;
+      button {
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        padding-bottom: 6px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 25px;
+      }
+    }
+  }
+}
+.input__wrapper-add {
+  width: 222px;
+  height: 33px;
+  background: $subColor;
+  border: 1px solid rgba(91, 105, 118, 0.58);
+  border-radius: 30px;
+  color: rgba(91, 105, 118, 0.58);
+  position: absolute;
+  text-align: center;
+  padding: 7px;
+  top: 70px;
+  cursor: pointer;
+  &.file {
+    position: absolute;
+    opacity: 0;
+    top: 70px;
+    cursor: pointer;
+  }
+}

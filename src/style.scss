@@ -1,0 +1,106 @@
+@import "./styles/base/variables";
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url(https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2) format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Comfortaa;
+}
+
+.container {
+  width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+.container.white {
+  background: #fff;
+}
+
+.background {
+  width: 100%;
+  height: 100vh;
+  background: #363a44;
+}
+
+.white {
+  background: #fff;
+}
+
+.fz-15 {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.fz-20 {
+  padding-bottom: 6px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.fz-24 {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+.fz-25 {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.fz-30 {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 33px;
+}
+
+.fz-30.colored {
+  color: #b9e3e1;
+}
+
+.fz-32 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 49px;
+}
+
+.fz-40b {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 45px;
+}
+
+.fz-40 {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 45px;
+}
+
+.colored {
+  color: #ace0dcfc;
+}
+
+@import "styles/utils/btn";
+@import "styles/utils/input";
+@import "styles/partials/homepage";
+@import "styles/partials/signin";
+@import "styles/partials/registration";
+@import "styles/partials/resetPassword";
+@import "styles/utils/navItems";
+@import "styles/utils/choosePage";
+@import "styles/partials/menu";
+@import "styles/partials/contacts";
+@import "styles/partials/chat";
+@import "styles/utils/popup";
+@import "styles/partials/settings";
+@import "styles/utils/settingsInput";

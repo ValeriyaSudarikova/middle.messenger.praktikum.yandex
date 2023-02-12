@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Messengery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.scss">
+</head>
+<body>
+    <main class="background">
+        <div class="main">
+            <nav class="main__navigation small">
+                <div class="main__navigation_header">
+                    <img src="../../img/user2.png" alt="иконка юзера" class="main__navigation_header-img">
+                    <div class="main__navigation_header-text hidden">
+                        <h3 class="fz-20">
+                            Валерия Сударикова
+                        </h3>
+                        <span class="fz-20 colored">
+                            cейчас онлайн
+                        </span>
+                    </div>
+                </div>
+                {{>components/navItem link="../components/chat.hbs" iconPath="../../icons/message.svg" iconAlt="иконка сообщений" text="Активные чаты"}}
+                {{>components/navItem link="../components/contacts.hbs" iconPath="../../icons/friends.svg" iconAlt="иконка чатов" text="Список контактов"}}
+                {{>components/navItem link="../components/settings.hbs" iconPath="../../icons/settings.svg" iconAlt="иконка сообщений" text="Настройки"}}
+                {{>components/btnSubmit class="main__navigation-close hidden" label="Скрыть меню"}}
+                <button type="button" class="main__navigation-open">
+                    <img src="../../icons/next.svg" alt="далее"/>
+                </button>
+            </nav>
+<!--                        {{>components/choosePage path="../../icons/menu.svg" alt="выберете раздел"}}-->
+<!--                        {{>components/choosePage path="../../icons/404.svg" alt="ошибка 404"}}-->
+<!--                        {{>components/contacts}}-->
+<!--                        {{>components/chat}}-->
+            <!--            {{>components/popup}}-->
+            {{>components/settings}}
+        </div>
+    </main>
+</body>
+</html>
