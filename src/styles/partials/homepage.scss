@@ -2,30 +2,34 @@
 
 .homepage {
   margin-top: 0;
+
   &__circle {
     width: 100%;
     height: 630px;
     z-index: 2;
-    background-color: $subColor;
+    background-color: $sub-color;
     border-radius: 0 0 720px 720px;
     display: block;
     top: 0;
     box-shadow: -4px 19px 67px #0000001a;
+
     &_img {
       z-index: 3;
-      fill: $subColor;
+      fill: $sub-color;
       position: absolute;
       top: -10px;
       left: 25%;
       display: block;
     }
   }
+
   &__logo {
     z-index: 1;
     display: block;
     margin: 0 auto;
     margin-top: -50px;
   }
+
   &__btns {
     flex-direction: row;
     justify-content: center;
