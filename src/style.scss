@@ -1,15 +1,15 @@
 @import "./styles/base/variables";
 
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2) format('woff2');
+  font-family: Comfortaa;
+  src: url("https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2") format('woff2');
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Comfortaa;
+  font-family: Comfortaa, serif;
 }
 
 .container {
@@ -92,15 +92,15 @@
 
 @import "styles/utils/btn";
 @import "styles/utils/input";
-@import "styles/partials/homepage";
-@import "styles/partials/signin";
-@import "styles/partials/registration";
-@import "styles/partials/resetPassword";
 @import "styles/utils/navItems";
 @import "styles/utils/choosePage";
 @import "styles/partials/menu";
 @import "styles/partials/contacts";
 @import "styles/partials/chat";
 @import "styles/utils/popup";
-@import "styles/partials/settings";
 @import "styles/utils/settingsInput";
+@import "styles/partials/homepage";
+@import "styles/partials/signin";
+@import "styles/partials/registration";
+@import "styles/partials/resetPassword";
+@import "styles/partials/settings";

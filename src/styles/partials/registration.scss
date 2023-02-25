@@ -1,34 +1,41 @@
 @import "../base/variables";
 
 .registration {
+
   &__img {
     display: block;
     margin: 0 auto;
   }
+
   &__circle {
     display: block;
-    background: $mainColor;
+    background: $main-color;
     width: 100%;
     height: 680px;
     border-radius: 720px 720px 0 0;
-    box-shadow: -4px 19px 67px rgba(0, 0, 0, 0.1);
+    box-shadow: -4px 19px 67px rgba(0 0 0 / 0.1);
     position: absolute;
     bottom: 0;
   }
+
   &__form {
     width: 500px;
     height: 450px;
     margin: 200px auto;
     //margin-top: 150px;
+
     &_inputs {
       display: none;
+
       &.active {
         display: block;
       }
     }
+
     &_pagination {
       display: flex;
       flex-direction: row;
+
       &-wrapper {
         margin: 0 auto;
         height: 50px;
@@ -38,37 +45,42 @@
         justify-content: space-between;
         align-items: flex-end;
       }
+
       &-item {
         display: block;
         width: 10px;
         height: 10px;
         margin-right: 3px;
         border-radius: 100%;
-        background: $subColor;
+        background: $sub-color;
+
         &.active {
           width: 25px;
           border-radius: 100px;
         }
       }
+
       &-trigger {
         padding-top: 15px;
         width: 32px;
         height: 32px;
-        background: $mainColor;
+        background: $main-color;
         border-radius: 100%;
         border: none;
         cursor: pointer;
       }
     }
   }
+
   & label {
-    background: $mainColor;
-    color: $subColor;
+    background: $main-color;
+    color: $sub-color;
   }
+
   & input {
-    background: $mainColor;
-    color: $subColor;
-    border: 1px solid $subColor;
+    background: $main-color;
+    color: $sub-color;
+    border: 1px solid $sub-color;
     margin-bottom: 40px;
   }
 }
