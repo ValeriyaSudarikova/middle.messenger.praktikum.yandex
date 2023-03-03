@@ -4,10 +4,11 @@
   "description": "study project ",
   "scripts": {
     "dev": "parcel src/index.html -p 3002 --no-cache",
-    "build:prod": "parcel build src/index.html --no-cache",
+    "build:prod": "parcel build ./index.html --no-cache",
     "start": "npm run build:prod && ts-node server.ts",
     "check": "tsc --noEmit",
     "eslint": "node_modules/.bin/eslint . --fix "
+
   },
   "repository": {
     "type": "git",
