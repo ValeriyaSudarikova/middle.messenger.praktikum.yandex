@@ -13,6 +13,8 @@
 	"ignoreFiles": [
 		"build/*",
 		"public/*",
-		"dist/*"
+		"dist/*",
+		"node-modules/*",
+		".github/*"
 	]
 }
