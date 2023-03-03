@@ -1,66 +1,67 @@
 enum METHODS {
-	GET = 'GET',
-	POST = 'POST',
-	PUT = 'PUT',
-	DELETE = 'DELETE'
+	GET = "GET",
+	POST = "POST",
+	PUT = "PUT",
+	DELETE = "DELETE"
 
 }
+/* eslint-disable */
 type Data = Record<string, any>
 type Options = {method: METHODS, data?: Data, headers?: Record<string, string>}
 type OptionsWithoutMethod = {data?: Data, timeout?: number}
 
 function queryStringify(data: Data) {
-	let json = Object.entries(data)
+	const json = Object.entries(data)
 
-	let resStr = '?';
+	let resStr = "?"
 	json.map(item => {
 		if (Array.isArray(item)) {
 			item.map((inner,i) => {
 				if (i === 0) {
-					return resStr += inner + '=';
+					return resStr += inner + "="
 				} else {
-					return resStr += inner +'&'
+					return resStr += inner +"&"
 				}
 			})
 		}
 	})
 	resStr = resStr.slice(0, resStr.length - 1)
-	return resStr ? resStr : ''
+	return resStr ? resStr : ""
 }
-
+/* eslint-disable */
 class HTTPTransport {
-	checkRoute = (data: Data | undefined) => {return data ? queryStringify(data) : ''}
-	get = (url: string, options: OptionsWithoutMethod = {}, timeout: number = 5000):Promise<XMLHttpRequest> => {
-		let route:string = this.checkRoute(options.data)
-		return this.request(route, {...options, method: METHODS.GET}, timeout);
-	};
-	post = (url, options: OptionsWithoutMethod = {}, timeout: number = 5000) => {
-		let route:string = this.checkRoute(options.data)
+	checkRoute = (data: Data | undefined) => {return data ? queryStringify(data) : ""}
+	get = (url: string, options: OptionsWithoutMethod = {}, timeout = 5000):Promise<XMLHttpRequest> => {
+		const route:string = this.checkRoute(options.data)
+		return this.request(route, {...options, method: METHODS.GET}, timeout)
+	}
+	post = (url, options: OptionsWithoutMethod = {}, timeout = 5000) => {
+		const route:string = this.checkRoute(options.data)
 		return this.request(route, {...options, method: METHODS.POST}, timeout)
 	}
-	put = (url, options: OptionsWithoutMethod={}, timeout: number = 5000) => {
-		let route:string = this.checkRoute(options.data)
+	put = (url, options: OptionsWithoutMethod={}, timeout = 5000) => {
+		const route:string = this.checkRoute(options.data)
 		return this.request(route, {...options, method: METHODS.PUT}, timeout)
 	}
-	delete = (url, options: OptionsWithoutMethod={}, timeout: number = 5000) => {
-		let route:string = this.checkRoute(options.data)
+	delete = (url, options: OptionsWithoutMethod={}, timeout = 5000) => {
+		const route:string = this.checkRoute(options.data)
 		return this.request(route, {...options, method: METHODS.DELETE}, timeout)
 	}
-
+	/* eslint-disable */
 	request = (url: string, options: Options = {method: METHODS.GET}, timeout = 5000):Promise<XMLHttpRequest> => {
-		const {method, data, headers} = options;
+		const {method, data, headers} = options
 
 		return new Promise((resolve, reject) => {
 
-			const xhr = new XMLHttpRequest;
+			const xhr = new XMLHttpRequest
 
-			xhr.open(url, method);
+			xhr.open(url, method)
 
 			if (headers) {
-				let hdrs = Object.entries(headers);
+				const hdrs = Object.entries(headers)
 				hdrs.forEach(item => {
 					if (Array.isArray(item) && item[0]) {
-						xhr.setRequestHeader(item[0], item[1]);
+						xhr.setRequestHeader(item[0], item[1])
 					}
 				})
 			}
@@ -69,15 +70,15 @@ class HTTPTransport {
 				resolve(xhr)
 			}
 
-			xhr.onabort = reject;
-			xhr.onerror = reject;
-			xhr.ontimeout = reject;
+			xhr.onabort = reject
+			xhr.onerror = reject
+			xhr.ontimeout = reject
 
 			if (method === METHODS.GET || !data) {
 				xhr.send()
 			} else {
 				xhr.send(JSON.stringify(data))
 			}
-		});
+		})
 	}
 }

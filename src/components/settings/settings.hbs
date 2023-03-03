@@ -1,0 +1,20 @@
+<div class="settings">
+    <div class="settings__header">
+        <div class="settings__header-avatar">
+					{{{userAvatar}}}
+            <div class="settings__header-avatar input__wrapper fz-25">
+								{{{settingsFileInput}}}
+            </div>
+            <div class="input__header-container">
+								{{#each SettingsHeaderInputs}} {{{this}}} {{/each}}
+						</div>
+        </div>
+    </div>
+    <form class="settings__inputs">
+				{{#each SettingsInputs}} {{{this}}} {{/each}}
+        <div class="settings__inputs-submit">
+					{{{btnReset}}}
+					{{{btnSubmit}}}
+        </div>
+    </form>
+</div>

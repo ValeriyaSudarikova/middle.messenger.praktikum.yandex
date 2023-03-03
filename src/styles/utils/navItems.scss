@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
   border: 1px solid $main-color;
   box-shadow: -4px 3px 0px rgba(0, 0, 0, 0.25);
   border-radius: 0 38px 38px 0;
@@ -17,9 +18,12 @@
   &-img {
     margin-right: 18px;
   }
+  &-text {
+    padding-left: 18px;
+  }
 }
 
-.nav-item:hover {
+.nav__item:hover {
   background: rgba(185 227 225 / 0.6);
 }
 
