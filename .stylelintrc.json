@@ -12,6 +12,7 @@
 	},
 	"ignoreFiles": [
 		"build/*",
-		"public/*"
+		"public/*",
+		"dist/*"
 	]
 }
