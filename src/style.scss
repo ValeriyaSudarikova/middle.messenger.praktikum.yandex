@@ -32,13 +32,23 @@
 .white {
   background: #fff;
 }
-
+.fz-14l {
+  color: #839DAA;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 17px;
+  padding-left: 5px;
+}
 .fz-15 {
   font-size: 15px;
   font-weight: 400;
   line-height: 17px;
 }
-
+.fz-16b {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17px;
+}
 .fz-20 {
   padding-bottom: 6px;
   font-size: 20px;
@@ -97,6 +107,7 @@
 @import "styles/partials/menu";
 @import "styles/partials/contacts";
 @import "styles/partials/chat";
+@import "styles/partials/chatItems";
 @import "styles/utils/popup";
 @import "styles/utils/settingsInput";
 @import "styles/partials/homepage";

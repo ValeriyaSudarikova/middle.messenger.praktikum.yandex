@@ -54,6 +54,12 @@
         font-size: 20px;
         font-weight: 400;
         line-height: 25px;
+        &.input__reset {
+          width: 300px;
+        }
+        &:disabled {
+          background: #e8e8e8;
+        }
       }
     }
   }

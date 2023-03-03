@@ -1,4 +1,4 @@
-//--no-eslintrc
+/* eslint-disable */
 const express = require("express")
 
 const app = express()

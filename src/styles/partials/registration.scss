@@ -53,6 +53,7 @@
         margin-right: 3px;
         border-radius: 100%;
         background: $sub-color;
+        transition: 0.5s;
 
         &.active {
           width: 25px;
@@ -61,7 +62,7 @@
       }
 
       &-trigger {
-        padding-top: 15px;
+        padding-top: 7px;
         width: 32px;
         height: 32px;
         background: $main-color;

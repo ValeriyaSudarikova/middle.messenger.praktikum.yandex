@@ -1,0 +1,13 @@
+<div class="chat">
+    <div class="chat__title">
+			{{{activeContactItem}}}
+    </div>
+    <div class="chat__wrapper">
+			{{#each messages}} {{{this}}} {{/each}}
+    </div>
+    <form class="chat__form">
+			{{{fileInput}}}
+			{{{chatInput}}}
+			{{{submitBtn}}}
+    </form>
+</div>
