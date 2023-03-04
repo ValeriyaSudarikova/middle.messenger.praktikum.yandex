@@ -1,15 +1,15 @@
 @import "./styles/base/variables";
 
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2) format('woff2');
+  font-family: Comfortaa;
+  src: url("https://fonts.gstatic.com/s/comfortaa/v40/1Ptsg8LJRfWJmhDAuUs4SYFqL_KWxWMT.woff2") format('woff2');
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Comfortaa;
+  font-family: Comfortaa, serif;
 }
 
 .container {
@@ -32,13 +32,23 @@
 .white {
   background: #fff;
 }
-
+.fz-14l {
+  color: #839DAA;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 17px;
+  padding-left: 5px;
+}
 .fz-15 {
   font-size: 15px;
   font-weight: 400;
   line-height: 17px;
 }
-
+.fz-16b {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17px;
+}
 .fz-20 {
   padding-bottom: 6px;
   font-size: 20px;
@@ -92,15 +102,16 @@
 
 @import "styles/utils/btn";
 @import "styles/utils/input";
-@import "styles/partials/homepage";
-@import "styles/partials/signin";
-@import "styles/partials/registration";
-@import "styles/partials/resetPassword";
 @import "styles/utils/navItems";
 @import "styles/utils/choosePage";
 @import "styles/partials/menu";
 @import "styles/partials/contacts";
 @import "styles/partials/chat";
+@import "styles/partials/chatItems";
 @import "styles/utils/popup";
-@import "styles/partials/settings";
 @import "styles/utils/settingsInput";
+@import "styles/partials/homepage";
+@import "styles/partials/signin";
+@import "styles/partials/registration";
+@import "styles/partials/resetPassword";
+@import "styles/partials/settings";

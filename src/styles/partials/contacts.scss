@@ -1,26 +1,33 @@
 @import "../base/variables";
+
 .contacts {
-  background: $subColor;
+  background: $sub-color;
   width: 418px;
   height: 90vh;
-  box-shadow: -4px 17px 30px rgba(0, 0, 0, 0.09);
+  box-shadow: -4px 17px 30px rgba(0, 0, 0 / 0.09);
   border-radius: 30px;
   margin-left: 27px;
   padding: 10px 27px;
+
   &.small {
     width: 130px;
   }
+
   &__header {
+    margin-top: 15px;
     text-align: center;
+
     &.hidden {
       display: none;
     }
   }
+
   &__list {
     display: flex;
     margin-top: 42px;
     flex-direction: column;
     align-items: start;
+
     &_item {
       display: flex;
       flex-direction: row;
@@ -39,6 +46,8 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        height: 90px;
         &.hidden {
           display: none;
         }
@@ -49,7 +58,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: baseline;
+        align-items: center;
         span {
           margin-top: 5px;
         }
@@ -67,8 +76,8 @@
         width: 43px;
         height: 43px;
         border-radius: 50%;
-        background: $subColor;
-        border: 1px solid $mainColor;
+        background: $sub-color;
+        border: 1px solid $main-color;
         img {
           display: block;
           width: 30px;
@@ -76,22 +85,26 @@
           margin: 0 auto;
         }
       }
+
       &-btn:hover {
       background: $light;
     }
+
       & .status {
         display: block;
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         opacity: 1;
-        border: 3px solid #FFFFFF;
+        border: 3px solid #FFF;
         position: absolute;
         left: 60px;
         top: 60px;
+
         &.online {
           background: $light;
         }
+
         &.offline {
           background: #CACACA;
         }
