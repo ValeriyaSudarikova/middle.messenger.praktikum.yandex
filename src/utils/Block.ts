@@ -11,7 +11,7 @@ class Block<props = any> {
 
 	public id = nanoid(6)
 	protected props: props
-	public children: Record<string, Block> | Record<string, Block[]>
+	public children:  Record<string, Block | Block[]>
 	private eventBus: () => EventBus
 	private _element: HTMLElement | null = null
 	private _meta: { tagName: string, props: any }
@@ -33,35 +33,33 @@ class Block<props = any> {
 		eventBus.emit(Block.EVENTS.INIT)
 	}
 
-	_getChildrenAndProps = (childrenAndProps: props | any) : any => {
-		const props: Record<string, any> = {}
-		const children: Record<string, Block> | Record<string, Block[]> = {}
+	_getChildrenAndProps = (childrenAndProps: props | any) : { props: props, children: Record<string, Block | Block[]> } => {
+		const props: Record<string, unknown> = {};
+		const children: Record<string, Block | Block[]> = {};
+
 		Object.entries(childrenAndProps).forEach(([key, value]) => {
-			if (Array.isArray(value) && value[0]) {
-				/* eslint-disable */
-				//@ts-ignore
-				children[key] = value
-			}
-			if (value instanceof Block) {
-				children[key] = value
+			if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+				children[key as string] = value;
+			} else if (value instanceof Block) {
+				children[key as string] = value;
 			} else {
-				props[key] = value
+				props[key] = value;
 			}
-		})
-		return { props, children }
+		});
+
+		return {props: props as props, children};
 	}
 	_addEvents() {
-		//@ts-ignore
 		const {events = {}} = this.props as {events: Record<string, () => void>}
+
 		Object.keys(events).forEach(eventName => {
-			this._element!.addEventListener(eventName, events[eventName])
+			this._element?.addEventListener(eventName, events[eventName])
 		})
 	}
 
 	_registerEvents(eventBus: EventBus) {
 		eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-		//@ts-ignore
 		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
 	}
@@ -72,22 +70,31 @@ class Block<props = any> {
 	}
 
 	private _init() {
-		this._createResourses()
+		// this._createResourses()
 		this.init()
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 	}
-
+	/* eslint-disable */
 	protected init() {}
 
 	private _componentDidMount() {
 		this.componentDidMount()
 	}
-
+	/* eslint-disable */
 	protected componentDidMount() {}
 
 	public dispatchComponentDidMount() {
-		this.eventBus().emit(Block.EVENTS.FLOW_CDM)
-		Object.values(this.children).forEach(child => child.dispatchComponentDidMount())
+		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+
+		Object.values(this.children).forEach(child => {
+			if (Array.isArray(child)) {
+				child.forEach(item => {
+					item.dispatchComponentDidMount()
+				})
+			} else {
+				child.dispatchComponentDidMount()
+			}
+		});
 	}
 
 	private _componentDidUpdate(oldProps: any, newProps: any) {
@@ -95,7 +102,7 @@ class Block<props = any> {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 		}
 	}
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(oldProps: props | any, newProps: props | any): boolean {
 		if (newProps !== oldProps) {
 			if (newProps.child && newProps.child instanceof Block) {
 				const {child} = newProps
@@ -106,12 +113,11 @@ class Block<props = any> {
 		return false
 	}
 
-	setProps(nextProps: any) {
+	setProps(nextProps: props) {
 		if (!nextProps) {
 			return
 		}
-		//@ts-ignore
-		Object.assign(this.props, nextProps)
+		Object.assign(this.props!, nextProps)
 	}
 
 	get element() {
@@ -132,7 +138,6 @@ class Block<props = any> {
 		this._addEvents()
 	}
 
-	// @ts-ignore
 	protected compile(template: TemplateDelegate, context: any) {
 		const contextAndStubs = {...context}
 
@@ -162,7 +167,7 @@ class Block<props = any> {
 			stub.replaceWith(component.getContent()!)
 		}
 
-		Object.entries(this.children).forEach(([name, component]) => {
+		Object.entries(this.children).forEach(([_, component]) => {
 
 			if (Array.isArray(component)) {
 				component.forEach(replaceStub)
@@ -184,6 +189,7 @@ class Block<props = any> {
 	}
 
 	_makePropsProxy(props: any) {
+		/* eslint-disable */
 		const self = this
 
 		return new Proxy(props, {
@@ -196,8 +202,6 @@ class Block<props = any> {
 
 				target[prop] = value
 
-				// Запускаем обновление компоненты
-				// Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
 				return true
 			},
@@ -208,17 +212,16 @@ class Block<props = any> {
 	}
 
 	_createDocumentElement(tagName: string) {
-		// Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
 		return document.createElement(tagName)
 	}
 
-	// show() {
-	// 	this.getContent()!.style.display = "block"
-	// }
-	//
-	// hide() {
-	// 	this.getContent()!.style.display = "none"
-	// }
+	show() {
+		this.getContent()!.style.display = "block"
+	}
+
+	hide() {
+		this.getContent()!.style.display = "none"
+	}
 }
-/* eslint-disable */
+
 export default Block

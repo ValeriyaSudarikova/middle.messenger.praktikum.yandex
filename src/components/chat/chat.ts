@@ -1,7 +1,7 @@
 import Block from "../../utils/Block"
 import template from "./chat.hbs"
 //components
-import BtnSubmit, {BtnSubmitProps} from "../btnSubmit/btnSubmit"
+import BtnSubmit from "../btnSubmit/btnSubmit"
 import ChatItem, {ChatItemProps} from "./chatItem/chatItem"
 import ChatFileInput from "./chatFileInput/chatFileInput"
 import ContactItem, {ContactItemProps} from "../contactItem/contactItem"
@@ -29,7 +29,6 @@ export default class Chat extends Block<ChatProps> {
 	init() {
 		const {contact, messages} = this.props
 		let newMessage = ""
-		const quantity = 0
 		/* eslint-disable */
 		//@ts-ignore
 		this.children.activeContactItem = new ContactItem({...contact})
@@ -53,8 +52,7 @@ export default class Chat extends Block<ChatProps> {
 			},
 			events: {
 				focus: (event: any) => {console.log(event, "focus")},
-				blur: (event: any) => {
-					console.log("kd")},
+				blur: () => {console.log("kd")},
 			}
 		},
 		)
@@ -71,8 +69,6 @@ export default class Chat extends Block<ChatProps> {
 			}
 		})
 		this.children.submitBtn = new BtnSubmit({
-			/* eslint-disable */
-			//@ts-ignore
 			type: "submit",
 			class: "chat__input-submit",
 			label: new Img({
@@ -80,7 +76,7 @@ export default class Chat extends Block<ChatProps> {
 				alt: "отправить"
 			}),
 			events: {
-				click: (event, props: any = this.props) => {
+				click: (event: any) => {
 					event.preventDefault()
 					if (newMessage) {
 						const wrapper = document.querySelector(".chat__wrapper")

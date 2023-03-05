@@ -1,13 +1,11 @@
 import Block from "../../utils/Block"
 import template from "./signin.hbs"
-import BtnSubmit, {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
 import Img,{ImgProps} from "../../components/img/img"
 import Link, {linkProps} from "../../components/link/link"
-import InputWrapper, {InputWrapperProps} from "../../components/input/inputWrapper"
+import SigninForm, {SigninFormProps} from "./signinForm/signinForm";
 
 export interface SigninProps {
-	inputs: InputWrapperProps[],
-	submit: BtnSubmitProps,
+	form: SigninFormProps,
 	logo: ImgProps,
 	link: linkProps
 }
@@ -22,12 +20,7 @@ export default class Signin extends Block<SigninProps> {
 	}
 
 	init() {
-		this.children.LogInInputs = this.props.inputs.map(input => {
-			return new InputWrapper({...input})
-		})
-		/* eslint-disable */
-		//@ts-ignore
-		this.children.Submit = new BtnSubmit({...this.props.submit})
+		this.children.Form = new SigninForm({...this.props.form})
 		this.children.Logo = new Img({...this.props.logo})
 		this.children.ResetPassLink = new Link({...this.props.link})
 	}

@@ -1,3 +1,5 @@
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
+
 enum METHODS {
 	GET = "GET",
 	POST = "POST",
@@ -31,24 +33,20 @@ function queryStringify(data: Data) {
 /* eslint-disable */
 class HTTPTransport {
 	checkRoute = (data: Data | undefined) => {return data ? queryStringify(data) : ""}
-	get = (url: string, options: OptionsWithoutMethod = {}, timeout = 5000):Promise<XMLHttpRequest> => {
-		const route:string = this.checkRoute(options.data)
-		return this.request(route, {...options, method: METHODS.GET}, timeout)
-	}
-	post = (url, options: OptionsWithoutMethod = {}, timeout = 5000) => {
-		const route:string = this.checkRoute(options.data)
-		return this.request(route, {...options, method: METHODS.POST}, timeout)
-	}
-	put = (url, options: OptionsWithoutMethod={}, timeout = 5000) => {
-		const route:string = this.checkRoute(options.data)
-		return this.request(route, {...options, method: METHODS.PUT}, timeout)
-	}
-	delete = (url, options: OptionsWithoutMethod={}, timeout = 5000) => {
-		const route:string = this.checkRoute(options.data)
-		return this.request(route, {...options, method: METHODS.DELETE}, timeout)
-	}
+	get: HTTPMethod = (url, options = {}) => (
+		this.request(url, {...options, method: METHODS.GET})
+	)
+	put: HTTPMethod = (url, options = {}) => (
+		this.request(url, {...options, method: METHODS.PUT})
+	)
+	post: HTTPMethod = (url, options = {}) => (
+		this.request(url, {...options, method: METHODS.POST})
+	)
+	delete: HTTPMethod = (url, options = {}) => (
+		this.request(url, {...options, method: METHODS.DELETE})
+	)
 	/* eslint-disable */
-	request = (url: string, options: Options = {method: METHODS.GET}, timeout = 5000):Promise<XMLHttpRequest> => {
+	request = (url: string, options: Options = {method: METHODS.GET}):Promise<XMLHttpRequest> => {
 		const {method, data, headers} = options
 
 		return new Promise((resolve, reject) => {

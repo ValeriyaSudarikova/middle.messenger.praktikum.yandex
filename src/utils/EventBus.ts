@@ -5,7 +5,7 @@ class EventBus {
 	/* eslint-disable */
 
 
-	on(event: string, callback: () => void):void {
+	on(event: string, callback: (oldProps?: any, newProps?:any) => void):void {
 
 		if (!this.listeners[event]) {
 			if (!this.listeners[event]) {
@@ -22,14 +22,12 @@ class EventBus {
 		this.listeners[event] = this.listeners[event].filter(listener => listener !== callback)
 	}
 
-	emit(event: string, ...args) {
+	emit(event: string, ...args: any) {
 		if (!this.listeners[event]) {
 			throw new Error(`Нет события: ${event}`)
 		}
 		this.listeners[event].forEach(function (listener) {
-			/* eslint-disable */
-			// @ts-ignore
-			listener(...args)
+			listener.apply(null, args)
 		})
 	}
 }
