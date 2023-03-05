@@ -9,7 +9,7 @@ export interface SettingsInputWrapperProps {
 }
 
 export default class SettingsInputWrapper extends Block<SettingsInputWrapperProps> {
-	constructor(props) {
+	constructor(props: SettingsInputWrapperProps) {
 		super("div", props)
 	}
 

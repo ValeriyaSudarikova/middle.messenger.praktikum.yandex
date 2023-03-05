@@ -1,14 +1,12 @@
 import Block from "../../../utils/Block"
 import template from "./settingsInput.hbs"
-import SettingsInputLabel,
-{SettingsInputLabelProps}
-	from "../settingInputLabel/SettingsInputLabel"
 
 export interface SettingsInputProps {
 	type: string,
 	name: string,
 	placeholder: string,
-	value: string
+	value: string,
+	required?: boolean,
 	events: Record<string, any>
 }
 
@@ -18,7 +16,14 @@ export default class SettingsInput extends Block<SettingsInputProps> {
 	}
 
 	protected render(): DocumentFragment {
-		return this.compile(template, {...this.props})
+		return this.compile(template, {
+			type: this.props.type,
+			name: this.props.name,
+			placeholder: this.props.placeholder,
+			value: this.props.value,
+			required: this.props.required ? null : "required",
+			events: this.props.events
+		})
 	}
 
 }

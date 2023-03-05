@@ -1,17 +1,17 @@
 import template from "./btnSubmit.hbs"
 import Block from "../../utils/Block"
-import Img, {ImgProps} from "../img/img"
+import Img from "../img/img"
 
 export interface BtnSubmitProps {
 	type: string,
 	class: string,
 	label?: string | Img,
 	disabled?: string,
-	events: Record<string, any>
+	events?: Record<string, any>
 }
 
 class BtnSubmit extends Block<BtnSubmitProps> {
-	constructor(props: BtnSubmit) {
+	constructor(props: BtnSubmitProps) {
 		super("div", props)
 	}
 

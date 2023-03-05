@@ -1,6 +1,5 @@
 import Block from "../../utils/Block"
 import template from "./btn.hbs"
-import {ImgProps} from "../img/img"
 export interface BtnProps {
 	type: string,
 	class: string,

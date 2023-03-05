@@ -3,11 +3,6 @@ import template from "./homepage.hbs"
 //components
 import Btn, {BtnProps} from "../../components/btn/btn"
 import Img, {ImgProps} from "../../components/img/img"
-//imgs
-import mainImg from "../../img/homepage.png"
-import logo from "../../img/logo.svg"
-import logoblack from "../../img/logo_black.svg"
-import Registration from "../registration/registration"
 
 export interface HomepageProps {
 	circledImg: ImgProps,
@@ -17,7 +12,7 @@ export interface HomepageProps {
 }
 
 export default class Homepage extends Block<HomepageProps> {
-	constructor(props) {
+	constructor(props: HomepageProps) {
 		super("div", props)
 	}
 

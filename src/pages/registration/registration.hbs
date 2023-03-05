@@ -17,28 +17,7 @@
             <div class="registration">
 							{{{SectionLogo}}}
                 <div class="registration__circle">
-                    <form class="registration__form">
-                        <div class="registration__form_inputs active">
-													{{#each InputsP1}}
-														{{{this}}}
-													{{/each}}
-                        </div>
-                        <div class="registration__form_inputs ">
-														{{#each InputsP2}} {{{this}}} {{/each}}
-                        </div>
-                        <div class="registration__form_inputs ">
-														{{#each InputsP3}} {{{this}}} {{/each}}
-                        </div>
-                        <div class="registration__form_pagination-wrapper">
-                            <div class="registration__form_pagination">
-                                <div class="registration__form_pagination-item active"></div>
-                                <div class="registration__form_pagination-item"></div>
-                                <div class="registration__form_pagination-item"></div>
-                            </div>
-													{{{next}}}
-                        </div>
-											{{{Submit}}}
-                    </form>
+									{{{RegistrationForm}}}
                 </div>
             </div>
         </div>

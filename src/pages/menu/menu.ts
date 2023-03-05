@@ -31,12 +31,8 @@ export default class Menu extends Block<MenuProps> {
 		this.children.NavItems = NavItems.map(item => {
 			return new NavItem({...item})
 		})
-		/* eslint-disable */
-		//@ts-ignore
 		this.children.NavigationOpenBtn = new BtnSubmit({...NavOpenBtn})
-		//@ts-ignore
 		this.children.NavigationCloseBtn = new BtnSubmit({...CloseBtn})
-		/* eslint-disable */
 	}
 
 }
