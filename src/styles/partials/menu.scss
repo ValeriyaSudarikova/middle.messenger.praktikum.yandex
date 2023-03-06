@@ -5,25 +5,29 @@
   align-items: center;
   padding: 40px 10px;
   display: flex;
+
   &__navigation {
     display: flex;
     flex-direction: column;
     width: 380px;
     height: 90vh;
-    background: $subColor;
-    box-shadow: -4px 17px 30px rgba(0, 0, 0, 0.1);
+    background: $sub-color;
+    box-shadow: -4px 17px 30px rgba(0 0 0 / 0.1);
     border-radius: 30px;
     position: relative;
+
     &_header {
       padding: 16px 45px 50px 16px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+
       &-text .hidden {
         display: none;
       }
     }
+
     &-close {
       cursor: pointer;
       width: 250px;
@@ -36,18 +40,19 @@
       position: absolute;
       bottom: 21px;
     }
+
     &-open {
       width: 66px;
       height: 60px;
-      background: $mainColor;
-      box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
+      background: $main-color;
+      box-shadow: -8px 8px 4px rgba(0 0 0 / 0.25);
       border-radius: 30px;
       cursor: pointer;
       margin: 0 auto;
       margin-top: 200px;
     }
     &-open:hover {
-      box-shadow: -8px 8px 4px rgba(100, 99, 99, 0.25);
+      box-shadow: -8px 8px 4px rgba(100 99 99 / 0.25);
     }
     &.small {
       width: 135px;

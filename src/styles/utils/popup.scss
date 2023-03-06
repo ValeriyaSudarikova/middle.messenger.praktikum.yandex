@@ -1,41 +1,48 @@
 @import "../base/variables";
+
 .popup {
+
   &__layout {
     width: 97vw;
     height: 100vh;
     z-index: 5;
-    background: rgba(62, 59, 59, 0.56);
+    background: rgba(62 59 59 / 0.56);
     position: absolute;
   }
+
   &__open {
     width: 490px;
     height: 260px;
-    background: $subColor;
+    background: $sub-color;
     position: absolute;
     top: 20%;
     left: 35%;
-    box-shadow: -1px 9px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: -1px 9px 12px rgba(0 0 0 / 0.05);
     border-radius: 30px;
     padding: 23px 65px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
     &-text {
       text-align: center;
     }
+
     &-btns {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+
       button {
         width: 147px;
         height: 60px;
-        background: rgba(238, 236, 236, 0.39);
+        background: rgba(238 236 236 / 0.39);
         border: 4px solid #5B6976;
         backdrop-filter: blur(2px);
         border-radius: 30px;
         cursor: pointer;
       }
+
       button:hover {
         border: 4px solid $light;
       }
