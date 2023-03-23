@@ -1,8 +1,18 @@
 import Block from "../../utils/Block"
 import template from "./signin.hbs"
 import Img,{ImgProps} from "../../components/img/img"
-import Link, {linkProps} from "../../components/link/link"
+import {Link, linkProps} from "../../components/link/link"
 import SigninForm, {SigninFormProps} from "./signinForm/signinForm";
+//helpers
+import {login, ShowFocusMessage} from "../../utils/helpers";
+//img
+import logo from "../../img/logo.svg"
+import {InputWrapperProps} from "../../components/input/inputWrapper";
+import {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit";
+import AuthController from "../../controllers/AuthController";
+import {SignInData} from "../../api/auth/auth.t";
+import {Router} from "../../utils/Router";
+import {Routes} from "../../index";
 
 export interface SigninProps {
 	form: SigninFormProps,
@@ -20,8 +30,58 @@ export default class Signin extends Block<SigninProps> {
 	}
 
 	init() {
-		this.children.Form = new SigninForm({...this.props.form})
-		this.children.Logo = new Img({...this.props.logo})
-		this.children.ResetPassLink = new Link({...this.props.link})
+		let loginData: SignInData = {login: "", password: ""}
+		this.children.Form = new SigninForm({
+			inputs: [
+				{
+					label: "ввудите логин",
+					input: {
+						class: "input fz-24",
+						type: "text",
+						name: "login",
+						events: {
+							focus: (Event:any) => {ShowFocusMessage(Event, Event.target.name, "errored__message-dark")},
+							blur: (Event: any) => {login(Event, loginData, Event.target.name, Event.target.value)}
+						}
+					}
+				},
+				{
+					label: "введите пароль",
+					input: {
+						class: "input fz-24",
+						type: "password",
+						name: "password",
+						events: {
+							focus: (Event:any) => {ShowFocusMessage(Event, Event.target.name, "errored__message-dark")},
+							blur: (Event: any) => {login(Event, loginData, Event.target.name, Event.target.value)}
+						}
+					}
+				}
+			],
+			submit: {
+				class: "btn fz-30 signin__form_submit",
+				type: "submit",
+				label: "Войти"
+			},
+			events: {
+				submit: (Event: any) => {
+					Event.preventDefault();
+					console.log(loginData)
+					if (loginData.login && loginData.password) {
+						AuthController.signin(loginData)
+					}
+				}
+			}
+		})
+		this.children.Logo = new Img({
+			src: logo,
+			alt: "логотип приложения",
+			class: "signin__logo"
+		})
+		this.children.ResetPassLink = new Link({
+			class: "signin__link fz-30 colored",
+			text: "Забыли пароль?",
+			href: "/reset-password",
+		})
 	}
 }

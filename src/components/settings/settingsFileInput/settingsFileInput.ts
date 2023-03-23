@@ -8,7 +8,6 @@ export interface SettingsFileInputProps {
 	forClass: string
 	input: InputProps
 	// events: Record<string, any>
-	//todo write all events
 }
 
 export default class SettingsFileInput extends Block<SettingsFileInputProps> {
@@ -23,10 +22,6 @@ export default class SettingsFileInput extends Block<SettingsFileInputProps> {
 	init() {
 		this.children.Input = new Input({
 			...this.props.input,
-			events: {
-				focus: (event) => {console.log(event)},
-				blur: (event) => {console.log(event)}
-			}
 		})
 	}
 }

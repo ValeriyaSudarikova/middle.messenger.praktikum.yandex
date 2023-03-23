@@ -42,14 +42,17 @@
     }
 
     &-open {
-      width: 66px;
-      height: 60px;
-      background: $main-color;
+      width: 66px !important;
+      height: 60px !important;
+      background: #5B6976;
       box-shadow: -8px 8px 4px rgba(0 0 0 / 0.25);
       border-radius: 30px;
+      border: none;
       cursor: pointer;
-      margin: 0 auto;
-      margin-top: 200px;
+      margin-left: 35px;
+      position: absolute;
+      bottom: 21px;
+//      margin-top: 20px;
     }
     &-open:hover {
       box-shadow: -8px 8px 4px rgba(100 99 99 / 0.25);

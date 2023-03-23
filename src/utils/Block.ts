@@ -1,6 +1,7 @@
 import EventBus from "./EventBus"
 import {nanoid} from "nanoid"
 import {TemplateDelegate} from "handlebars"
+
 class Block<props = any> {
 	static EVENTS = {
 		INIT: "init",
@@ -10,7 +11,7 @@ class Block<props = any> {
 	}
 
 	public id = nanoid(6)
-	protected props: props
+	protected props: props;
 	public children:  Record<string, Block | Block[]>
 	private eventBus: () => EventBus
 	private _element: HTMLElement | null = null
@@ -28,8 +29,11 @@ class Block<props = any> {
 
 		this.children = children
 		this.props = this._makePropsProxy(props)
+
 		this.eventBus = () => eventBus
+
 		this._registerEvents(eventBus)
+
 		eventBus.emit(Block.EVENTS.INIT)
 	}
 
@@ -50,38 +54,34 @@ class Block<props = any> {
 		return {props: props as props, children};
 	}
 	_addEvents() {
-		const {events = {}} = this.props as {events: Record<string, () => void>}
+		const {events = {}} = this.props as props & {events: Record<string, () => void>}
 
 		Object.keys(events).forEach(eventName => {
-			this._element?.addEventListener(eventName, events[eventName])
-		})
+			this._element?.addEventListener(eventName, events[eventName]);
+		});
 	}
 
 	_registerEvents(eventBus: EventBus) {
-		eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
-		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
-		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
+		eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
-	_createResourses() {
-		const {tagName} = this._meta
-		this._element = this._createDocumentElement(tagName)
-	}
-
-	private _init() {
-		// this._createResourses()
-		this.init()
-		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
-	}
-	/* eslint-disable */
 	protected init() {}
 
 	private _componentDidMount() {
 		this.componentDidMount()
 	}
-	/* eslint-disable */
+
 	protected componentDidMount() {}
+
+	private _init() {
+		this.init()
+
+		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+	}
+
 
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -103,20 +103,14 @@ class Block<props = any> {
 		}
 	}
 	componentDidUpdate(oldProps: props | any, newProps: props | any): boolean {
-		if (newProps !== oldProps) {
-			if (newProps.child && newProps.child instanceof Block) {
-				const {child} = newProps
-				this.children.child = child
-				return true
-			}
-		}
-		return false
+		return true
 	}
 
 	setProps(nextProps: props) {
 		if (!nextProps) {
 			return
 		}
+
 		Object.assign(this.props!, nextProps)
 	}
 
@@ -125,17 +119,17 @@ class Block<props = any> {
 	}
 
 	_render() {
-		const fragment = this.render()
+		const fragment = this.render();
 
-		const newElement = fragment.firstElementChild as HTMLElement
+		const newElement = fragment.firstElementChild as HTMLElement;
 
 		if (this._element && newElement) {
-			this._element.replaceWith(newElement)
+			this._element.replaceWith(newElement);
 		}
 
-		this._element = newElement
+		this._element = newElement;
 
-		this._addEvents()
+		this._addEvents();
 	}
 
 	protected compile(template: TemplateDelegate, context: any) {
@@ -176,7 +170,6 @@ class Block<props = any> {
 			}
 		})
 
-
 		return temp.content
 	}
 
@@ -189,30 +182,26 @@ class Block<props = any> {
 	}
 
 	_makePropsProxy(props: any) {
-		/* eslint-disable */
 		const self = this
 
 		return new Proxy(props, {
 			get(target, prop: string) {
-				const value = target[prop]
-				return typeof value === "function" ? value.bind(target) : value
+				const value = target[prop];
+				return typeof value === 'function' ? value.bind(target) : value;
 			},
+
 			set(target, prop: string, value) {
 				const oldTarget = {...target}
 
-				target[prop] = value
+				target[prop as keyof props] = value;
 
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
-				return true
+				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+				return true;
 			},
 			deleteProperty() {
-				throw new Error("Нет доступа")
+				throw new Error('Нет доступа');
 			}
-		})
-	}
-
-	_createDocumentElement(tagName: string) {
-		return document.createElement(tagName)
+		});
 	}
 
 	show() {

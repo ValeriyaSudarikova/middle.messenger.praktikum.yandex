@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "study project ",
   "scripts": {
-    "dev": "parcel index.html -p 3000 --no-cache",
-    "start": "node ./server.js -p 3000 --open",
-    "build": "parcel build ./index.html",
+    "dev": "parcel src/index.html -p 3000 --no-cache",
+    "start": "node src/server.js -p 3000 --open",
+    "build": "parcel build src/index.html",
     "eslint": "node_modules/.bin/eslint . --fix "
   },
   "repository": {

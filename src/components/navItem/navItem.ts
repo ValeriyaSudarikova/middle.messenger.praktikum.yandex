@@ -1,6 +1,8 @@
 import Block from "../../utils/Block"
 import template from "./navItem.hbs"
 import Img, {ImgProps} from "../img/img"
+import Settings, {SettingsProps} from "../settings/settings";
+import {ContactsProps, ContactsWithStore} from "../chatFriendsSections/contacts";
 
 export interface NavItemProps {
 	link: string,

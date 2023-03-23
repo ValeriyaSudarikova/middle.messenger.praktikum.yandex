@@ -1,17 +1,29 @@
 import Block from "../../utils/Block"
 import template from "./btn.hbs"
-export interface BtnProps {
+import {PropsWithRouter, withRouter} from "../hocs/withRouter";
+export interface BtnProps extends PropsWithRouter{
 	type: string,
 	class: string,
-	href?: string,
+	href: string,
 	label: string,
-	events: Record<string, any>
+	events?: Record<string, any>
 }
-export default class Btn extends Block<BtnProps> {
+class BaseBtn extends Block<BtnProps> {
 	constructor(props: BtnProps) {
-		super("div", props)
+		super("div", {
+			...props,
+			events: {
+				click: () => this.navigate()
+			}
+		})
 	}
+
+	navigate() {
+		this.props.router.go(this.props.href)
+	}
+
 	protected render():DocumentFragment {
 		return this.compile(template, {...this.props})
 	}
 }
+export const Btn = withRouter(BaseBtn)
