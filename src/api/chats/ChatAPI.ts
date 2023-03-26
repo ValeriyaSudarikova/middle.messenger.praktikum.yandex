@@ -32,9 +32,6 @@ export class ChatAPI extends BaseAPI {
         return this.http.get(`/${id}/users`)
     }
 
-    getUserByLogin(login: string): Promise<UserData> {
-        return this.http.post('/search/', login)
-    }
 
     addUsers(id: number, users: number[]): Promise<unknown> {
         return this.http.put('/users', { users, chatId: id });

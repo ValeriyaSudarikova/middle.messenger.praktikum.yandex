@@ -24,9 +24,7 @@ export default class ChatListItem extends Block<ChatItem> {
 	}
 
 	protected render(): DocumentFragment {
-		let avatar = this.props.avatar ? this.props.avatar : icon;
-
-		console.log(avatar)
+		let avatar = this.props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : icon;
 
 		return this.compile(template, {
 			img: {class: "", src: avatar, alt: "аватар чата"},
@@ -36,6 +34,7 @@ export default class ChatListItem extends Block<ChatItem> {
 			date: this.props.last_message?.time || dateFormatter(new Date((new Date()).toISOString())),
 			messageText: this.props.last_message?.content?  this.checkMessageLength(this.props.last_message?.content) : ""
 		})
+
 	}
 
 	init() {
@@ -49,7 +48,10 @@ export default class ChatListItem extends Block<ChatItem> {
 			class: "messaging",
 			label: new Img({src: mesImg, alt: "Сообщение"}),
 			events: {
-				click: (Event: any, data: any = this.props) => {createChat(Event, data)}
+				click: (Event: any) => {
+					// createChat(Event, data)
+					// console.log(Event)
+				}
 			}
 		})
 		this.children.del = new BtnSubmit({

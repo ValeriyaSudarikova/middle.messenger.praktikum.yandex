@@ -10,6 +10,16 @@ class AuthController {
         this.api = new AuthAPI()
     }
 
+    async getUser() {
+        store.set("user.isLoading", true)
+
+        const user = await this.api.getUser()
+
+        store.set("user.isLoading", false)
+        store.set("user.data", user)
+
+    }
+
     async signup(data: SignUpData) {
         try {
             await this.api.signup(data);
@@ -41,9 +51,13 @@ class AuthController {
     async signin(data: SignInData) {
         try {
             await this.api.signin(data)
+
             await this.getUser();
+
             Router.go(Routes.menu)
+
         } catch (e) {
+
             let error = document.createElement("span");
             let btn = document.querySelector("button");
             error.innerHTML = "Проверьте корректность данных и повторите попытку входа";
@@ -52,6 +66,7 @@ class AuthController {
             setTimeout(() => {
                 error.remove()
             }, 3000)
+
         }
     }
 
@@ -65,42 +80,7 @@ class AuthController {
         }
     }
 
-    async ChangeUserData(data: any, withJson: boolean) {
 
-        let formdata = new FormData();
-
-        formdata.append("userRequest", data)
-
-        console.log(formdata, 'fdata')
-
-        try {
-            await this.api.changeUserData(data, withJson)
-            await this.getUser();
-
-            Router.go(Routes.menu)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    async getUser() {
-        store.set("user.isLoading", true)
-
-        const user = await this.api.getUser()
-
-        store.set("user.isLoading", false)
-        store.set("user.data", user)
-
-    }
-
-    async setUserAvatar(avatar: object) {
-        try {
-            this.api.changeUserAvatar(avatar);
-            await this.api.getUser();
-        } catch (e) {
-            console.log(e)
-        }
-    }
 }
 
 export default new AuthController();

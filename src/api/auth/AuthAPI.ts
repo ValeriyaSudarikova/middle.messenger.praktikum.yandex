@@ -1,5 +1,6 @@
 import BaseAPI from "../baseApi";
 import {SignInData, SignUpData, UserData} from "./auth.t";
+import store from "../../utils/Store";
 
 export class AuthAPI extends BaseAPI {
     constructor() {
@@ -19,17 +20,9 @@ export class AuthAPI extends BaseAPI {
 
     }
 
-     getUser() {
-         return this.http.get<UserData>("/user");
-     }
-
-     changeUserData(data: any, withJson: boolean) {
-        return this.http.put("/user/profile", {data: data, flag: withJson})
-     }
-
-     changeUserAvatar(avatar: any) {
-        return this.http.put("/user/profile/avatar", avatar)
-     }
+    getUser() {
+        return this.http.get<UserData>("/user");
+    }
 
     create = undefined;
     read = undefined;

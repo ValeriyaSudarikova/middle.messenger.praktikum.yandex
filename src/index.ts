@@ -9,8 +9,10 @@ import Signin from "./pages/signin/signin"
 import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController";
 import Registration from "./pages/registration/registration";
+import MessageController from "./controllers/MessageController";
+import chatsController from "./controllers/ChatController";
 
-
+console.log(chatsController, MessageController)
 
 export enum Routes {
 	homepage = "/homepage",

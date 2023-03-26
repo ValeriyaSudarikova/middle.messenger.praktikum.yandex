@@ -10,8 +10,16 @@ import Img from "../img/img"
 //icons
 import send from "../../icons/send.svg"
 import add from "../../icons/add.svg"
+import no_avatar from "../../icons/no_avatar.svg"
+//utils
+import messageController, {Message} from "../../controllers/MessageController";
+import store from "../../utils/Store";
+import chatsController from "../../controllers/ChatController";
+import contactsController from "../../controllers/ContactsController";
+import {UserData} from "../../api/auth/auth.t";
 
 interface ChatProps {
+	selectedChat: ChatItem,
 	contact: ContactItemProps,
 	messages: ChatItemProps[]
 
@@ -26,16 +34,37 @@ export default class Chat extends Block<ChatProps> {
 		return this.compile(template, {...this.props})
 	}
 
+	 createMessages(messages: Message[]) {
+		messages.map( async (message) => {
+			const myId = store.getState().user!.data.id;
+
+			let chatter: UserData | undefined = await contactsController.FindUserById(message.chat_id)!;
+
+			let cls: "from" | "to" = message.user_id !== myId ? "to" : "from" ;
+			let UserImg
+			if (chatter) {
+				UserImg = {
+					src: 'https://ya-praktikum.tech/api/v2/resources' + chatter.avatar;
+					alt: "аватар пользователя"
+				}
+			}
+
+			let imgProps = UserImg ? UserImg : {src: no_avatar, alt: "аватар пользователя"}
+
+			return new ChatItem({class: cls, message: message.content, img: imgProps})
+		})
+	}
+
 	init() {
 		const {contact, messages} = this.props
+
 		let newMessage = ""
-		/* eslint-disable */
-		//@ts-ignore
 		this.children.activeContactItem = new ContactItem({...contact})
-		/* eslint-disable */
+
 		this.children.messages = messages.map(message => {
 			return new ChatItem({...message})
 		})
+
 		this.children.fileInput = new ChatFileInput({
 			name: "file",
 			type: "file",
@@ -51,8 +80,7 @@ export default class Chat extends Block<ChatProps> {
 				}
 			},
 			events: {
-				focus: (event: any) => {console.log(event, "focus")},
-				blur: () => {console.log("kd")},
+				blur: () => {console.log("blur")},
 			}
 		},
 		)
@@ -60,7 +88,6 @@ export default class Chat extends Block<ChatProps> {
 			type: "text",
 			class: "chat__input-mess",
 			events: {
-				focus: (event: any) => {console.log(event, "focus")},
 				blur: (event: any) => {
 					if (event.target.value) {
 						newMessage = event.target.value
@@ -77,20 +104,19 @@ export default class Chat extends Block<ChatProps> {
 			}),
 			events: {
 				click: (event: any) => {
-					event.preventDefault()
+					event.preventDefault();
+
 					if (newMessage) {
+
 						const wrapper = document.querySelector(".chat__wrapper")
-						const Message = new ChatItem({
-							class: "from",
-							message: newMessage,
-							img: contact.img
-						})
+
+						messageController.sendMessage(, newMessage)
+
 						wrapper!.append(Message.getContent()!)
 						newMessage = ""
 					}
 				}
 			}
-			/* eslint-disable */
 		})
 	}
 }

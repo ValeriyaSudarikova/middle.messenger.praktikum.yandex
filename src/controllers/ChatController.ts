@@ -1,14 +1,7 @@
 import {ChatAPI} from "../api/chats/ChatAPI";
-import {ChatItem, Message} from "../api/chats/chats.t";
-import {UserData} from "../api/auth/auth.t";
 
 import store from "../utils/Store";
-import {Routes} from "../index";
-import Router from "../utils/Router";
-import ChatListItem from "../components/chatListItem/chatListItem";
-import {ImgProps} from "../components/img/img";
-import {dateFormatter} from "../utils/helpers";
-import * as domain from "domain";
+import MessageController from "./MessageController";
 
 class ChatController {
     private api: ChatAPI;
@@ -24,7 +17,14 @@ class ChatController {
 
     async getChats() {
         try {
-            const chats = await this.api.read()
+            const chats = await this.api.read();
+
+            chats.map( async (chat) => {
+                let token = await this.getToken(chat.id);
+
+                await MessageController.connect(chat.id, token)
+            })
+
             let statedChats = store.getState().chats?.data;
 
             if (chats !== statedChats) {

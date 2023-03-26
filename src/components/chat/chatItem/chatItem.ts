@@ -17,10 +17,7 @@ export default class ChatItem extends Block<ChatItemProps> {
 	}
 
 	init() {
-		this.children.chatItemImg = new Img({
-			src: this.props.img.src,
-			alt: this.props.img.alt
-		})
+		this.children.chatItemImg = new Img({...this.props.img})
 	}
 
 	protected render(): DocumentFragment {

@@ -4,6 +4,7 @@ import store from "../utils/Store";
 import {ContactsAPI} from "../api/contacts/ContactsAPI";
 import {UserData} from "../api/auth/auth.t";
 import {login} from "../utils/helpers";
+import chatsController from "./ChatController";
 
 class ContactsController {
     private api: ContactsAPI;
@@ -66,6 +67,8 @@ class ContactsController {
             }
 
             store.set("contacts.data", this.state);
+
+            return newUser;
         }
     }
 

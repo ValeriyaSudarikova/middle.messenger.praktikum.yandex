@@ -121,12 +121,12 @@ export default class Registration extends Block<RegistrationProps> {
 				},
 			],
 			events: {
-				submit: (Event: any) => {
+				submit: async (Event: any) => {
 					Event.preventDefault();
-					console.log(formData)
-					if (formData.login && formData.email && formData.phone && formData.first_name && formData.second_name && formData.password) {
-						AuthController.signup(formData)
-					}
+
+					// if (formData.login && formData.email && formData.phone && formData.first_name && formData.second_name && formData.password) {
+						await AuthController.signup(formData)
+					// }
 				}
 			}
 		})

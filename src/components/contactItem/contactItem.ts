@@ -20,18 +20,18 @@ export const createChat = (Event: any, data: any) => {
 
 	const chatWrapper = document.querySelector(".main")
 	const contacts = document.querySelector(".contacts")
-	const chat = new Chat({
-		contact: data,
-		messages: [
-			{
-				class: "to",
-				message: data.messageText ? data.messageText : "",
-				img: data.img
-			}
-		]
-	})
-	contacts!.classList.add("hidden")
-	chatWrapper!.append(chat.getContent()!)
+	// const chat = new Chat({
+	// 	contact: data,
+	// 	messages: [
+	// 		{
+	// 			class: "to",
+	// 			message: data.messageText ? data.messageText : "",
+	// 			img: data.img
+	// 		}
+	// 	]
+	// })
+	// contacts!.classList.add("hidden")
+	// chatWrapper!.append(chat.getContent()!)
 }
 
 class ContactItem extends Block<ContactItemProps> {

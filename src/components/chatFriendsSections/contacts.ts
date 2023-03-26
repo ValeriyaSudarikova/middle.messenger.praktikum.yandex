@@ -15,7 +15,8 @@ export interface ContactsProps {
 	flag: "contact" | "chat",
 	chats?: ChatItem[] | undefined,
 	contacts?: ContactItemProps[] | undefined
-	search: ContactSearchFormProps
+	search: ContactSearchFormProps,
+	events: Record<string, any>
 }
 
 export default class ContactsBase extends Block<ContactsProps> {

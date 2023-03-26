@@ -6,6 +6,7 @@ export interface ChatItem {
     avatar: string,
     unreadCount: number,
     last_message: Message | undefined,
+    delete?: (id: number) => void | undefined
 }
 
 export interface Message {

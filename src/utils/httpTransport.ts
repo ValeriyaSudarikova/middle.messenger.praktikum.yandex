@@ -148,12 +148,10 @@ export default class HTTPTransport {
 
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
-
 			xhr.open(method, url);
 
-			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+			xhr.onreadystatechange = (e) => {
 
-			xhr.onreadystatechange = () => {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					if (xhr.status < 400) {
 						resolve(xhr.response);
@@ -174,14 +172,12 @@ export default class HTTPTransport {
 
 			if (method === Method.Get || !data) {
 				xhr.send();
-			} else {
-				if (typeof data === "object" && method === Method.Put) {
-					if (data.flag) {
-						xhr.send(JSON.stringify(data.data));
-					}
-					console.log(data)
-					xhr.send(data.data);
-				}
+			} else if (method === Method.Put && data instanceof FormData) {
+				console.log(data, "formdata")
+				xhr.send(data);
+			} else if (method === Method.Put && data) {
+				console.log(data, 'json')
+				xhr.send(JSON.stringify(data))
 			}
 		});
 	}

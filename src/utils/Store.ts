@@ -3,6 +3,7 @@ import {set} from "./helpers";
 import EventBus from "./EventBus";
 import Block from "./Block";
 import {ChatItem} from "../api/chats/chats.t";
+import {Message} from "../controllers/MessageController";
 
 export interface State {
     user?: {
@@ -16,6 +17,7 @@ export interface State {
         error: string,
         isLoading: boolean
     },
+    messages?: Record<number, Message[]>
     contacts?: {
         data: UserData[],
         error: string,

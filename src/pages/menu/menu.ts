@@ -26,6 +26,10 @@ import {ContactsAPI} from "../../api/contacts/ContactsAPI";
 import ContactsController from "../../controllers/ContactsController";
 import Avatar from "../../components/img/avatar/avatar";
 import * as events from "events";
+import messageController from "../../controllers/MessageController";
+import chatsController from "../../controllers/ChatController";
+import UserController from "../../controllers/UserController";
+import userController from "../../controllers/UserController";
 
 interface MenuProps {
 	UserImg: ImgProps,
@@ -172,6 +176,11 @@ class MenuBase extends Block<MenuProps> {
 						}
 					}
 				}
+			},
+			events: {
+				click: (event: any) => {
+					chatsController.selectChat(event.target.id)
+				}
 			}
 		});
 		const settings = new Settings({
@@ -189,10 +198,10 @@ class MenuBase extends Block<MenuProps> {
 						change: async (Event: any) => {
 							let formData = new FormData();
 							if (Event.target.files[0]) {
-								console.log('formating', Event.target.files[0])
+
 								formData.append("avatar", Event.target.files![0])
-								console.log(formData)
-								await AuthController.setUserAvatar(formData)
+
+								await UserController.setUserAvatar(formData, true)
 							}
 						}
 					}
@@ -204,19 +213,19 @@ class MenuBase extends Block<MenuProps> {
 						Event.preventDefault()
 
 						let options = {
-							// "id": UserData.id,
-							"first_name": newUserData?.first_name? newUserData?.first_name : UserData.first_name,
-							"second_name": newUserData?.second_name? newUserData.second_name : UserData.second_name,
-							"display_name": newUserData?.display_name? newUserData.display_name : UserData.display_name,
-							"login": newUserData?.login ? newUserData.login : UserData.login,
-							"email": newUserData?.email? newUserData.email : UserData.email,
-							"phone": newUserData?.phone? newUserData.phone : UserData.phone,
-							// "avatar": newUserData?.avatar? newUserData.avatar : UserData.avatar
+							first_name: newUserData!.first_name ? newUserData!.first_name : UserData.first_name,
+							second_name: newUserData!.second_name? newUserData!.second_name : UserData.second_name,
+							display_name: newUserData!.display_name? newUserData!.display_name : UserData.display_name,
+							login: newUserData!.login ? newUserData!.login : UserData.login,
+							email: newUserData!.email? newUserData!.email : UserData.email,
+							phone: newUserData!.phone? newUserData!.phone : UserData.phone,
 						}
 
 						UnchangedData = JSON.parse(JSON.stringify(UserData))
 
-						AuthController.ChangeUserData(options, true)
+						console.log(options, "options")
+
+						userController.ChangeUserData(options)
 
 						const input: HTMLButtonElement = document.querySelector(".input__submit")!
 						input.disabled = true
@@ -505,6 +514,11 @@ class MenuBase extends Block<MenuProps> {
 				click: () => { CloseMenu() }
 			}
 		})
+	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		console.log('old', oldProps,'new', newProps)
+		return true
 	}
 }
 
