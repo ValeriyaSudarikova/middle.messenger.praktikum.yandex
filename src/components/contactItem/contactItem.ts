@@ -5,10 +5,10 @@ import BtnSubmit from "../btnSubmit/btnSubmit"
 import mess from "../../icons/message.svg"
 import delIcon from "../../icons/trash.svg"
 import Chat from "../chat/chat"
-import contactsController from "../../controllers/ContactsController";
+import contactsController from "../../controllers/ContactsController"
 
 export interface ContactItemProps {
-	class: string,
+	class?: string,
 	contactID: number,
 	statusClass: string,
 	name: string,

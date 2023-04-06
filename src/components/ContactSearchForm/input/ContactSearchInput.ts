@@ -1,5 +1,5 @@
-import Block from "../../../utils/Block";
-import template from "./ContactSearchInput.hbs";
+import Block from "../../../utils/Block"
+import template from "./ContactSearchInput.hbs"
 
 export interface InputProps {
     placeholder: string,
@@ -8,13 +8,13 @@ export interface InputProps {
 }
 
 export default class ContactSearchInput extends Block<InputProps> {
-    constructor(props: InputProps) {
-        super("div", props)
-    }
+	constructor(props: InputProps) {
+		super("div", props)
+	}
 
-    protected render(): DocumentFragment {
-        return this.compile(template, {
-            ...this.props,
-        })
-    }
+	protected render(): DocumentFragment {
+		return this.compile(template, {
+			...this.props,
+		})
+	}
 }

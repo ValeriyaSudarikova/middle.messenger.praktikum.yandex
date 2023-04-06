@@ -1,6 +1,6 @@
 import Block from "../../utils/Block"
 import template from "./link.hbs"
-import {PropsWithRouter, withRouter} from "../hocs/withRouter";
+import {PropsWithRouter, withRouter} from "../hocs/withRouter"
 
 export interface linkProps extends PropsWithRouter {
 	href: string,
@@ -26,4 +26,4 @@ class BaseLink extends Block<linkProps> {
 		return this.compile(template, {...this.props})
 	}
 }
-export const Link = withRouter(BaseLink);
+export const Link = withRouter(BaseLink)

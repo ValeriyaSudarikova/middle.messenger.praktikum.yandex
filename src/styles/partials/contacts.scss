@@ -33,6 +33,7 @@
     border-bottom: 1px solid $main-color;
     overflow-y: scroll;
     overflow-x: hidden;
+
     &::-webkit-scrollbar {
       width: 11px;
       border: 1px solid #DCDDE0;

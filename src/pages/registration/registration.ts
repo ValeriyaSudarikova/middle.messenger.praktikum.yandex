@@ -1,13 +1,13 @@
 import Block from "../../utils/Block"
 import template from "./registration.hbs"
 import Img, {ImgProps} from "../../components/img/img"
-import RegForm, {RegFormProps} from "./regForm/RegForm";
+import RegForm, {RegFormProps} from "./regForm/RegForm"
 //img
-import logo from '../../img/logo_black.svg';
-import {checkOnErrors, getData, ShowFocusMessage} from "../../utils/helpers";
-import {SignUpData} from "../../api/auth/auth.t";
-import AuthController from "../../controllers/AuthController";
-import store, {withStore} from "../../utils/Store";
+import logo from "../../img/logo_black.svg"
+import {checkOnErrors, getData, ShowFocusMessage} from "../../utils/helpers"
+import {SignUpData} from "../../api/auth/auth.t"
+import AuthController from "../../controllers/AuthController"
+import store, {withStore} from "../../utils/Store"
 
 export interface RegistrationProps {
 	logo?: ImgProps,
@@ -24,7 +24,7 @@ export default class Registration extends Block<RegistrationProps> {
 	}
 
 	init() {
-		let formData: SignUpData = {
+		const formData: SignUpData = {
 			login: "",
 			email: "",
 			first_name: "",
@@ -38,7 +38,7 @@ export default class Registration extends Block<RegistrationProps> {
 			src: logo,
 			alt:"логотип приложения",
 			class: "registration__img"
-		});
+		})
 
 		this.children.RegistrationForm = new RegForm({
 			inputsp1: [
@@ -122,10 +122,10 @@ export default class Registration extends Block<RegistrationProps> {
 			],
 			events: {
 				submit: async (Event: any) => {
-					Event.preventDefault();
+					Event.preventDefault()
 
 					// if (formData.login && formData.email && formData.phone && formData.first_name && formData.second_name && formData.password) {
-						await AuthController.signup(formData)
+					await AuthController.signup(formData)
 					// }
 				}
 			}

@@ -2,22 +2,26 @@ import Block from "../../../utils/Block"
 import template from "./chatItem.hbs"
 //components
 import Img from "../../img/img"
+import {Message} from "../../../controllers/MessageController"
+import store from "../../../utils/Store"
+import {dateFormatter} from "../../../utils/helpers"
 
-export interface ChatItemProps {
+export interface MessageProps {
 	class: "from" | "to",
 	message: string | null,
+	date: string,
 	img: imgProps
 }
 
 interface imgProps {src: string, alt: string}
 
-export default class ChatItem extends Block<ChatItemProps> {
-	constructor(props: ChatItemProps) {
+export default class MessageItem extends Block<MessageProps> {
+	constructor(props: MessageProps) {
 		super("div", props)
 	}
 
 	init() {
-		this.children.chatItemImg = new Img({...this.props.img})
+		this.children.chatItemImg = new Img(this.props.img)
 	}
 
 	protected render(): DocumentFragment {

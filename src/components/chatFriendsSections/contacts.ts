@@ -2,13 +2,13 @@ import Block from "../../utils/Block"
 import template from "./contacts.hbs"
 import ContactItem, {ContactItemProps, createChat} from "../contactItem/contactItem"
 import ChatListItem from "../chatListItem/chatListItem"
-import ContactSearchForm, {ContactSearchFormProps} from "../ContactSearchForm/ContactSearchForm";
-import {ChatItem} from "../../api/chats/chats.t";
-import store, {withStore} from "../../utils/Store";
-import {UserData} from "../../api/auth/auth.t";
+import ContactSearchForm, {ContactSearchFormProps} from "../ContactSearchForm/ContactSearchForm"
+import {ChatItem} from "../../api/chats/chats.t"
+import store, {withStore} from "../../utils/Store"
+import {UserData} from "../../api/auth/auth.t"
 
-import user from "../../img/user.png";
-import ChatController from "../../controllers/ChatController";
+import user from "../../img/user.png"
+import ChatController from "../../controllers/ChatController"
 
 export interface ContactsProps {
 	header: string,
@@ -20,19 +20,21 @@ export interface ContactsProps {
 }
 
 export default class ContactsBase extends Block<ContactsProps> {
-	public chats: ChatItem[] | undefined;
+	public chats: ChatItem[] | undefined
 	public contacts: UserData[] | undefined
 	constructor(props: ContactsProps) {
 		super("div", props)
-		this.chats = store.getState().chats?.data;
+		this.chats = store.getState().chats?.data
 		this.contacts = store.getState().contacts?.data
 	}
 
 	private CreateChat(items: ChatItem[]) {
 		if (Array.isArray(items) && items[0]) {
+
 			this.children.Items = items.map(item => {
+
 				return new ChatListItem({...item})
-			});
+			})
 		}
 	}
 
@@ -64,14 +66,17 @@ export default class ContactsBase extends Block<ContactsProps> {
 
 	componentDidUpdate(oldProps: any, newProps: any) {
 
-		if (!this.chats || this.chats !== store.getState().chats!.data ) {
-			this.chats = [...newProps.chats.data]
+		if (oldProps.chats !== newProps.chats ) {
+			this.chats = [...newProps.chats]
 			if (this.chats) {
-				this.CreateChat(this.chats)
+				//@ts-ignore
+				this.children.Items = this.chats.map(chat => {
+					return new ChatListItem({...chat})
+				})
 			}
 		}
 
-		return true;
+		return true
 	}
 
 	protected render(): DocumentFragment {

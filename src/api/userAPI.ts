@@ -1,27 +1,27 @@
-import BaseAPI from "./baseApi";
-import {UserData} from "./auth/auth.t";
+import BaseAPI from "./baseApi"
+import {UserData} from "./auth/auth.t"
 
 export class UserAPI extends BaseAPI {
-    constructor() {
-        super("/user");
-    }
+	constructor() {
+		super("/user")
+	}
 
-    changeUserData(data: any) {
+	changeUserData(data: any) {
 
-        return this.http.put("/profile", data)
-    }
+		return this.http.put("/profile", data)
+	}
 
-    changeUserAvatar(avatar: any) {
-        return this.http.put("/profile/avatar", avatar)
-    }
+	changeUserAvatar(avatar: any) {
+		return this.http.put("/profile/avatar", avatar)
+	}
 
-    getUserByID(id: number) {
-        return this.http.get(`/${id}`)
-    }
+	getUserByID(id: number) {
+		return this.http.get(`/${id}`)
+	}
 
 
-    create = undefined;
-    read = undefined;
-    update = undefined;
-    delete = undefined;
+	create = undefined
+	read = undefined
+	update = undefined
+	delete = undefined
 }

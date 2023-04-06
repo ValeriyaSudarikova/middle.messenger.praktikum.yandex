@@ -2,10 +2,10 @@ import Block from "../../utils/Block"
 import template from "./settings.hbs"
 import SettingsFileInput, {SettingsFileInputProps} from "./settingsFileInput/settingsFileInput"
 import Img, {ImgProps} from "../img/img"
-import SettingForm, {SettingFormProps} from "./settingsForm/settingForm";
-import {Btn,BtnProps} from "../btn/btn";
-import Avatar from "../img/avatar/avatar";
-import {withStore} from "../../utils/Store";
+import SettingForm, {SettingFormProps} from "./settingsForm/settingForm"
+import {Btn,BtnProps} from "../btn/btn"
+import Avatar from "../img/avatar/avatar"
+import {withStore} from "../../utils/Store"
 
 export interface SettingsProps {
 	img: ImgProps,
@@ -26,9 +26,9 @@ export default class SettingsBase extends Block<SettingsProps> {
 	init() {
 		this.children.userAvatar = new Img({
 			...this.props.img
-		});
-		this.children.settingsFileInput = new SettingsFileInput({...this.props.file});
-		this.children.Form = new SettingForm({...this.props.form});
+		})
+		this.children.settingsFileInput = new SettingsFileInput({...this.props.file})
+		this.children.Form = new SettingForm({...this.props.form})
 
 	}
 

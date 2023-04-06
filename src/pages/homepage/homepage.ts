@@ -4,8 +4,8 @@ import template from "./homepage.hbs"
 import {BtnProps, Btn} from "../../components/btn/btn"
 import Img, {ImgProps} from "../../components/img/img"
 //img
-import mainImg from "../../img/homepage.png";
-import logo from "../../img/logo.svg";
+import mainImg from "../../img/homepage.png"
+import logo from "../../img/logo.svg"
 export interface HomepageProps {
 	circledImg: ImgProps,
 	logo: ImgProps,

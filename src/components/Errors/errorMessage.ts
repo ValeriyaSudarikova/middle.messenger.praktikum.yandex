@@ -2,7 +2,7 @@ import Block from "../../utils/Block"
 import template from "./errorMessage.hbs"
 import Img, {ImgProps} from "../img/img"
 
-interface ErrorMessageProps {
+export interface ErrorMessageProps {
 	img: ImgProps
 }
 

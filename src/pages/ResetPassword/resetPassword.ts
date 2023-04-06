@@ -1,10 +1,10 @@
 import Block from "../../utils/Block"
 import template from "./resetPasword.hbs"
 import Img, {ImgProps} from "../../components/img/img"
-import ResetPassForm, {ResetPassFormProps} from "./resetPassForm/resetPassForm";
+import ResetPassForm, {ResetPassFormProps} from "./resetPassForm/resetPassForm"
 //img
-import logoblack from '../../img/logo_black.svg';
-import {getData, InputNames, login, ShowFocusMessage} from "../../utils/helpers";
+import logoblack from "../../img/logo_black.svg"
+import {getData, InputNames, login, ShowFocusMessage} from "../../utils/helpers"
 interface ResetPasswordProps {
 	logo: ImgProps
 	form: ResetPassFormProps
@@ -20,7 +20,7 @@ export default class ResetPassword extends Block<ResetPasswordProps> {
 	}
 
 	init() {
-		let formData: any = {}
+		const formData: any = {}
 		this.children.LogoBlack = new Img({
 			src: logoblack,
 			alt: "логотип приложения",
@@ -61,7 +61,7 @@ export default class ResetPassword extends Block<ResetPasswordProps> {
 						name: "repeat_password",
 						events: {
 							focus: (Event:any) => {ShowFocusMessage(Event, Event.target.name, "errored__message")},
-							blur: (Event:any) => {getData(Event, formData, Event.target.name, Event.target.value);}
+							blur: (Event:any) => {getData(Event, formData, Event.target.name, Event.target.value)}
 						}
 					}
 				},
@@ -73,16 +73,16 @@ export default class ResetPassword extends Block<ResetPasswordProps> {
 			},
 			events: {
 				submit: (Event: any) => {
-					Event.preventDefault();
+					Event.preventDefault()
 					if (formData[InputNames.pass] === formData[InputNames.repPass]) {
-						console.log('pass reset, current user data: ', FormData)
+						console.log("pass reset, current user data: ", FormData)
 					} else {
-						let elem = document.querySelector("button");
-						let error = document.createElement("span");
-						error.classList.add("errored_message");
-						error.innerHTML = "Пароли не совпадают";
-						error.style.color = "white";
-						error.style.marginLeft = "30%";
+						const elem = document.querySelector("button")
+						const error = document.createElement("span")
+						error.classList.add("errored_message")
+						error.innerHTML = "Пароли не совпадают"
+						error.style.color = "white"
+						error.style.marginLeft = "30%"
 						elem!.after(error)
 
 						setTimeout(() => {

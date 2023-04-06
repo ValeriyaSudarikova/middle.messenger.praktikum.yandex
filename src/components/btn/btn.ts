@@ -1,6 +1,6 @@
 import Block from "../../utils/Block"
 import template from "./btn.hbs"
-import {PropsWithRouter, withRouter} from "../hocs/withRouter";
+import {PropsWithRouter, withRouter} from "../hocs/withRouter"
 export interface BtnProps extends PropsWithRouter{
 	type: string,
 	class: string,

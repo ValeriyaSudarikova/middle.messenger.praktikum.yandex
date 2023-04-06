@@ -10,29 +10,40 @@ import Popup from "../popup/popup"
 import icon from "../../icons/no_avatar.svg"
 
 import {createChat} from "../contactItem/contactItem"
-import {ChatItem, Message} from "../../api/chats/chats.t";
-import {dateFormatter} from "../../utils/helpers";
-import chatsController from "../../controllers/ChatController";
+import {ChatItem, Message} from "../../api/chats/chats.t"
+import {dateFormatter} from "../../utils/helpers"
+import chatsController from "../../controllers/ChatController"
+import store from "../../utils/Store"
+import chatController from "../../controllers/ChatController"
 
 export default class ChatListItem extends Block<ChatItem> {
 	constructor(props: ChatItem) {
 		super("div", props)
 	}
 
-	checkMessageLength = (mess: string) => {
-		if (mess.length > 90) {return mess.substring(1, 90)}
+	checkMessageLength(mess: string) : string | undefined {
+		if (mess.length > 90) {
+			return mess.substring(1, 90)
+		} else {
+			return mess
+		}
 	}
 
 	protected render(): DocumentFragment {
-		let avatar = this.props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : icon;
+		const avatar = this.props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : icon
 
 		return this.compile(template, {
 			img: {class: "", src: avatar, alt: "аватар чата"},
 			id: this.props.id,
 			name: this.props.title,
 			statusClass: "offline",
-			date: this.props.last_message?.time || dateFormatter(new Date((new Date()).toISOString())),
-			messageText: this.props.last_message?.content?  this.checkMessageLength(this.props.last_message?.content) : ""
+			date: !this.props.last_message?.time ? dateFormatter(new Date((new Date()).toISOString())) : dateFormatter(new Date(this.props.last_message.time)),
+			messageText: this.props.last_message?.content ?  this.checkMessageLength(this.props.last_message?.content) : "",
+			events: {
+				click: (Event: any) => {
+					console.log(Event.target)
+				}
+			}
 		})
 
 	}
@@ -49,8 +60,10 @@ export default class ChatListItem extends Block<ChatItem> {
 			label: new Img({src: mesImg, alt: "Сообщение"}),
 			events: {
 				click: (Event: any) => {
-					// createChat(Event, data)
-					// console.log(Event)
+
+					chatController.selectChat(this.props.id)
+
+					store.set("selected_chat", this.props.id)
 				}
 			}
 		})

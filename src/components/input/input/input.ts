@@ -1,6 +1,6 @@
 import Block from "../../../utils/Block"
 import template from "./input.hbs"
-import {login, ShowFocusMessage} from "../../../utils/helpers";
+import {login, ShowFocusMessage} from "../../../utils/helpers"
 
 export interface InputProps {
 	type: string,

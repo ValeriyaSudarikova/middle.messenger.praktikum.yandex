@@ -2,17 +2,17 @@ import Block from "../../utils/Block"
 import template from "./signin.hbs"
 import Img,{ImgProps} from "../../components/img/img"
 import {Link, linkProps} from "../../components/link/link"
-import SigninForm, {SigninFormProps} from "./signinForm/signinForm";
+import SigninForm, {SigninFormProps} from "./signinForm/signinForm"
 //helpers
-import {login, ShowFocusMessage} from "../../utils/helpers";
+import {login, ShowFocusMessage} from "../../utils/helpers"
 //img
 import logo from "../../img/logo.svg"
-import {InputWrapperProps} from "../../components/input/inputWrapper";
-import {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit";
-import AuthController from "../../controllers/AuthController";
-import {SignInData} from "../../api/auth/auth.t";
-import {Router} from "../../utils/Router";
-import {Routes} from "../../index";
+import {InputWrapperProps} from "../../components/input/inputWrapper"
+import {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
+import AuthController from "../../controllers/AuthController"
+import {SignInData} from "../../api/auth/auth.t"
+import {Router} from "../../utils/Router"
+import {Routes} from "../../index"
 
 export interface SigninProps {
 	form: SigninFormProps,
@@ -30,7 +30,7 @@ export default class Signin extends Block<SigninProps> {
 	}
 
 	init() {
-		let loginData: SignInData = {login: "", password: ""}
+		const loginData: SignInData = {login: "", password: ""}
 		this.children.Form = new SigninForm({
 			inputs: [
 				{
@@ -65,7 +65,7 @@ export default class Signin extends Block<SigninProps> {
 			},
 			events: {
 				submit: (Event: any) => {
-					Event.preventDefault();
+					Event.preventDefault()
 					console.log(loginData)
 					if (loginData.login && loginData.password) {
 						AuthController.signin(loginData)

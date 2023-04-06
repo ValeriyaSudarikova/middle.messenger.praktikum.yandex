@@ -23,8 +23,17 @@
       justify-content: space-between;
       align-items: center;
 
-      &-text .hidden {
+      &-text {
+        text-align: left;
+        width: 200px;
+        &.hidden {
         display: none;
+      }
+      }
+      &-img {
+        width: 95px;
+        height: 95px;
+        border-radius: 100%;
       }
     }
 

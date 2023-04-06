@@ -1,9 +1,9 @@
-import Block from "../../utils/Block";
-import template from "./ContactSearchForm.hbs";
+import Block from "../../utils/Block"
+import template from "./ContactSearchForm.hbs"
 //components
-import ContactSearchInput, {InputProps} from "./input/ContactSearchInput";
-import ContactSearchBtn, {BtnProps} from "./btn/ContactSearchBtn";
-import ContactSearchLabel, {LabelProps} from './label/label';
+import ContactSearchInput, {InputProps} from "./input/ContactSearchInput"
+import ContactSearchBtn, {BtnProps} from "./btn/ContactSearchBtn"
+import ContactSearchLabel, {LabelProps} from "./label/label"
 
 export interface ContactSearchFormProps {
     input: InputProps,
@@ -13,21 +13,21 @@ export interface ContactSearchFormProps {
 }
 
 class ContactSearchForm extends Block<ContactSearchFormProps> {
-    constructor(props: ContactSearchFormProps) {
-        super("div", props)
-    }
+	constructor(props: ContactSearchFormProps) {
+		super("div", props)
+	}
 
-    protected render(): DocumentFragment {
-        return this.compile(template, {
-            ...this.props,
-        })
-    }
+	protected render(): DocumentFragment {
+		return this.compile(template, {
+			...this.props,
+		})
+	}
 
-    protected init() {
-        this.children.Label = new ContactSearchLabel({...this.props.label});
-        this.children.Input = new ContactSearchInput({...this.props.input});
-        this.children.Btn = new ContactSearchBtn({...this.props.btn});
-    }
+	protected init() {
+		this.children.Label = new ContactSearchLabel({...this.props.label})
+		this.children.Input = new ContactSearchInput({...this.props.input})
+		this.children.Btn = new ContactSearchBtn({...this.props.btn})
+	}
 }
 
 export default ContactSearchForm

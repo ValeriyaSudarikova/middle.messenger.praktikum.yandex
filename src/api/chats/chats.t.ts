@@ -1,4 +1,4 @@
-import {UserData} from "../auth/auth.t";
+import {UserData} from "../auth/auth.t"
 
 export interface ChatItem {
     id: number,
@@ -7,6 +7,7 @@ export interface ChatItem {
     unreadCount: number,
     last_message: Message | undefined,
     delete?: (id: number) => void | undefined
+    events?: Record<string, any>
 }
 
 export interface Message {
