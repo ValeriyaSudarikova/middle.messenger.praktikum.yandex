@@ -1,6 +1,7 @@
 import EventBus from "./EventBus"
 import {nanoid} from "nanoid"
 import {TemplateDelegate} from "handlebars"
+
 class Block<props = any> {
 	static EVENTS = {
 		INIT: "init",
@@ -28,29 +29,32 @@ class Block<props = any> {
 
 		this.children = children
 		this.props = this._makePropsProxy(props)
+
 		this.eventBus = () => eventBus
+
 		this._registerEvents(eventBus)
+
 		eventBus.emit(Block.EVENTS.INIT)
 	}
 
 	_getChildrenAndProps = (childrenAndProps: props | any) : { props: props, children: Record<string, Block | Block[]> } => {
-		const props: Record<string, unknown> = {};
-		const children: Record<string, Block | Block[]> = {};
+		const props: Record<string, unknown> = {}
+		const children: Record<string, Block | Block[]> = {}
 
 		Object.entries(childrenAndProps).forEach(([key, value]) => {
 			if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
-				children[key as string] = value;
+				children[key as string] = value
 			} else if (value instanceof Block) {
-				children[key as string] = value;
+				children[key as string] = value
 			} else {
-				props[key] = value;
+				props[key] = value
 			}
-		});
+		})
 
-		return {props: props as props, children};
+		return {props: props as props, children}
 	}
 	_addEvents() {
-		const {events = {}} = this.props as {events: Record<string, () => void>}
+		const {events = {}} = this.props as props & {events: Record<string, () => void>}
 
 		Object.keys(events).forEach(eventName => {
 			this._element?.addEventListener(eventName, events[eventName])
@@ -64,27 +68,23 @@ class Block<props = any> {
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
 	}
 
-	_createResourses() {
-		const {tagName} = this._meta
-		this._element = this._createDocumentElement(tagName)
-	}
-
-	private _init() {
-		// this._createResourses()
-		this.init()
-		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
-	}
-	/* eslint-disable */
 	protected init() {}
 
 	private _componentDidMount() {
 		this.componentDidMount()
 	}
-	/* eslint-disable */
+
 	protected componentDidMount() {}
 
+	private _init() {
+		this.init()
+
+		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+	}
+
+
 	public dispatchComponentDidMount() {
-		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+		this.eventBus().emit(Block.EVENTS.FLOW_CDM)
 
 		Object.values(this.children).forEach(child => {
 			if (Array.isArray(child)) {
@@ -94,7 +94,7 @@ class Block<props = any> {
 			} else {
 				child.dispatchComponentDidMount()
 			}
-		});
+		})
 	}
 
 	private _componentDidUpdate(oldProps: any, newProps: any) {
@@ -102,22 +102,18 @@ class Block<props = any> {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 		}
 	}
-	componentDidUpdate(oldProps: props | any, newProps: props | any): boolean {
-		if (newProps !== oldProps) {
-			if (newProps.child && newProps.child instanceof Block) {
-				const {child} = newProps
-				this.children.child = child
-				return true
-			}
-		}
-		return false
+	componentDidUpdate(oldProps: props | any, newProps: props | any): boolean | Promise<boolean> {
+		return true
 	}
 
 	setProps(nextProps: props) {
 		if (!nextProps) {
 			return
 		}
+
 		Object.assign(this.props!, nextProps)
+
+		this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
 	}
 
 	get element() {
@@ -176,7 +172,6 @@ class Block<props = any> {
 			}
 		})
 
-
 		return temp.content
 	}
 
@@ -189,7 +184,6 @@ class Block<props = any> {
 	}
 
 	_makePropsProxy(props: any) {
-		/* eslint-disable */
 		const self = this
 
 		return new Proxy(props, {
@@ -197,10 +191,11 @@ class Block<props = any> {
 				const value = target[prop]
 				return typeof value === "function" ? value.bind(target) : value
 			},
+
 			set(target, prop: string, value) {
 				const oldTarget = {...target}
 
-				target[prop] = value
+				target[prop as keyof props] = value
 
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
 				return true
@@ -209,10 +204,6 @@ class Block<props = any> {
 				throw new Error("Нет доступа")
 			}
 		})
-	}
-
-	_createDocumentElement(tagName: string) {
-		return document.createElement(tagName)
 	}
 
 	show() {

@@ -9,7 +9,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Comfortaa, serif;
+  font-family: Comfortaa, sans-serif;
 }
 
 .container {
@@ -31,6 +31,14 @@
 
 .white {
   background: #fff;
+}
+.fz-13l {
+  margin-top: 4px;
+  color: #5b6976;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 12px;
+  padding-left: 5px;
 }
 .fz-14l {
   color: #839DAA;
@@ -98,6 +106,10 @@
 
 .colored {
   color: #ace0dcfc;
+}
+
+.error_404 {
+  margin-left: 50%;
 }
 
 @import "styles/utils/btn";

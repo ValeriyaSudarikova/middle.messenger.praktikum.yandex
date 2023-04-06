@@ -2,9 +2,6 @@ import Block from "../../../../utils/Block"
 import template from "./label.hbs"
 //components
 import Img, {ImgProps} from "../../../img/img"
-//icons
-import add from "../../../../icons/add.svg"
-
 export interface LabelProps {
 	forClass: string,
 	class: string,

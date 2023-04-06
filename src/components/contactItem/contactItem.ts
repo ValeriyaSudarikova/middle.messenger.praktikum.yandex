@@ -1,39 +1,41 @@
 import Block from "../../utils/Block"
 import template from "./contactItem.hbs"
 import Img, {ImgProps} from "../img/img"
-import Btn, {BtnProps} from "../btn/btn"
-import BtnSubmit, {BtnSubmitProps} from "../btnSubmit/btnSubmit"
+import BtnSubmit from "../btnSubmit/btnSubmit"
 import mess from "../../icons/message.svg"
 import delIcon from "../../icons/trash.svg"
 import Chat from "../chat/chat"
+import contactsController from "../../controllers/ContactsController"
 
 export interface ContactItemProps {
-	class: string,
+	class?: string,
+	contactID: number,
 	statusClass: string,
 	name: string,
-	status: string,
+	status?: string,
 	img: ImgProps
 }
 
 export const createChat = (Event: any, data: any) => {
+
 	const chatWrapper = document.querySelector(".main")
 	const contacts = document.querySelector(".contacts")
-	const chat = new Chat({
-		contact: data,
-		messages: [
-			{
-				class: "to",
-				message: data.messageText ? data.messageText : "",
-				img: data.img
-			}
-		]
-	})
-	contacts!.classList.add("hidden")
-	chatWrapper!.append(chat.getContent()!)
+	// const chat = new Chat({
+	// 	contact: data,
+	// 	messages: [
+	// 		{
+	// 			class: "to",
+	// 			message: data.messageText ? data.messageText : "",
+	// 			img: data.img
+	// 		}
+	// 	]
+	// })
+	// contacts!.classList.add("hidden")
+	// chatWrapper!.append(chat.getContent()!)
 }
 
 class ContactItem extends Block<ContactItemProps> {
-	constructor(props: ContactItem) {
+	constructor(props: ContactItemProps) {
 		super("div", props)
 	}
 
@@ -44,23 +46,20 @@ class ContactItem extends Block<ContactItemProps> {
 	init() {
 		this.children.activeContactImg = new Img({...this.props.img})
 		this.children.message = new BtnSubmit({
-			/* eslint-disable */
-			//@ts-ignore
 			type: "button",
 			class: "contacts__list_item-btn mess",
 			label: new Img({src: mess, alt:"сообщение"}),
 			events: {
-				click: (event: Event, data: any = this.props) => {createChat(Event, data)}
+				click: (Event: Event, data: any = this.props) => {createChat(Event, data)}
 			}
 		})
 		this.children.del = new BtnSubmit({
-			//@ts-ignore
 			type: "button",
 			class: "contacts__list_item-btn trash",
 			label: new Img({src:delIcon, alt:"удаление"}),
 			events: {
+				click: (Event: any, id:number = this.props.contactID) => {contactsController.deleteUser(id)}
 			}
-			/* eslint-disable */
 		})
 	}
 }

@@ -1,7 +1,7 @@
 import Block from "../../../utils/Block"
 import template from "./chatInput.hbs"
 
-interface ChatInputProps {
+export interface ChatInputProps {
 	type: string,
 	class: string
 	events: Record<string, any>

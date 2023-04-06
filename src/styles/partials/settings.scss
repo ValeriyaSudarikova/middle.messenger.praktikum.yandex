@@ -1,7 +1,7 @@
 @import "../base/variables";
 
 .settings {
-  width: 88vw;
+  width: 80vw;
   height: 90vh;
   background: $sub-color;
   margin-left: 20px;
@@ -17,14 +17,20 @@
 //    align-items: baseline;
     padding: 54px 64px 0 64px;
     margin-bottom: 60px;
+    .settings-error {
+      padding-top: 5px;
+      display: block;
+      position: absolute;
+      width: 450px;
+      right: 40px;
+    }
     &-avatar {
       width: 250px;
       margin-bottom: 30px;
       display: flex;
       flex-direction: row;
       justify-content: left;
-      align-items: stretch;
-
+      font-size: 20px;
       &.input__wrapper {
 //        width: 100%;
 //        margin-right: 180px;
@@ -38,16 +44,10 @@
         border-radius: 50%;
       }
     }
-    .input__header-container {
-      position: relative;
-      padding-top: 25px;
-      margin-left: 150px;
-      width: 300px;
-      .settings-error {
-        position: absolute;
-        width: 380px;
-        right: -400px;
-      }
+    .settings__header-container {
+      margin-top: -20px;
+      margin-left: 20px;
+      margin-bottom: 40px;
     }
   }
 
