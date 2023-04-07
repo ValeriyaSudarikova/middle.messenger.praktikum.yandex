@@ -2,8 +2,6 @@ import {ChatAPI} from "../api/chats/ChatAPI"
 
 import store from "../utils/Store"
 import MessageController from "./MessageController"
-import {log} from "util"
-import messageController from "./MessageController"
 
 class ChatController {
 	private api: ChatAPI

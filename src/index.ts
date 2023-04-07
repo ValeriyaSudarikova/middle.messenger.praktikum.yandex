@@ -1,21 +1,13 @@
 import Homepage from "./pages/homepage/homepage"
-import Contacts from "./components/chatFriendsSections/contacts"
 import {Menu} from "./pages/menu/menu"
-import Img from "./components/img/img"
 import Router from "./utils/Router"
-import RegistrationWithStore from "./pages/registration/registration"
-import logoblack from "./img/logo_black.svg"
 import Signin from "./pages/signin/signin"
 import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController"
 import Registration from "./pages/registration/registration"
-import MessageController from "./controllers/MessageController"
-import chatsController from "./controllers/ChatController"
-
-console.log(chatsController, MessageController)
 
 export enum Routes {
-	homepage = "/homepage",
+	homepage = "/",
 	registration = "/sign-up",
 	signIn = "/sign-in",
 	resetPass = "/reset-password",
@@ -37,7 +29,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	switch (window.location.pathname) {
 	case Routes.homepage:
+		isProtectedRoute = false
+		break
 	case Routes.registration:
+		isProtectedRoute = false
+		break
 	case Routes.signIn:
 		isProtectedRoute = false
 		break
@@ -48,6 +44,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 		Router.start()
 		if (!isProtectedRoute) {
+			Router.go(Routes.homepage)
+		} else {
 			Router.go(Routes.menu)
 		}
 	} catch (e) {

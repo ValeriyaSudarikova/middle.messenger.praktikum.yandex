@@ -1,5 +1,5 @@
 import Block from "../../utils/Block"
-import {Router} from "../../utils/Router"
+import Router from "../../utils/Router"
 
 interface BlockConstructable { new(props: any): Block; }
 export function withRouter(Component: BlockConstructable) {
@@ -13,5 +13,5 @@ export function withRouter(Component: BlockConstructable) {
 }
 
 export interface PropsWithRouter {
-    router: Router;
+    router: typeof Router;
 }
