@@ -6,15 +6,12 @@ import NavItem, {NavItemProps} from "../../components/navItem/navItem"
 import BtnSubmit, {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
 import HeaderText, {HeaderTextProps} from "./headerText/headerText"
 //img
-import user2 from "../../img/user2.png"
-import user1 from "../../img/user1.png"
 import no_icon from "../../icons/no_avatar.svg"
 import chatIcon from "../../icons/message.svg"
 import friends from "../../icons/friends.svg"
 import exit from "../../icons/exit.svg"
 import settingsIcon from "../../icons/settings.svg"
 import next from "../../icons/next.svg"
-import notFound from "../../icons/404.svg"
 
 import AuthController from "../../controllers/AuthController"
 import {changeData, CloseMenu, findProperty, InputNames, OpenMenu} from "../../utils/helpers"
@@ -23,18 +20,10 @@ import Settings, {SettingsProps} from "../../components/settings/settings"
 import store, {State, withStore} from "../../utils/Store"
 import {UsedDataKeys, UserData} from "../../api/auth/auth.t"
 import ChatController from "../../controllers/ChatController"
-import UserController from "../../controllers/UserController"
-import userController from "../../controllers/UserController"
+import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/chats.t"
 import messageController, {Message} from "../../controllers/MessageController"
-import {ContactItemProps} from "../../components/contactItem/contactItem"
 import Chat, {ChatProps} from "../../components/chat/chat"
-import chatController from "../../controllers/ChatController"
-import ErrorMessage, {ErrorMessageProps} from "../../components/Errors/errorMessage"
-import ContactsController from "../../controllers/ContactsController"
-import ContactsBase from "../../components/chatFriendsSections/contacts"
-import {response} from "express"
-import {ChatContactProps} from "../../components/chat/chatContact/ChatContact"
 
 interface MenuProps {
 	UserImg: ImgProps,
@@ -191,7 +180,7 @@ class MenuBase extends Block<MenuProps> {
 
 								formData.append("avatar", Event.target.files![0])
 
-								await UserController.setUserAvatar(formData)
+								await userController.setUserAvatar(formData)
 							}
 						}
 					}
@@ -561,4 +550,4 @@ class MenuBase extends Block<MenuProps> {
 	}
 }
 
-export const Menu = withStore((state) => {return state || {}})(MenuBase)
+export const menu = withStore((state) => {return state || {}})(MenuBase)

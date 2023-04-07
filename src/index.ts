@@ -1,10 +1,6 @@
 import Homepage from "./pages/homepage/homepage"
-import Contacts from "./components/chatFriendsSections/contacts"
-import {Menu} from "./pages/menu/menu"
-import Img from "./components/img/img"
-import Router from "./utils/Router"
-import RegistrationWithStore from "./pages/registration/registration"
-import logoblack from "./img/logo_black.svg"
+import {menu} from "./pages/menu/menu"
+import {Router} from "./utils/Router"
 import Signin from "./pages/signin/signin"
 import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController"
@@ -27,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 		.use(Routes.registration, Registration)
 		.use(Routes.signIn, Signin)
 		.use(Routes.resetPass, ResetPassword)
-		.use(Routes.menu, Menu)
+		.use(Routes.menu, menu)
 
 	let isProtectedRoute = true
 

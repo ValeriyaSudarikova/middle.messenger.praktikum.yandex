@@ -6,7 +6,7 @@ import Img, {ImgProps} from "../../components/img/img"
 //img
 import mainImg from "../../img/homepage.png"
 import logo from "../../img/logo.svg"
-import Router from "../../utils/Router";
+import {Router} from "../../utils/Router";
 import {Routes} from "../../index";
 export interface HomepageProps {
 	circledImg: ImgProps,
