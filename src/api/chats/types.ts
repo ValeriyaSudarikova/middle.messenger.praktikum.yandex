@@ -1,4 +1,4 @@
-import {UserData} from "../auth/auth.t"
+import {UserData} from "../auth/types"
 
 export interface ChatItem {
     id: number,

@@ -1,11 +1,11 @@
 import Block from "../../utils/Block"
 import template from "./chat.hbs"
 //components
-import BtnSubmit from "../btnSubmit/btnSubmit"
+import {ChatItem} from "../../api/chats/types"
+import ContactSearchForm from "../ContactSearchForm/ContactSearchForm"
+import ChatContact, {ChatContactProps} from "./chatContact/ChatContact"
 import MessageItem, {MessageProps} from "./chatItem/chatItem"
-import ChatFileInput from "./chatFileInput/chatFileInput"
-import ContactItem, {ContactItemProps} from "../contactItem/contactItem"
-import ChatInput from "./chatInput/chatInput"
+import ChatMessageForm from "./chatForm/ChatForm"
 import Img from "../img/img"
 //icons
 import send from "../../icons/send.svg"
@@ -15,18 +15,8 @@ import no_chat_avatar from "../../img/chat.png"
 //utils
 import messageController, {Message} from "../../controllers/MessageController"
 import store from "../../utils/Store"
-import chatsController from "../../controllers/ChatController"
-import contactsController from "../../controllers/ContactsController"
-import {UserData} from "../../api/auth/auth.t"
-import {ChatItem} from "../../api/chats/chats.t"
-import ContactSearchForm from "../ContactSearchForm/ContactSearchForm"
-import {BtnProps} from "../ContactSearchForm/btn/ContactSearchBtn"
-import ChatController from "../../controllers/ChatController"
-import ChatContact, {ChatContactProps} from "./chatContact/ChatContact"
 import chatController from "../../controllers/ChatController"
 import {dateFormatter} from "../../utils/helpers"
-import ChatMessageForm from "./chatForm/ChatForm"
-import {isDeepStrictEqual} from "util"
 
 export interface ChatProps {
 	selectedChat: ChatItem,

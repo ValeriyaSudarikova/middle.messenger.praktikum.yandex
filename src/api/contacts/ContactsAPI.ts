@@ -1,5 +1,5 @@
 import BaseAPI from "../baseApi"
-import {SignInData, SignUpData, UserData} from "../auth/auth.t"
+import {SignInData, SignUpData, UserData} from "../auth/types"
 
 export class ContactsAPI extends BaseAPI {
 	constructor() {
@@ -11,7 +11,6 @@ export class ContactsAPI extends BaseAPI {
 	}
 
 	getUserByLogin(login: string): Promise<UserData> {
-		console.log(login)
 		return this.http.post("/search", login)
 	}
 

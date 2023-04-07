@@ -18,10 +18,10 @@ import {changeData, CloseMenu, findProperty, InputNames, OpenMenu} from "../../u
 import Contacts, {ContactsWithStore} from "../../components/chatFriendsSections/contacts"
 import Settings, {SettingsProps} from "../../components/settings/settings"
 import store, {State, withStore} from "../../utils/Store"
-import {UsedDataKeys, UserData} from "../../api/auth/auth.t"
+import {UsedDataKeys, UserData} from "../../api/auth/types"
 import ChatController from "../../controllers/ChatController"
 import {userController} from "../../controllers/UserController"
-import {ChatItem} from "../../api/chats/chats.t"
+import {ChatItem} from "../../api/chats/types"
 import messageController, {Message} from "../../controllers/MessageController"
 import Chat, {ChatProps} from "../../components/chat/chat"
 

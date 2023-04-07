@@ -12,7 +12,6 @@ export interface SignInData {
     password: string
 }
 
-export interface LogoutData {}
 export interface UserData {
     "id": number,
     "first_name": string,

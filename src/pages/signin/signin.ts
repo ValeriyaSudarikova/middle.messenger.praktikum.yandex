@@ -10,7 +10,7 @@ import logo from "../../img/logo.svg"
 import {InputWrapperProps} from "../../components/input/inputWrapper"
 import {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
 import AuthController from "../../controllers/AuthController"
-import {SignInData} from "../../api/auth/auth.t"
+import {SignInData} from "../../api/auth/types"
 import {Router} from "../../utils/Router"
 import {Routes} from "../../index"
 

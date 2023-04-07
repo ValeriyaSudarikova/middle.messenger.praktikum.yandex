@@ -1,6 +1,6 @@
 import BaseAPI from "../baseApi"
-import {ChatItem, Message} from "./chats.t"
-import {UserData} from "../auth/auth.t"
+import {ChatItem, Message} from "./types"
+import {UserData} from "../auth/types"
 
 export class ChatAPI extends BaseAPI {
 

@@ -1,4 +1,4 @@
-import {UserData} from "../api/auth/auth.t"
+import {UserData} from "../api/auth/types"
 import WSTransport, {WSTransportEvents} from "../utils/WSTransport"
 import store from "../utils/Store"
 

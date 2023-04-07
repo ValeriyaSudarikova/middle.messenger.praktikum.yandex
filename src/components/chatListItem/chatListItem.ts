@@ -10,7 +10,7 @@ import Popup from "../popup/popup"
 import icon from "../../icons/no_avatar.svg"
 
 import {createChat} from "../contactItem/contactItem"
-import {ChatItem, Message} from "../../api/chats/chats.t"
+import {ChatItem, Message} from "../../api/chats/types"
 import {dateFormatter} from "../../utils/helpers"
 import chatsController from "../../controllers/ChatController"
 import store from "../../utils/Store"

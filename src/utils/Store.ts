@@ -1,8 +1,8 @@
-import {UserData} from "../api/auth/auth.t"
+import {UserData} from "../api/auth/types"
 import {set} from "./helpers"
 import EventBus from "./EventBus"
 import Block from "./Block"
-import {ChatItem} from "../api/chats/chats.t"
+import {ChatItem} from "../api/chats/types"
 import {Message} from "../controllers/MessageController"
 
 export interface State {
@@ -50,11 +50,6 @@ export class Store extends EventBus {
 	}
 }
 
-const store = new Store()
-
-// @ts-ignore
-window.store = store
-
 interface BlockConstructor<P = any> {
     new(props: any): Block<P & any>;
 }
@@ -80,5 +75,7 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 
 	}
 }
+
+const store = new Store()
 
 export default store

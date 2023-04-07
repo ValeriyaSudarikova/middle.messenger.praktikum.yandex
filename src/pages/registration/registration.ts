@@ -5,7 +5,7 @@ import RegForm, {RegFormProps} from "./regForm/RegForm"
 //img
 import logo from "../../img/logo_black.svg"
 import {checkOnErrors, getData, ShowFocusMessage} from "../../utils/helpers"
-import {SignUpData} from "../../api/auth/auth.t"
+import {SignUpData} from "../../api/auth/types"
 import AuthController from "../../controllers/AuthController"
 import store, {withStore} from "../../utils/Store"
 

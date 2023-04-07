@@ -1,6 +1,6 @@
 import store from "../utils/Store"
 import {ContactsAPI} from "../api/contacts/ContactsAPI"
-import {UserData} from "../api/auth/auth.t"
+import {UserData} from "../api/auth/types"
 
 class ContactsController {
 	private api: ContactsAPI

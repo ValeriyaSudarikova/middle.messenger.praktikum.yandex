@@ -2,6 +2,7 @@ import {Router} from "../utils/Router"
 import {Routes} from "../index"
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
+import {UserData} from "../api/auth/types";
 
 class UserController {
 	private api: UserAPI
@@ -10,8 +11,7 @@ class UserController {
 		this.api = new UserAPI()
 	}
 
-	async ChangeUserData(data: any) {
-
+	async ChangeUserData(data: UserData) {
 
 		try {
 			await this.api.changeUserData(data)

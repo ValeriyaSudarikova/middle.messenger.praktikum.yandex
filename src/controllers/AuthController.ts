@@ -1,5 +1,5 @@
 import {AuthAPI} from "../api/auth/AuthAPI"
-import {SignInData, SignUpData, UserData} from "../api/auth/auth.t"
+import {SignInData, SignUpData, UserData} from "../api/auth/types"
 import store from "../utils/Store"
 import {Routes} from "../index"
 import {Router} from "../utils/Router"
@@ -21,6 +21,24 @@ class AuthController {
 
 	}
 
+	createErrorMessage(errorMess: string, clas: string, afterElemTag: string) {
+		const existedMes = document.querySelector(clas)
+
+		if (existedMes) {
+			existedMes.remove()
+		}
+
+		const error = document.createElement("span")
+		error.innerHTML = errorMess
+		error.classList.add(clas)
+		const elem = document.querySelector(afterElemTag)
+
+		elem!.after(error)
+		setTimeout(() => {
+			error.remove()
+		}, 3000)
+	}
+
 	async signup(data: SignUpData) {
 		try {
 			await this.api.signup(data)
@@ -30,22 +48,7 @@ class AuthController {
 			Router.go(Routes.menu)
 
 		} catch (e) {
-			console.error("error", e)
-
-			const existedMes = document.querySelector(".errored__message")
-			if (existedMes) {
-				existedMes.remove()
-			}
-
-			const error = document.createElement("span")
-			error.innerHTML = "Пользователь с этими данными уже существует"
-			error.classList.add("errored__message")
-			const elem = document.querySelector(".submit")
-
-            elem!.after(error)
-            setTimeout(() => {
-            	error.remove()
-            }, 3000)
+			this.createErrorMessage("Пользователь с этими данными уже существует", ".errored__message", ".submit" )
 		}
 	}
 
@@ -58,16 +61,7 @@ class AuthController {
 			Router.go(Routes.menu)
 
 		} catch (e) {
-
-			const error = document.createElement("span")
-			const btn = document.querySelector("button")
-			error.innerHTML = "Проверьте корректность данных и повторите попытку входа"
-			error.classList.add(".errored__message-dark")
-			btn?.after(error)
-			setTimeout(() => {
-				error.remove()
-			}, 3000)
-
+			this.createErrorMessage("Проверьте корректность данных и повторите попытку входа", ".errored__message-dark", "button")
 		}
 	}
 

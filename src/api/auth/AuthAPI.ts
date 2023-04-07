@@ -1,5 +1,5 @@
 import BaseAPI from "../baseApi"
-import {SignInData, SignUpData, UserData} from "./auth.t"
+import {SignInData, SignUpData, UserData} from "./types"
 import store from "../../utils/Store"
 
 export class AuthAPI extends BaseAPI {

@@ -1,4 +1,4 @@
-import {UsedDataKeys, UserData} from "../api/auth/auth.t"
+import {UsedDataKeys, UserData} from "../api/auth/types"
 
 export type Indexed<Type = any> = {
     [key in string]: Type;
