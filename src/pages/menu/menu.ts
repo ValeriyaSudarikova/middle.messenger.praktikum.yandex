@@ -46,7 +46,6 @@ interface MenuProps {
 
 class MenuBase extends Block<MenuProps> {
 	public UserData: UserData | undefined
-	// public nav: NavItemProps[];
 	public chats_data: ChatItem[] | undefined
 	public chats: Contacts | undefined
 	public active_chat_data: {chat: ChatItem, users: UserData[], messages: Message[]} | undefined
@@ -79,7 +78,6 @@ class MenuBase extends Block<MenuProps> {
 		}
 		this.chats_data = store.getState().chats?.data
 		this.active_chat_data = store.getState().selected_chat_data
-		// this.settings_data =
 	}
 
 	closeUnactive(Event: any) {
@@ -319,60 +317,7 @@ class MenuBase extends Block<MenuProps> {
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
-					},
-					// {
-					// 	label: {
-					// 		text: "старый пароль",
-					// 		subtitle: "Введите старый пароль",
-					// 	},
-					// 	input: {
-					// 		type: "password",
-					// 		name: "OldPassword",
-					// 		placeholder: "",
-					// 		required: true,
-					// 		value: /*FormData? findProperty(FormData, InputNames.pass) : */"",
-					// 		events: {
-					// 			focus: () => {},
-					// 			blur: (Event: any) => {changeData(Event, UnchangedData, FormData, Event.target.name, Event.target.value)}
-					// 		}
-					// 	}
-					// },
-					// {
-					// 	label: {
-					// 		text: "новый пароль",
-					// 		subtitle: "Введите новый пароль, рекомендуется использовать буквы и символы для надежности",
-					// 	},
-					// 	input: {
-					// 		type: "password",
-					// 		name: "NewPassword",
-					// 		required: true,
-					// 		placeholder: "введите новый пароль",
-					// 		value: "",
-					// 		events: {
-					// 			focus: () => {},
-					// 			blur: (Event: any) => {changeData(Event, UnchangedData, FormData, Event.target.name, Event.target.value)}
-					// 		}
-					// 	}
-					//
-					// },
-					// {
-					// 	label: {
-					// 		text: "повторите пароль",
-					// 		subtitle: "",
-					// 		// forClass: string
-					// 	},
-					// 	input: {
-					// 		type: "password",
-					// 		name: "repeatpass",
-					// 		required: true,
-					// 		placeholder: "повторите пароль",
-					// 		value: "",
-					// 		events: {
-					// 			focus: () => {},
-					// 			blur: (Event: any) => {changeData(Event, UnchangedData, FormData, Event.target.name, Event.target.value)}
-					// 		}
-					// 	}
-					// }
+					}
 				],
 				submit: {
 					type:"submit",
@@ -475,10 +420,10 @@ class MenuBase extends Block<MenuProps> {
 		})
 	}
 
-	async getUsers(props: any) {
+	async getUsers(props: { chat: ChatItem, users: UserData[], messages: Message[]}) {
 		let users
-		if (props.selected_chat_data.users) {
-			users = props.selected_chat_data.users.map((user:UserData) => {
+		if (props.users) {
+			users = props.users.map((user:UserData) => {
 				return {
 					img: {
 						src: "https://ya-praktikum.tech/api/v2/resources" + user.avatar,
@@ -488,7 +433,7 @@ class MenuBase extends Block<MenuProps> {
 				}
 			})
 		} else {
-			const r = await ChatController.getUsers(props.selected_chat_data.chat.id)
+			const r = await ChatController.getUsers(props.chat.id)
 			users = r!.map((user) => {
 				return {
 					img: {
@@ -523,14 +468,19 @@ class MenuBase extends Block<MenuProps> {
 			selected_bool = !oldProps.selected_chat_data
 		}
 
-		if (oldProps.chats !== newProps.chats) {
+		if (this.chats_data !== newProps.chats.data ) {
 
-			this.chats_data = newProps.chats?.data
+			newProps.chats.data.map( async (chat: ChatItem) => {
+				await messageController.getOldMessages(chat.id)
+			})
 
-			this.chats?.setProps({
+			this.chats_data = store.getState().chats!.data
+			console.log(this.chats_data, "chats")
+
+			this.chats!.setProps({
 				header: "Мои сообщения",
 				flag: "chat",
-				chats: newProps.chats.data,
+				chats: this.chats_data,
 				search: {
 					input: {
 						placeholder: "введите название чата",
@@ -588,22 +538,24 @@ class MenuBase extends Block<MenuProps> {
 
 		}
 		if (selected_bool) {
+			let users = await this.getUsers(newProps.selected_chat_data);
 			if (!this.active_chat) {
 				this.active_chat = new Chat({
 					selectedChat: newProps.selected_chat_data.chat,
 					ChatName: newProps.selected_chat_data.chat.title,
-					Contacts:  await this.getUsers(newProps),
+					Contacts:  users,
 					messages: newProps.selected_chat_data.messages ? newProps.selected_chat_data.messages : this.getMessages(newProps),
 				})
 			} else {
 				this.active_chat.setProps({
 					selectedChat: newProps.selected_chat_data.chat,
 					ChatName: newProps.selected_chat_data.chat.title,
-					Contacts:  await this.getUsers(newProps),
+					Contacts:  users,
 					messages: newProps.selected_chat_data.messages
 				})
 			}
 
+			await messageController.getOldMessages(newProps.selected_chat_data.id)
 		}
 		return true
 	}

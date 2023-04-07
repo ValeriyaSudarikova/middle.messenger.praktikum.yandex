@@ -20,79 +20,79 @@ export interface Message {
     }
 }
 
-class MessagesController{
-	private sockets: Map<number, WSTransport> = new Map()
+class MessagesController {
+	private sockets: Map<number, WSTransport> = new Map();
 
 	async connect(id: number, token: string) {
-		if (this.sockets.get(id)) {
-			return
+		if (this.sockets.has(id)) {
+			return;
 		}
 
-		const {user} = store.getState()
+		const userId = store.getState().user!.data.id;
 
-		const transport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${user?.data.id}/${id}/${token}`)
+		const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
 
-		await transport.connect()
+		this.sockets.set(id, wsTransport);
 
-		this.sockets.set(id, transport)
+		await wsTransport.connect();
 
-		this.getOldMessages(id)
-
-		this.subscribe(transport, id)
+		this.subscribe(wsTransport, id);
+		this.getOldMessages(id);
 	}
 
 	sendMessage(id: number, message: string) {
-		const transport = this.sockets.get(id)
+		const socket = this.sockets.get(id);
 
-		if (!transport) {
-			throw new Error("Channel is closed")
+		if (!socket) {
+			throw new Error(`Chat ${id} is not connected`);
 		}
 
-		transport.send({type: "message", content: message})
+		socket.send({
+			type: 'message',
+			content: message,
+		});
 	}
 
 	getOldMessages(id: number) {
-		const transport = this.sockets.get(id)
+		const socket = this.sockets.get(id);
 
-		if (!transport) {
-			throw new Error("Channel is closed")
+		if (!socket) {
+			throw new Error(`Chat ${id} is not connected`);
 		}
 
-		transport.send({type: "get old", content: "0"})
+		socket.send({type: 'get old', content: '0'});
 	}
 
 	closeAll() {
-		Array.from(this.sockets.values()).forEach(socket => {socket.close()})
+		Array.from(this.sockets.values()).forEach(socket => socket.close());
 	}
 
-	private onMessage(id: number, message: Message | Message[]) {
-		console.log(message, "mess")
-		if (Array.isArray(message)) {
-			store.set(`messages.${id}`, message)
+	private onMessage(id: number, messages: Message | Message[]) {
+		let messagesToAdd: Message[] = [];
 
-			return
+		if (Array.isArray(messages)) {
+			messagesToAdd = messages.reverse();
+		} else {
+			messagesToAdd.push(messages);
 		}
 
-		const history = store.getState().messages![id]
+		const currentMessages = (store.getState().messages || {})[id] || [];
 
-		if (!history) {
-			store.set(`messages.${id}`, [message])
-		}
+		messagesToAdd = [...currentMessages, ...messagesToAdd];
 
-		store.set(`messages.${id}`, [...history, message])
-
+		store.set(`messages.${id}`, messagesToAdd);
 	}
 
 	private onClose(id: number) {
-		this.sockets.delete(id)
+		this.sockets.delete(id);
 	}
 
 	private subscribe(transport: WSTransport, id: number) {
-		transport.on(WSTransportEvents.message, (messages) => this.onMessage(id, messages))
-		transport.on(WSTransportEvents.close, () => {this.onClose(id)})
+		transport.on(WSTransportEvents.message, (message) => this.onMessage(id, message));
+		transport.on(WSTransportEvents.close, () => this.onClose(id));
 	}
-
 }
+
 
 const messageController = new MessagesController()
 

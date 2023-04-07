@@ -202,8 +202,6 @@ export default class Chat extends Block<ChatProps> {
 					if (newMessage) {
 						messageController.sendMessage(this.props.selectedChat.id, newMessage)
 
-						messageController.getOldMessages(this.props.selectedChat.id)
-
 						event.target.reset()
 					}
 				}
