@@ -29,11 +29,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	switch (window.location.pathname) {
 	case Routes.homepage:
-		isProtectedRoute = false
-		break
 	case Routes.registration:
-		isProtectedRoute = false
-		break
 	case Routes.signIn:
 		isProtectedRoute = false
 		break
@@ -52,7 +48,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 		Router.start()
 
 		if (isProtectedRoute) {
-			Router.go(Routes.menu)
+			Router.go(Routes.homepage)
 		}
 	}
 

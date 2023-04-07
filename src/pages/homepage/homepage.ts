@@ -38,10 +38,9 @@ export default class Homepage extends Block<HomepageProps> {
 		this.children.btnSignIn = new Btn({
 			type: "button",
 			class: "homepage",
-			// href: "/sign-in",
 			label: "Вход",
 			events: {
-				click: (event: any) => {
+				click: () => {
 					Router.go(Routes.signIn);
 				}
 			}
@@ -49,7 +48,6 @@ export default class Homepage extends Block<HomepageProps> {
 		this.children.btnRegistration = new Btn({
 			type: "button",
 			class: "homepage",
-			// href: "/registration",
 			label: "Регистрация",
 			events: () => {
 				Router.go(Routes.registration);
