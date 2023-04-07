@@ -1,6 +1,5 @@
-import Router from "../utils/Router"
+import {Router} from "../utils/Router"
 import {Routes} from "../index"
-import store from "../utils/Store"
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
 

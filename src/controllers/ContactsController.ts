@@ -1,10 +1,6 @@
-import {ChatAPI} from "../api/chats/ChatAPI"
-import ChatListItem from "../components/chatListItem/chatListItem"
 import store from "../utils/Store"
 import {ContactsAPI} from "../api/contacts/ContactsAPI"
 import {UserData} from "../api/auth/auth.t"
-import {login} from "../utils/helpers"
-import chatsController from "./ChatController"
 
 class ContactsController {
 	private api: ContactsAPI

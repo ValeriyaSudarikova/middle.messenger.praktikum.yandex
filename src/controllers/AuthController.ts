@@ -2,7 +2,7 @@ import {AuthAPI} from "../api/auth/AuthAPI"
 import {SignInData, SignUpData, UserData} from "../api/auth/auth.t"
 import store from "../utils/Store"
 import {Routes} from "../index"
-import Router from "../utils/Router"
+import {Router} from "../utils/Router"
 import messageController from "./MessageController"
 
 class AuthController {

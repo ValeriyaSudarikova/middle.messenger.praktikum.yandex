@@ -55,20 +55,20 @@ class Route {
 	}
 }
 
-class Router {
-	private static __instance: Router
+class router {
+	private static __instance: router
 	private routes: Route[] = []
 	private currentRoute: Route | null = null
 	private history = window.history
 
 	constructor(private readonly rootQuery: string) {
-		if (Router.__instance) {
-			return Router.__instance
+		if (router.__instance) {
+			return router.__instance
 		}
 
 		this.routes = []
 
-		Router.__instance = this
+		router.__instance = this
 	}
 
 	public use(pathname: string, block: BlockConstructor) {
@@ -123,4 +123,4 @@ class Router {
 	}
 }
 
-export default new Router("main")
+export const Router = new router("main")
