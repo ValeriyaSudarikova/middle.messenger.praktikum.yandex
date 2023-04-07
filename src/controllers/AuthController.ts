@@ -12,13 +12,17 @@ class AuthController {
 	}
 
 	async getUser() {
-		store.set("user.isLoading", true)
+		try {
+			store.set("user.isLoading", true)
 
-		const user = await this.api.getUser()
+			const user = await this.api.getUser()
 
-		store.set("user.isLoading", false)
-		store.set("user.data", user)
-
+			store.set("user.isLoading", false)
+			store.set("user.data", user)
+			Router.go(Routes.menu)
+		} catch (e) {
+			Router.go(Routes.homepage)
+		}
 	}
 
 	createErrorMessage(errorMess: string, clas: string, afterElemTag: string) {
