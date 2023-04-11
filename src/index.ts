@@ -1,6 +1,6 @@
 import Homepage from "./pages/homepage/homepage"
 import {menu} from "./pages/menu/menu"
-import {Router} from "./utils/Router"
+import Router from "./utils/Router"
 import Signin from "./pages/signin/signin"
 import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController"
@@ -18,16 +18,17 @@ export enum Routes {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
+
 	Router
 		.use(Routes.homepage, Homepage)
 		.use(Routes.registration, Registration)
 		.use(Routes.signIn, Signin)
-		.use(Routes.resetPass, ResetPassword)
 		.use(Routes.menu, menu)
 
 	let isProtectedRoute = true
 
 	switch (window.location.pathname) {
+
 	case Routes.homepage:
 	case Routes.registration:
 	case Routes.signIn:
@@ -39,16 +40,18 @@ window.addEventListener("DOMContentLoaded", async () => {
 		await AuthController.getUser()
 
 		Router.start()
-		if (!isProtectedRoute) {
-			Router.go(Routes.homepage)
-		} else {
-			Router.go(Routes.menu)
-		}
-	} catch (e) {
-		Router.start()
 
 		if (isProtectedRoute) {
-			Router.go(Routes.homepage)
+			Router.go(Routes.menu)
+		}
+
+	} catch (e) {
+
+		console.log('catch', e)
+		Router.start()
+
+		if (!isProtectedRoute) {
+			Router.go(Routes.homepage);
 		}
 	}
 

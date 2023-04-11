@@ -1,12 +1,12 @@
 import BaseAPI from "./baseApi"
-import {UserData} from "./auth/types"
+import {UserData, UserDataToChange} from "./auth/types"
 
 export class UserAPI extends BaseAPI {
 	constructor() {
 		super("/user")
 	}
 
-	changeUserData(data: UserData) {
+	changeUserData(data: UserDataToChange) {
 
 		return this.http.put("/profile", data)
 	}

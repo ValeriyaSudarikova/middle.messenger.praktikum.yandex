@@ -280,3 +280,31 @@ function queryStringify(data: StringIndexed): string | never {
 
 	return result;
 }
+
+ interface AnyObject {
+	[key: string]: any;
+}
+
+export function isEqual(obj1: any, obj2: any): boolean {
+	if (obj1 === obj2) {
+		return true;
+	} else if (obj1 instanceof Date && obj2 instanceof Date) {
+		return obj1.getTime() === obj2.getTime();
+	} else if (Array.isArray(obj1) && Array.isArray(obj2)) {
+		if (obj1.length !== obj2.length) return false;
+		for (let i = 0; i < obj1.length; i++) {
+			if (!isEqual(obj1[i], obj2[i])) return false;
+		}
+		return true;
+	} else if (typeof obj1 === "object" && typeof obj2 === "object") {
+		let keys1 = Object.keys(obj1);
+		let keys2 = Object.keys(obj2);
+		if (keys1.length !== keys2.length) return false;
+		for (let key of keys1) {
+			if (!keys2.includes(key) || !isEqual(obj1[key], obj2[key])) return false;
+		}
+		return true;
+	} else {
+		return false;
+	}
+}

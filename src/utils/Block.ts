@@ -107,6 +107,7 @@ class Block<props = any> {
 	}
 
 	setProps(nextProps: props) {
+
 		if (!nextProps) {
 			return
 		}

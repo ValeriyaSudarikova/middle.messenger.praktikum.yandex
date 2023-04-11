@@ -27,6 +27,7 @@ export default class WSTransport extends EventBus {
 	}
 
 	public connect(): Promise<void> {
+
 		this.socket = new WebSocket(this.url)
 
 		this.subscribe(this.socket)

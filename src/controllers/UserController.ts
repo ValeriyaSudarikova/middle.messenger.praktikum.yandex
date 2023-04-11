@@ -2,7 +2,7 @@ import {Router} from "../utils/Router"
 import {Routes} from "../index"
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
-import {UserData} from "../api/auth/types";
+import {UserData, UserDataToChange} from "../api/auth/types";
 
 class UserController {
 	private api: UserAPI
@@ -11,14 +11,15 @@ class UserController {
 		this.api = new UserAPI()
 	}
 
-	async ChangeUserData(data: UserData) {
+	async ChangeUserData(data: UserDataToChange) {
 
 		try {
 			await this.api.changeUserData(data)
 
-			await authController.getUser()
+			await authController.getUser();
 
-			Router.go(Routes.menu)
+			location.reload()
+
 		} catch (e) {
 			console.log(e)
 		}
@@ -27,6 +28,11 @@ class UserController {
 	async setUserAvatar(avatar: object) {
 		try {
 			await this.api.changeUserAvatar(avatar)
+
+			await authController.getUser()
+
+			location.reload()
+
 		} catch (e) {
 			console.log(e)
 		}

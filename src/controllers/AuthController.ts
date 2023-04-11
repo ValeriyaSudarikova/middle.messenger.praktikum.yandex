@@ -2,7 +2,7 @@ import {AuthAPI} from "../api/auth/AuthAPI"
 import {SignInData, SignUpData, UserData} from "../api/auth/types"
 import store from "../utils/Store"
 import {Routes} from "../index"
-import {Router} from "../utils/Router"
+import Router from "../utils/Router"
 import messageController from "./MessageController"
 
 class AuthController {
@@ -19,9 +19,10 @@ class AuthController {
 
 			store.set("user.isLoading", false)
 			store.set("user.data", user)
+
 			Router.go(Routes.menu)
 		} catch (e) {
-			Router.go(Routes.homepage)
+			// Router.go(Routes.signIn)
 		}
 	}
 
@@ -52,7 +53,9 @@ class AuthController {
 			Router.go(Routes.menu)
 
 		} catch (e) {
+
 			this.createErrorMessage("Пользователь с этими данными уже существует", ".errored__message", ".submit" )
+
 		}
 	}
 
@@ -62,7 +65,7 @@ class AuthController {
 
 			await this.getUser()
 
-			Router.go(Routes.menu)
+			// Router.go(Routes.menu)
 
 		} catch (e) {
 			this.createErrorMessage("Проверьте корректность данных и повторите попытку входа", ".errored__message-dark", "button")
@@ -79,7 +82,6 @@ class AuthController {
 			store.set("chats.data", undefined)
 			store.set("selected_chat", undefined)
 			store.set("selected_chat_data", undefined)
-
 
 			Router.go(Routes.homepage)
 		} catch (e) {

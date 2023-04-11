@@ -16,7 +16,8 @@ import no_chat_avatar from "../../img/chat.png"
 import messageController, {Message} from "../../controllers/MessageController"
 import store from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
-import {dateFormatter} from "../../utils/helpers"
+import {dateFormatter, isEqual} from "../../utils/helpers"
+import {ChatWrapper} from "./chatWrapper/ChatWrapper";
 
 export interface ChatProps {
 	selectedChat: ChatItem,
@@ -29,7 +30,8 @@ export default class Chat extends Block<ChatProps> {
 	public newID: number | undefined
 	public ChatName: string | undefined
 	public Contacts: string[] | undefined
-	public messages: any
+	public current_offset: number
+	public ChatWrapper: ChatWrapper | undefined;
 
 	constructor(props: ChatProps) {
 		super("div", props)
@@ -37,7 +39,8 @@ export default class Chat extends Block<ChatProps> {
 		this.ChatName = undefined
 		this.Contacts = undefined
 		this.newID = undefined
-		this.messages = undefined
+		this.ChatWrapper = undefined
+		this.current_offset = 0
 	}
 
 	protected render(): DocumentFragment {
@@ -75,8 +78,6 @@ export default class Chat extends Block<ChatProps> {
 	}
 
 	init() {
-		messageController.getOldMessages(this.props.selectedChat.id)
-
 		let newMessage = ""
 
 		this.children.ChatLogo = new Img({
@@ -84,6 +85,7 @@ export default class Chat extends Block<ChatProps> {
 			alt: "аватар чата",
 			class: "chat__avatar"
 		})
+
 		this.children.Contacts = this.props.Contacts.map(contact => {
 			return new ChatContact(contact)
 		})
@@ -108,7 +110,7 @@ export default class Chat extends Block<ChatProps> {
 			events: {
 				submit: (Event: any) => {
 					Event.preventDefault()
-					console.log(this.newID)
+
 					if (this.newID) {
 						chatController.addUserToChat(this.props.selectedChat.id, this.newID!)
 					} else {
@@ -118,23 +120,19 @@ export default class Chat extends Block<ChatProps> {
 			}
 		})
 
-		if (this.props.messages) {
-			this.messages = this.createMessages(this.props.messages)
-		}
+		this.ChatWrapper = new ChatWrapper({
+			messages: this.props.messages,
+			events: {
+				scroll: (event: any) => {
+					// event.target.scrollTop = this.props.messages?.length ? this.props.messages.length * 50 : 0
+				}
+			}
+		});
 
-		const wrapper = document.querySelector(".chat__wrapper")
-
-		if (Array.isArray(this.messages) && this.messages[0] && wrapper) {
-			this.messages.forEach(message => {
-				wrapper!.append(message.getContent())
-				message.show()
-			})
-		}
-		console.log(wrapper, this.messages)
+		this.children.chatWrapper = this.ChatWrapper;
 
 		this.children.form = new ChatMessageForm({
 			file: {
-				//@ts-ignore
 				name: "file",
 				type: "file",
 				id: "input__file",
@@ -157,7 +155,6 @@ export default class Chat extends Block<ChatProps> {
 				}
 			},
 			input: {
-				//@ts-ignore
 				type: "text",
 				class: "chat__input-mess",
 				events: {
@@ -171,7 +168,6 @@ export default class Chat extends Block<ChatProps> {
 				}
 			},
 			btn: {
-				//@ts-ignore
 				type: "submit",
 				class: "chat__input-submit",
 				label: new Img({
@@ -203,14 +199,16 @@ export default class Chat extends Block<ChatProps> {
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
 
-		if (!newProps.messages) {
-			const mess = store.getState().messages![newProps.selectedChat.id]
-			this.messages = this.createMessages(mess)
-		} else {
-			this.messages = this.createMessages(newProps.messages)
+		if (!isEqual(oldProps.messages, newProps.messages)) {
+			this.ChatWrapper?.setProps({
+				messages: newProps.messages,
+				events: {
+					scroll: (event: any) => {
+						console.log(event)
+					}
+				}
+			})
 		}
-
-		this.children.messages = this.messages
 
 		return true
 	}

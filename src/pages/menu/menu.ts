@@ -14,15 +14,15 @@ import settingsIcon from "../../icons/settings.svg"
 import next from "../../icons/next.svg"
 
 import AuthController from "../../controllers/AuthController"
-import {changeData, CloseMenu, findProperty, InputNames, OpenMenu} from "../../utils/helpers"
+import {changeData, CloseMenu, findProperty, InputNames, isEqual, OpenMenu} from "../../utils/helpers"
 import Contacts, {ContactsWithStore} from "../../components/chatFriendsSections/contacts"
 import Settings, {SettingsProps} from "../../components/settings/settings"
 import store, {State, withStore} from "../../utils/Store"
-import {UsedDataKeys, UserData} from "../../api/auth/types"
+import {UsedDataKeys, UserData, UserDataToChange} from "../../api/auth/types"
 import ChatController from "../../controllers/ChatController"
 import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
-import messageController, {Message} from "../../controllers/MessageController"
+import messagesController, {Message} from "../../controllers/MessageController"
 import Chat, {ChatProps} from "../../components/chat/chat"
 
 interface MenuProps {
@@ -191,7 +191,7 @@ class MenuBase extends Block<MenuProps> {
 					submit: (Event: any) => {
 						Event.preventDefault()
 
-						const options = {
+						const options: UserDataToChange = {
 							first_name: this.newUserData!.first_name ? this.newUserData!.first_name : this.UserData!.first_name,
 							second_name: this.newUserData!.second_name? this.newUserData!.second_name : this.UserData!.second_name,
 							display_name: this.newUserData!.display_name? this.newUserData!.display_name : this.UserData!.display_name,
@@ -377,15 +377,21 @@ class MenuBase extends Block<MenuProps> {
 			}
 		]
 
-		this.children.UserImage = new Img({
+		if (!this.UserData) {
+			this.UserData = store.getState().user!.data
+		}
+
+		this.UserImg = new Img({
 			src: this.UserData!.avatar ? "https://ya-praktikum.tech/api/v2/resources" +  this.UserData!.avatar : no_icon,
 			alt: "иконка юзера",
 			class: "main__navigation_header-img"
-		})
-		this.children.HeaderText = new HeaderText({
-			userName: `${ this.UserData!.first_name} ${ this.UserData!.second_name}`,
-			userStatus: "online"
-		})
+		});
+
+		this.Header = new HeaderText({userName: `${this.UserData.first_name} ${this.UserData.second_name}`, userStatus: "online"});
+
+		this.children.UserImage = this.UserImg;
+
+		this.children.HeaderText = this.Header;
 
 		this.children.NavItems = NavItems.map(item => {
 			return new NavItem({...item})
@@ -410,8 +416,9 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	async getUsers(props: { chat: ChatItem, users: UserData[], messages: Message[]}) {
-		let users
+		let users;
 		if (props.users) {
+
 			users = props.users.map((user:UserData) => {
 				return {
 					img: {
@@ -422,7 +429,7 @@ class MenuBase extends Block<MenuProps> {
 				}
 			})
 		} else {
-			const r = await ChatController.getUsers(props.chat.id)
+			const r = await ChatController.getUsers(props.chat.id);
 			users = r!.map((user) => {
 				return {
 					img: {
@@ -436,20 +443,21 @@ class MenuBase extends Block<MenuProps> {
 		return users
 	}
 
-	getMessages(props: any) {
-		let messages
-		if (!props.selected_chat_data.messages) {
-			const id = props.selected_chat_data?.chat.id
+	getMessages(props: {messages: Message[], chat: ChatItem, users: UserData[]}) {
+		let messages;
+
+		if (!props.messages) {
+			const id = props.chat.id
 			messages = store.getState().messages![id]
 		} else {
-			messages = props.selected_chat_data?.messages
+			messages = props.messages
 		}
 		return messages
 	}
 
 	async componentDidUpdate(oldProps: any, newProps: any): Promise<boolean> {
 		let ChatName: string
-		let selected_bool
+		let selected_bool: boolean;
 
 		if (oldProps.selected_chat_data) {
 			selected_bool = oldProps.selected_chat_data.chat.id === newProps.selected_chat_data.chat.id
@@ -457,11 +465,7 @@ class MenuBase extends Block<MenuProps> {
 			selected_bool = !oldProps.selected_chat_data
 		}
 
-		if (this.chats_data !== newProps.chats.data ) {
-
-			newProps.chats.data.map( async (chat: ChatItem) => {
-				await messageController.getOldMessages(chat.id)
-			})
+		if (this.chats_data !== newProps.chats.data) {
 
 			this.chats_data = store.getState().chats!.data
 			console.log(this.chats_data, "chats")
@@ -512,39 +516,38 @@ class MenuBase extends Block<MenuProps> {
 				events: {}
 			})
 		}
-		if (oldProps.user.data.avatar !== newProps.user.data.avatar) {
+		if (!isEqual(oldProps.user.data.avatar, newProps.user.data.avatar)) {
 			this.UserImg?.setProps({
 				src: newProps.user.data.avatar ? "https://ya-praktikum.tech/api/v2/resources" +  newProps.user.data.avatar : no_icon,
 				alt: "аватар пользователя",
 				class: "main__navigation_header-img"
 			})
 		}
-		if (oldProps.user.data !== newProps.user.data) {
-			this.Header?.setProps({
-				userName: `${newProps.UserData!.first_name} ${newProps.UserData!.second_name}`,
+		if (isEqual(oldProps.user.data, newProps.user.data)) {
+			this.Header!.setProps({
+				userName: `${newProps.user.data!.first_name} ${newProps.user.data!.second_name}`,
 				userStatus: "online"
 			})
-
 		}
 		if (selected_bool) {
+
 			let users = await this.getUsers(newProps.selected_chat_data);
-			if (!this.active_chat) {
+
+			if (!this.active_chat || this.active_chat.id !== newProps.selected_chat) {
 				this.active_chat = new Chat({
 					selectedChat: newProps.selected_chat_data.chat,
 					ChatName: newProps.selected_chat_data.chat.title,
 					Contacts:  users,
-					messages: newProps.selected_chat_data.messages ? newProps.selected_chat_data.messages : this.getMessages(newProps),
+					messages: this.getMessages(newProps.selected_chat_data),
 				})
 			} else {
 				this.active_chat.setProps({
 					selectedChat: newProps.selected_chat_data.chat,
 					ChatName: newProps.selected_chat_data.chat.title,
 					Contacts:  users,
-					messages: newProps.selected_chat_data.messages
+					messages: this.getMessages(newProps.selected_chat_data)
 				})
 			}
-
-			await messageController.getOldMessages(newProps.selected_chat_data.id)
 		}
 		return true
 	}

@@ -1,29 +1,31 @@
-import {UserData} from "../api/auth/types"
-import WSTransport, {WSTransportEvents} from "../utils/WSTransport"
-import store from "../utils/Store"
+import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
+import store from '../utils/Store';
+import {isEqual} from "../utils/helpers";
+import chatsController from "./ChatController";
 
 export interface Message {
-    chat_id: number,
-    type: string,
-    user_id: number,
-    //"2020-01-02T14:22:22.000Z"
-    time: string,
-    content: string,
-    file?: {
-        id: number,
-        user_id: number,
-        path: string,
-        filename: string,
-        content_type: string,
-        content_size: number,
-        upload_date: string
-    }
+	id: number;
+	chat_id: number;
+	time: string;
+	type: string;
+	user_id: number;
+	content: string;
+	file?: {
+		id: number;
+		user_id: number;
+		path: string;
+		filename: string;
+		content_type: string;
+		content_size: number;
+		upload_date: string;
+	}
 }
 
 class MessagesController {
 	private sockets: Map<number, WSTransport> = new Map();
 
 	async connect(id: number, token: string) {
+
 		if (this.sockets.has(id)) {
 			return;
 		}
@@ -37,6 +39,7 @@ class MessagesController {
 		await wsTransport.connect();
 
 		this.subscribe(wsTransport, id);
+
 		this.getOldMessages(id);
 	}
 
@@ -53,14 +56,15 @@ class MessagesController {
 		});
 	}
 
-	getOldMessages(id: number) {
+	getOldMessages(id: number, offset?: number) {
+
 		const socket = this.sockets.get(id);
 
 		if (!socket) {
 			throw new Error(`Chat ${id} is not connected`);
 		}
 
-		socket.send({type: 'get old', content: '0'});
+		socket.send({type: 'get old', content: `${offset ? offset : 0}`});
 	}
 
 	closeAll() {
@@ -78,9 +82,13 @@ class MessagesController {
 
 		const currentMessages = (store.getState().messages || {})[id] || [];
 
-		messagesToAdd = [...currentMessages, ...messagesToAdd];
+		if (!isEqual(currentMessages, messagesToAdd)) {
+			messagesToAdd = [...currentMessages, ...messagesToAdd];
+		}
 
 		store.set(`messages.${id}`, messagesToAdd);
+
+		chatsController.getChats();
 	}
 
 	private onClose(id: number) {
@@ -91,9 +99,9 @@ class MessagesController {
 		transport.on(WSTransportEvents.message, (message) => this.onMessage(id, message));
 		transport.on(WSTransportEvents.close, () => this.onClose(id));
 	}
+
 }
 
+const messagesController = new MessagesController();
 
-const messageController = new MessagesController()
-
-export default messageController
+export default messagesController;

@@ -1,7 +1,7 @@
 import {ChatAPI} from "../api/chats/ChatAPI"
 
 import store from "../utils/Store"
-import MessageController from "./MessageController"
+import messagesController from "./MessageController"
 
 class ChatController {
 	private api: ChatAPI
@@ -16,14 +16,15 @@ class ChatController {
 	}
 
 	async getChats() {
+
 		try {
-			const chats = await this.api.read()
+				const chats = await this.api.read()
 
-			const statedChats = store.getState().chats?.data
+				const statedChats = store.getState().chats?.data
 
-			if (chats !== statedChats) {
-				store.set("chats.data", chats)
-			}
+				if (chats !== statedChats) {
+					store.set("chats.data", chats)
+				}
 
 		} catch (e) {
 			const contactBlocks = document.querySelectorAll(".contacts")
@@ -49,6 +50,7 @@ class ChatController {
 	}
 
 	async getUsers(id: number) {
+
 		try {
 			const users = await this.api.getUsers(id)
 
@@ -74,7 +76,7 @@ class ChatController {
 	async delete(id: number) {
 		await this.api.delete(id)
 
-		this.getChats()
+		await this.getChats()
 	}
 
 	getToken(id: number) {
@@ -82,12 +84,13 @@ class ChatController {
 	}
 
 	async selectChat(id: number) {
-
 		try {
 			const users = await this.api.getUsers(id)
 			const chats = await this.api.read()
 
-			const selectedChat = chats.filter(chat => {return chat.id === id})[0]
+			const selectedChat = chats.filter(chat => {
+				return chat.id === id
+			})[0]
 
 			if (selectedChat) {
 				store.set("selected_chat", id)
@@ -96,8 +99,7 @@ class ChatController {
 
 				const token = await this.getToken(selectedChat.id)
 
-				await MessageController.connect(selectedChat.id, token)
-				MessageController.getOldMessages(id)
+				await messagesController.connect(selectedChat.id, token)
 			}
 
 			if (users) {
@@ -114,4 +116,4 @@ class ChatController {
 
 const chatsController = new ChatController()
 
-export default chatsController
+export default chatsController;

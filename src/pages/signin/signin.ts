@@ -34,7 +34,7 @@ export default class Signin extends Block<SigninProps> {
 		this.children.Form = new SigninForm({
 			inputs: [
 				{
-					label: "ввудите логин",
+					label: "введите логин",
 					input: {
 						class: "input fz-24",
 						type: "text",
@@ -80,8 +80,15 @@ export default class Signin extends Block<SigninProps> {
 		})
 		this.children.ResetPassLink = new Link({
 			class: "signin__link fz-30 colored",
-			text: "Забыли пароль?",
-			href: "/reset-password",
+			text: "еще не зарегистрированы?",
+			href: "/sign-up",
+			events: {
+				click: (event: any) => {
+					event.preventDefault();
+
+					Router.go(Routes.registration)
+				}
+			}
 		})
 	}
 }
