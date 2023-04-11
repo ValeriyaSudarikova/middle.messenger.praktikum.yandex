@@ -50,7 +50,7 @@ class AuthController {
 
 			// await this.getUser()
 
-			Router.go(Routes.signIn)
+			Router.go(Routes.menu)
 
 		} catch (e) {
 
