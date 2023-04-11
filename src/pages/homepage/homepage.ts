@@ -40,20 +40,22 @@ export default class Homepage extends Block<HomepageProps> {
 			class: "homepage",
 			label: "Вход",
 			href: Routes.signIn,
-			// events: {
-			// 	click: () => {
-			// 		Router.go(Routes.signIn)
-			// 	}
-			// }
+			events: {
+				click: () => {
+					Router.go(Routes.signIn)
+				}
+			}
 		})
 		this.children.btnRegistration = new Btn({
 			type: "button",
 			class: "homepage",
 			label: "Регистрация",
 			href: Routes.registration,
-			// events: () => {
-			// 	Router.go(Routes.registration)
-			// }
+			events: {
+				click: () => {
+					Router.go(Routes.registration)
+				}
+			}
 		})
 	}
 }
