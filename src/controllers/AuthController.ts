@@ -48,9 +48,9 @@ class AuthController {
 		try {
 			await this.api.signup(data)
 
-			await this.getUser()
+			// await this.getUser()
 
-			Router.go(Routes.menu)
+			Router.go(Routes.signIn)
 
 		} catch (e) {
 
