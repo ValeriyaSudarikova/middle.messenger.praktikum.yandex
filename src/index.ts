@@ -47,7 +47,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	} catch (e) {
 
-		console.log('catch', e)
 		Router.start()
 
 		if (!isProtectedRoute) {
