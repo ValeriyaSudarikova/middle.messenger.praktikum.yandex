@@ -22,7 +22,7 @@ class AuthController {
 
 			Router.go(Routes.menu)
 		} catch (e) {
-			Router.go(Routes.signIn)
+			// Router.go(Routes.signIn)
 		}
 	}
 
