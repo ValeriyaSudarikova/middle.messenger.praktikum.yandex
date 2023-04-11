@@ -48,7 +48,7 @@ class AuthController {
 		try {
 			await this.api.signup(data)
 
-			// await this.getUser()
+			await this.getUser()
 
 			Router.go(Routes.menu)
 			window.location.reload()
