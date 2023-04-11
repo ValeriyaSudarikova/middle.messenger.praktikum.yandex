@@ -32,7 +32,6 @@ export default class Registration extends Block<RegistrationProps> {
 			password: "",
 			phone: ""
 		}
-		console.log(store.getState())
 
 		this.children.SectionLogo = new Img({
 			src: logo,
@@ -124,9 +123,7 @@ export default class Registration extends Block<RegistrationProps> {
 				submit: async (Event: any) => {
 					Event.preventDefault()
 
-					// if (formData.login && formData.email && formData.phone && formData.first_name && formData.second_name && formData.password) {
 					await AuthController.signup(formData)
-					// }
 				}
 			}
 		})

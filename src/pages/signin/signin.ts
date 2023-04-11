@@ -66,7 +66,6 @@ export default class Signin extends Block<SigninProps> {
 			events: {
 				submit: (Event: any) => {
 					Event.preventDefault()
-					console.log(loginData)
 					if (loginData.login && loginData.password) {
 						AuthController.signin(loginData)
 					}
@@ -84,7 +83,7 @@ export default class Signin extends Block<SigninProps> {
 			href: "/sign-up",
 			events: {
 				click: (event: any) => {
-					event.preventDefault();
+					event.preventDefault()
 
 					Router.go(Routes.registration)
 				}

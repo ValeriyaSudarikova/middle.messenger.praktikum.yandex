@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 		Router.start()
 
 		if (!isProtectedRoute) {
-			Router.go(Routes.homepage);
+			Router.go(Routes.homepage)
 		}
 	}
 

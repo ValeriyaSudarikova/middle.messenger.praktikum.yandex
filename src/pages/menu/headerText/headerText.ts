@@ -1,7 +1,7 @@
 import Block from "../../../utils/Block"
 import template from "./headerText.hbs"
-import Text, {TextProps} from "../../../components/header/text/headerText";
-import {isEqual} from "../../../utils/helpers";
+import Text, {TextProps} from "../../../components/header/text/headerText"
+import {isEqual} from "../../../utils/helpers"
 
 export interface HeaderTextProps {
 	userName: string,
@@ -13,8 +13,8 @@ export default class HeaderText extends Block<HeaderTextProps> {
 	public userStatus: Text | undefined
 	constructor(props: HeaderTextProps) {
 		super("div", props)
-		this.userName = undefined;
-		this.userStatus = undefined;
+		this.userName = undefined
+		this.userStatus = undefined
 	}
 
 	protected render(): DocumentFragment {
@@ -22,7 +22,7 @@ export default class HeaderText extends Block<HeaderTextProps> {
 	}
 
 	protected init() {
-		this.children.userName = new Text({text: this.props.userName});
-		this.children.userStatus = new Text({text: this.props.userStatus});
+		this.children.userName = new Text({text: this.props.userName})
+		this.children.userStatus = new Text({text: this.props.userStatus})
 	}
 }

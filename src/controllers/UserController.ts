@@ -2,7 +2,7 @@ import {Router} from "../utils/Router"
 import {Routes} from "../index"
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
-import {UserData, UserDataToChange} from "../api/auth/types";
+import {UserData, UserDataToChange} from "../api/auth/types"
 
 class UserController {
 	private api: UserAPI
@@ -16,7 +16,7 @@ class UserController {
 		try {
 			await this.api.changeUserData(data)
 
-			await authController.getUser();
+			await authController.getUser()
 
 			location.reload()
 
@@ -39,4 +39,4 @@ class UserController {
 	}
 }
 
-export const userController =  new UserController();
+export const userController =  new UserController()

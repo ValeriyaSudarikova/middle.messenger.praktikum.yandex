@@ -17,7 +17,7 @@ import messageController, {Message} from "../../controllers/MessageController"
 import store from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
 import {dateFormatter, isEqual} from "../../utils/helpers"
-import {ChatWrapper} from "./chatWrapper/ChatWrapper";
+import {ChatWrapper} from "./chatWrapper/ChatWrapper"
 
 export interface ChatProps {
 	selectedChat: ChatItem,
@@ -31,7 +31,7 @@ export default class Chat extends Block<ChatProps> {
 	public ChatName: string | undefined
 	public Contacts: string[] | undefined
 	public current_offset: number
-	public ChatWrapper: ChatWrapper | undefined;
+	public ChatWrapper: ChatWrapper | undefined
 
 	constructor(props: ChatProps) {
 		super("div", props)
@@ -127,9 +127,9 @@ export default class Chat extends Block<ChatProps> {
 					// event.target.scrollTop = this.props.messages?.length ? this.props.messages.length * 50 : 0
 				}
 			}
-		});
+		})
 
-		this.children.chatWrapper = this.ChatWrapper;
+		this.children.chatWrapper = this.ChatWrapper
 
 		this.children.form = new ChatMessageForm({
 			file: {

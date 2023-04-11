@@ -6,8 +6,8 @@ import Img, {ImgProps} from "../../components/img/img"
 //img
 import mainImg from "../../img/homepage.png"
 import logo from "../../img/logo.svg"
-import Router from "../../utils/Router";
-import {Routes} from "../../index";
+import Router from "../../utils/Router"
+import {Routes} from "../../index"
 export interface HomepageProps {
 	circledImg: ImgProps,
 	logo: ImgProps,
@@ -42,7 +42,7 @@ export default class Homepage extends Block<HomepageProps> {
 			href: Routes.signIn,
 			events: {
 				click: () => {
-					Router.go(Routes.signIn);
+					Router.go(Routes.signIn)
 				}
 			}
 		})
@@ -52,7 +52,7 @@ export default class Homepage extends Block<HomepageProps> {
 			label: "Регистрация",
 			href: Routes.registration,
 			events: () => {
-				Router.go(Routes.registration);
+				Router.go(Routes.registration)
 			}
 		})
 	}

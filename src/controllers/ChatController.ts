@@ -18,13 +18,13 @@ class ChatController {
 	async getChats() {
 
 		try {
-				const chats = await this.api.read()
+			const chats = await this.api.read()
 
-				const statedChats = store.getState().chats?.data
+			const statedChats = store.getState().chats?.data
 
-				if (chats !== statedChats) {
-					store.set("chats.data", chats)
-				}
+			if (chats !== statedChats) {
+				store.set("chats.data", chats)
+			}
 
 		} catch (e) {
 			const contactBlocks = document.querySelectorAll(".contacts")
@@ -116,4 +116,4 @@ class ChatController {
 
 const chatsController = new ChatController()
 
-export default chatsController;
+export default chatsController

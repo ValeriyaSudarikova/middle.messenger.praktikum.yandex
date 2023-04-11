@@ -75,7 +75,6 @@ export default class ResetPassword extends Block<ResetPasswordProps> {
 				submit: (Event: any) => {
 					Event.preventDefault()
 					if (formData[InputNames.pass] === formData[InputNames.repPass]) {
-						console.log("pass reset, current user data: ", FormData)
 					} else {
 						const elem = document.querySelector("button")
 						const error = document.createElement("span")

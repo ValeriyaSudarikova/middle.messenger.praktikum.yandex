@@ -62,7 +62,7 @@ export default class HTTPTransport {
 
 			xhr.open(method, url)
 
-			xhr.onreadystatechange = (e) => {
+			xhr.onreadystatechange = () => {
 
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					if (xhr.status < 400) {

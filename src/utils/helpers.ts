@@ -228,8 +228,8 @@ export const dateFormatter = (date: Date) => {
 	const day = date.getDate() + 1 < 10 ? "0"+ (date.getDate() + 1) : date.getDate()
 	const month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth()
 	const year = date.getFullYear()
-	const hours = date.getHours()
-	const minutes = date.getMinutes()
+	const hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours()
+	const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
 
 	return `${day}.${month}.${year}, ${hours}:${minutes}`
 }
@@ -238,47 +238,47 @@ type StringIndexed = Record<string, any>;
 
 function queryStringify(data: StringIndexed): string | never {
 	const isObject = (value: any): boolean => {
-		return typeof value === 'object' && !Array.isArray(value);
-	};
-
-	if (!isObject(data)) {
-		throw new Error('input must be an object');
+		return typeof value === "object" && !Array.isArray(value)
 	}
 
-	let result = '';
+	if (!isObject(data)) {
+		throw new Error("input must be an object")
+	}
+
+	let result = ""
 	const createObjectWithIndexedKeys = (object: StringIndexed, prefix: string): StringIndexed => {
-		const keys = Object.keys(object);
+		const keys = Object.keys(object)
 		return keys.reduce((accumulator, key) => {
-			accumulator[`${prefix}[${key}]`] = object[key];
-			return accumulator;
-		}, {} as StringIndexed);
-	};
+			accumulator[`${prefix}[${key}]`] = object[key]
+			return accumulator
+		}, {} as StringIndexed)
+	}
 
 	for (const [key, value] of Object.entries(data)) {
-		const prefix = decodeURI(key);
+		const prefix = decodeURI(key)
 
 		if (Array.isArray(value)) {
 			value.forEach((element: any, index: number) => {
 				if (isObject(element)) {
-					const subObject = createObjectWithIndexedKeys(element, `${prefix}[${index}]`);
-					result += queryStringify(subObject);
+					const subObject = createObjectWithIndexedKeys(element, `${prefix}[${index}]`)
+					result += queryStringify(subObject)
 				} else {
-					result += `&${prefix}[${index}]=${element}`;
+					result += `&${prefix}[${index}]=${element}`
 				}
-			});
+			})
 		} else if (isObject(value)) {
-			const subObject = createObjectWithIndexedKeys(value, prefix);
-			result += queryStringify(subObject);
+			const subObject = createObjectWithIndexedKeys(value, prefix)
+			result += queryStringify(subObject)
 		} else {
-			result += `&${prefix}=${value}`;
+			result += `&${prefix}=${value}`
 		}
 	}
 
 	if (result.length > 0) {
-		result = result.substring(1);
+		result = result.substring(1)
 	}
 
-	return result;
+	return result
 }
 
  interface AnyObject {
@@ -286,25 +286,39 @@ function queryStringify(data: StringIndexed): string | never {
 }
 
 export function isEqual(obj1: any, obj2: any): boolean {
+
 	if (obj1 === obj2) {
-		return true;
+
+		return true
+
 	} else if (obj1 instanceof Date && obj2 instanceof Date) {
-		return obj1.getTime() === obj2.getTime();
+
+		return obj1.getTime() === obj2.getTime()
+
 	} else if (Array.isArray(obj1) && Array.isArray(obj2)) {
-		if (obj1.length !== obj2.length) return false;
+
+		if (obj1.length !== obj2.length) return false
+
 		for (let i = 0; i < obj1.length; i++) {
-			if (!isEqual(obj1[i], obj2[i])) return false;
+			if (!isEqual(obj1[i], obj2[i])) return false
 		}
-		return true;
+
+		return true
+
 	} else if (typeof obj1 === "object" && typeof obj2 === "object") {
-		let keys1 = Object.keys(obj1);
-		let keys2 = Object.keys(obj2);
-		if (keys1.length !== keys2.length) return false;
-		for (let key of keys1) {
-			if (!keys2.includes(key) || !isEqual(obj1[key], obj2[key])) return false;
+
+		const keys1 = Object.keys(obj1)
+		const keys2 = Object.keys(obj2)
+
+		if (keys1.length !== keys2.length) return false
+
+		for (const key of keys1) {
+			if (!keys2.includes(key) || !isEqual(obj1[key], obj2[key])) return false
 		}
-		return true;
+
+		return true
+
 	} else {
-		return false;
+		return false
 	}
 }

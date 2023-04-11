@@ -385,13 +385,13 @@ class MenuBase extends Block<MenuProps> {
 			src: this.UserData!.avatar ? "https://ya-praktikum.tech/api/v2/resources" +  this.UserData!.avatar : no_icon,
 			alt: "иконка юзера",
 			class: "main__navigation_header-img"
-		});
+		})
 
-		this.Header = new HeaderText({userName: `${this.UserData.first_name} ${this.UserData.second_name}`, userStatus: "online"});
+		this.Header = new HeaderText({userName: `${this.UserData.first_name} ${this.UserData.second_name}`, userStatus: "online"})
 
-		this.children.UserImage = this.UserImg;
+		this.children.UserImage = this.UserImg
 
-		this.children.HeaderText = this.Header;
+		this.children.HeaderText = this.Header
 
 		this.children.NavItems = NavItems.map(item => {
 			return new NavItem({...item})
@@ -416,7 +416,7 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	async getUsers(props: { chat: ChatItem, users: UserData[], messages: Message[]}) {
-		let users;
+		let users
 		if (props.users) {
 
 			users = props.users.map((user:UserData) => {
@@ -429,7 +429,7 @@ class MenuBase extends Block<MenuProps> {
 				}
 			})
 		} else {
-			const r = await ChatController.getUsers(props.chat.id);
+			const r = await ChatController.getUsers(props.chat.id)
 			users = r!.map((user) => {
 				return {
 					img: {
@@ -444,7 +444,7 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	getMessages(props: {messages: Message[], chat: ChatItem, users: UserData[]}) {
-		let messages;
+		let messages
 
 		if (!props.messages) {
 			const id = props.chat.id
@@ -457,7 +457,7 @@ class MenuBase extends Block<MenuProps> {
 
 	async componentDidUpdate(oldProps: any, newProps: any): Promise<boolean> {
 		let ChatName: string
-		let selected_bool: boolean;
+		let selected_bool: boolean
 
 		if (oldProps.selected_chat_data) {
 			selected_bool = oldProps.selected_chat_data.chat.id === newProps.selected_chat_data.chat.id
@@ -468,7 +468,6 @@ class MenuBase extends Block<MenuProps> {
 		if (this.chats_data !== newProps.chats.data) {
 
 			this.chats_data = store.getState().chats!.data
-			console.log(this.chats_data, "chats")
 
 			this.chats!.setProps({
 				header: "Мои сообщения",
@@ -531,7 +530,7 @@ class MenuBase extends Block<MenuProps> {
 		}
 		if (selected_bool) {
 
-			let users = await this.getUsers(newProps.selected_chat_data);
+			const users = await this.getUsers(newProps.selected_chat_data)
 
 			if (!this.active_chat || this.active_chat.id !== newProps.selected_chat) {
 				this.active_chat = new Chat({
