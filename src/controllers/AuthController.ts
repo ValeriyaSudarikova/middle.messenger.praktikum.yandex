@@ -22,7 +22,7 @@ class AuthController {
 
 			Router.go(Routes.menu)
 		} catch (e) {
-			// Router.go(Routes.signIn)
+			Router.go(Routes.signIn)
 		}
 	}
 
@@ -65,7 +65,7 @@ class AuthController {
 
 			await this.getUser()
 
-			// Router.go(Routes.menu)
+			Router.go(Routes.menu)
 
 		} catch (e) {
 			this.createErrorMessage("Проверьте корректность данных и повторите попытку входа", ".errored__message-dark", "button")
