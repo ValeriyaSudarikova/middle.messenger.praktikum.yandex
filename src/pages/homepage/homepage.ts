@@ -39,7 +39,7 @@ export default class Homepage extends Block<HomepageProps> {
 			type: "button",
 			class: "homepage",
 			label: "Вход",
-			// href: Routes.signIn,
+			href: Routes.signIn,
 			events: {
 				click: () => {
 					Router.go(Routes.signIn)
@@ -50,7 +50,7 @@ export default class Homepage extends Block<HomepageProps> {
 			type: "button",
 			class: "homepage",
 			label: "Регистрация",
-			// href: Routes.registration,
+			href: Routes.registration,
 			events: () => {
 				Router.go(Routes.registration)
 			}
