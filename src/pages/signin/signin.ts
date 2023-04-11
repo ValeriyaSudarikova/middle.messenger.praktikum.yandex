@@ -80,7 +80,7 @@ export default class Signin extends Block<SigninProps> {
 		this.children.ResetPassLink = new Link({
 			class: "signin__link fz-30 colored",
 			text: "еще не зарегистрированы?",
-			href: "/sign-up",
+			// href: "/sign-up",
 			events: {
 				click: (event: any) => {
 					event.preventDefault()
