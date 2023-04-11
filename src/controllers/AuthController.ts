@@ -51,6 +51,7 @@ class AuthController {
 			// await this.getUser()
 
 			Router.go(Routes.menu)
+			window.location.reload()
 
 		} catch (e) {
 
