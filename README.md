@@ -4,7 +4,7 @@
 
 Ссылка на макет: https://www.figma.com/file/nw4iVxYeSKJVMeVmEcEmQs/Untitled?node-id=14%3A376&t=l2c4nQtALO3b8BTn-1
 
-Ссылка на деплой в Netlify: https://dazzling-begonia-95785d.netlify.app/
+Ссылка на деплой в Netlify: https://messagery.netlify.app/
 
 Проект находится в разработке, на данный момент частично реализованы следующие функции:
 - валидация полей ввода,
