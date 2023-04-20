@@ -38,21 +38,6 @@ export default class ContactsBase extends Block<ContactsProps> {
 		}
 	}
 
-	// private CreateContact(items: UserData[]) {
-	// 	if (Array.isArray(items) && items[0]) {
-	// 		this.children.Items = items.map(contact => {
-	// 			let status = "online"
-	// 			return new ContactItem({
-	// 				class: status,
-	// 				contactID: contact.id,
-	// 				statusClass: status,
-	// 				name: contact.display_name + " " + contact.id,
-	// 				img: {src: contact.avatar ? contact.avatar : user, alt: "изображение пользователя", class: "user"}
-	// 			})
-	// 		})
-	// 	}
-	// }
-
 	async init() {
 		if (this.chats && this.props.flag === "chat") {
 			this.CreateChat(this.chats)
@@ -69,7 +54,6 @@ export default class ContactsBase extends Block<ContactsProps> {
 		if (oldProps.chats !== newProps.chats ) {
 			this.chats = [...newProps.chats]
 			if (this.chats) {
-				//@ts-ignore
 				this.children.Items = this.chats.map(chat => {
 					return new ChatListItem({...chat})
 				})

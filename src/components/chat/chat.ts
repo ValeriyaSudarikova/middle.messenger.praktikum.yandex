@@ -14,24 +14,26 @@ import no_avatar from "../../icons/no_avatar.svg"
 import no_chat_avatar from "../../img/chat.png"
 //utils
 import messageController, {Message} from "../../controllers/MessageController"
-import store from "../../utils/Store"
+import store, {withStore} from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
 import {dateFormatter, isEqual} from "../../utils/helpers"
 import {ChatWrapper} from "./chatWrapper/ChatWrapper"
+import {userController} from "../../controllers/UserController";
+import {UserData} from "../../api/auth/types";
 
 export interface ChatProps {
 	selectedChat: ChatItem,
 	ChatName: string | undefined,
-	Contacts: ChatContactProps[] | [],
+	contacts:  UserData[] | [],
 	messages: Message[] | undefined,
 }
 
-export default class Chat extends Block<ChatProps> {
+class ChatBase extends Block<ChatProps> {
 	public newID: number | undefined
 	public ChatName: string | undefined
-	public Contacts: string[] | undefined
+	public Contacts: ChatContact[] | undefined
 	public current_offset: number
-	public ChatWrapper: ChatWrapper | undefined
+	public messages: MessageItem[] | undefined
 
 	constructor(props: ChatProps) {
 		super("div", props)
@@ -39,7 +41,7 @@ export default class Chat extends Block<ChatProps> {
 		this.ChatName = undefined
 		this.Contacts = undefined
 		this.newID = undefined
-		this.ChatWrapper = undefined
+		this.messages = undefined
 		this.current_offset = 0
 	}
 
@@ -47,37 +49,31 @@ export default class Chat extends Block<ChatProps> {
 		return this.compile(template, {...this.props})
 	}
 
-	 createMessages(messages: Message[]): any {
-		if (Array.isArray(messages) && messages[0]) {
-			const m = messages.sort((a, b) => {
-				return new Date(a.time).getTime() - new Date(b.time).getTime()
-			})
+	 createMessages(message: Message): any {
 
-			return m.map((message) => {
+		const myId = store.getState().user!.data.id
 
-				const myId = store.getState().user!.data.id
+		const user = store.getState().selected_chat_data!.users.filter((user) => {return user.id === message.user_id})
 
-				const user = store.getState().selected_chat_data!.users.filter((user) => {return user.id === message.user_id})
+		const cls: "from" | "to" = message.user_id !== myId ? "to" : "from"
 
-				const cls: "from" | "to" = message.user_id !== myId ? "to" : "from" 
+		let UserImg
 
-				let UserImg
-
-				if (user) {
-					UserImg = {
-						src: "https://ya-praktikum.tech/api/v2/resources" + user[0].avatar,
-						alt: "аватар пользователя"
-					}
-				}
-
-				const imgProps = UserImg ? UserImg : {src: no_avatar, alt: "аватар пользователя"}
-
-				return new MessageItem({class: cls, message: message.content, img: imgProps, date: dateFormatter(new Date(message.time))})
-			})
+		if (user) {
+			UserImg = {
+				src: "https://ya-praktikum.tech/api/v2/resources" + user[0].avatar,
+				alt: "аватар пользователя"
+			}
 		}
+
+		const imgProps = UserImg ? UserImg : {src: no_avatar, alt: "аватар пользователя"}
+
+		return new MessageItem({class: cls, message: message.content, img: imgProps, date: dateFormatter(new Date(message.time))})
+
 	}
 
-	init() {
+	async init() {
+		console.log(this.props, 'chat props')
 		let newMessage = ""
 
 		this.children.ChatLogo = new Img({
@@ -86,9 +82,19 @@ export default class Chat extends Block<ChatProps> {
 			class: "chat__avatar"
 		})
 
-		this.children.Contacts = this.props.Contacts.map(contact => {
-			return new ChatContact(contact)
-		})
+		if (this.props.messages && this.props.messages[0]) {
+			const m = this.props.messages.sort((a, b) => {
+				return new Date(b.time).getTime() - new Date(a.time).getTime()
+			})
+
+			this.messages = m.map((mess) => {
+				return this.createMessages(mess)
+			})
+		}
+
+		if (this.messages) {
+			this.children.messages = this.messages
+		}
 
 		this.children.AddContactForm = new ContactSearchForm({
 			input: {
@@ -119,17 +125,6 @@ export default class Chat extends Block<ChatProps> {
 				}
 			}
 		})
-
-		this.ChatWrapper = new ChatWrapper({
-			messages: this.props.messages,
-			events: {
-				scroll: (event: any) => {
-					// event.target.scrollTop = this.props.messages?.length ? this.props.messages.length * 50 : 0
-				}
-			}
-		})
-
-		this.children.chatWrapper = this.ChatWrapper
 
 		this.children.form = new ChatMessageForm({
 			file: {
@@ -195,21 +190,84 @@ export default class Chat extends Block<ChatProps> {
 			class: "chat__form"
 		})
 
+		console.log(this.props, 'contacts')
+
+		if (this.props.contacts && this.props.contacts[0]) {
+			console.log("block if")
+			this.Contacts = this.props.contacts.map((contact ) => {
+				let props = {
+					img: {
+						src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar,
+						alt: "аватар пользователя"},
+					name: contact.display_name
+				};
+
+				return new ChatContact(props)
+			})
+		} else {
+			console.log('block else')
+
+			let active_id = store.getState().selected_chat_data!.chat.id
+
+			let usrs = await chatController.getUsers(active_id);
+			console.log(usrs)
+
+			if (usrs) {
+				this.Contacts = usrs.map((usr) => {
+					let props = {
+						img: {
+							src: usr.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + usr.avatar : no_avatar,
+							alt: "аватар пользователя"},
+						name: usr.display_name
+					};
+
+					return new ChatContact(props)
+				})
+			}
+		}
+
+		if (this.Contacts) {
+			this.children.Contacts = this.Contacts
+		}
+
+		// this.ChatWrapper = new ChatWrapper({
+		// 	messages: this.props.messages,
+		// 	events: {
+		// 		scroll: (event: any) => {
+		// 			// event.target.scrollTop = this.props.messages?.length ? this.props.messages.length * 50 : 0
+		// 		}
+		// 	}
+		// })
+
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
-
-		if (!isEqual(oldProps.messages, newProps.messages)) {
-			this.ChatWrapper?.setProps({
-				messages: newProps.messages,
-				events: {
-					scroll: (event: any) => {
-						console.log(event)
-					}
-				}
+		if (this.Contacts && !isEqual(oldProps.contacts, newProps.contacts)) {
+			this.Contacts = newProps.contacts.map((contact: UserData) => {
+				let props = {img: {src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar, alt: "аватар пользователя"}, name: contact.display_name}
+				return new ChatContact(props)
 			})
+
+			this.children.Contacts = this.Contacts!
+		}
+
+		if (!oldProps.messages || !isEqual(oldProps.messages, newProps.messages)) {
+
+			const m = oldProps.messages.sort((a:Message, b:Message) => {
+				return new Date(b.time).getTime() - new Date(a.time).getTime()
+			})
+
+			this.messages = m.map((mess: Message) => {
+				return this.createMessages(mess)
+			})
+
+			this.children.messages = this.messages!
 		}
 
 		return true
 	}
 }
+
+const Chat = withStore((state) => {return {messages: state.messages![state.selected_chat!], contacts: state.selected_chat_data?.users} || {}})(ChatBase)
+
+export default Chat;

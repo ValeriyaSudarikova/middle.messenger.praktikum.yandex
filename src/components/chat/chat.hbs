@@ -13,6 +13,8 @@
 				{{{AddContactForm}}}
 			</div>
     </div>
-    {{{chatWrapper}}}
-    {{{form}}}
+		<div class="chat__wrapper">
+			{{#each messages}} {{{this}}} {{/each}}
+		</div>
+		{{{form}}}
 </div>

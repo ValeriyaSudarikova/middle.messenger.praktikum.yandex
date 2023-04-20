@@ -13,6 +13,7 @@ export interface State {
     },
     chats?: {
         data: ChatItem[],
+        users: Record<number, UserData[]>
         error: string,
         isLoading: boolean
     },

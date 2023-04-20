@@ -15,6 +15,7 @@
 		"public/*",
 		"dist/*",
 		"node-modules/*",
-		".github/*"
+		".github/*",
+		".parcel-cache/*"
 	]
 }

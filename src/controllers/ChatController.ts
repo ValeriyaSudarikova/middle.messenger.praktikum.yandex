@@ -18,13 +18,19 @@ class ChatController {
 	async getChats() {
 
 		try {
-			const chats = await this.api.read()
+			const chts = await this.api.read()
 
 			const statedChats = store.getState().chats?.data
 
-			if (chats !== statedChats) {
-				store.set("chats.data", chats)
+			if (chts !== statedChats) {
+				store.set("chats.data", chts)
 			}
+
+			chts.forEach(async chat => {
+				const token = await this.getToken(chat.id);
+				await messagesController.connect(chat.id, token);
+
+			})
 
 		} catch (e) {
 			const contactBlocks = document.querySelectorAll(".contacts")
@@ -97,9 +103,9 @@ class ChatController {
 
 				store.set("selected_chat_data.chat", selectedChat)
 
-				const token = await this.getToken(selectedChat.id)
-
-				await messagesController.connect(selectedChat.id, token)
+				// const token = await this.getToken(selectedChat.id)
+				//
+				// await messagesController.connect(selectedChat.id, token)
 			}
 
 			if (users) {

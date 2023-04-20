@@ -16,6 +16,11 @@
     border-radius: 30px;
     position: relative;
 
+    &-active {
+      display: flex;
+      flex-direction: row;
+    }
+
     &_header {
       padding: 16px 45px 50px 16px;
       display: flex;
