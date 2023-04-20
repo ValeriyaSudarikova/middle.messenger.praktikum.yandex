@@ -9,12 +9,6 @@
   border-radius: 30px;
   position: relative;
   &__header {
-//    display: flex;
-////    grid-auto-columns: 200px;
-////    grid-auto-rows: 70px;
-//    flex-direction: row-reverse;
-//    justify-content: space-between !important;
-//    align-items: baseline;
     padding: 54px 64px 0 64px;
     margin-bottom: 60px;
     .settings-error {
@@ -32,8 +26,6 @@
       justify-content: left;
       font-size: 20px;
       &.input__wrapper {
-//        width: 100%;
-//        margin-right: 180px;
         margin-left: 40px;
       }
 
