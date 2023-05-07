@@ -3,8 +3,8 @@ import template from "./chat.hbs"
 //components
 import {ChatItem} from "../../api/chats/types"
 import ContactSearchForm from "../ContactSearchForm/ContactSearchForm"
-import ChatContact, {ChatContactProps} from "./chatContact/ChatContact"
-import MessageItem, {MessageProps} from "./chatItem/chatItem"
+import ChatContact from "./chatContact/ChatContact"
+import MessageItem from "./chatItem/chatItem"
 import ChatMessageForm from "./chatForm/ChatForm"
 import Img from "../img/img"
 //icons
@@ -17,8 +17,6 @@ import messageController, {Message} from "../../controllers/MessageController"
 import store, {withStore} from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
 import {dateFormatter, isEqual} from "../../utils/helpers"
-import {ChatWrapper} from "./chatWrapper/ChatWrapper"
-import {userController} from "../../controllers/UserController";
 import {UserData} from "../../api/auth/types";
 
 export interface ChatProps {
@@ -31,40 +29,46 @@ export interface ChatProps {
 class ChatBase extends Block<ChatProps> {
 	public newID: number | undefined
 	public ChatName: string | undefined
+	ChatId: number | undefined
 	public Contacts: ChatContact[] | undefined
 	public current_offset: number
 	public messages: MessageItem[] | undefined
 
 	constructor(props: ChatProps) {
 		super("div", props)
-
-		this.ChatName = undefined
-		this.Contacts = undefined
-		this.newID = undefined
-		this.messages = undefined
+		this.ChatName = this.props.ChatName
 		this.current_offset = 0
+
 	}
 
 	protected render(): DocumentFragment {
 		return this.compile(template, {...this.props})
 	}
 
-	 createMessages(message: Message): any {
+	returnUsersAvatar(users: UserData[], id: number) {
+		if (users && users[0]) {
+			const user = users.filter((user) => {return user.id === id})
+
+			let UserImg;
+
+			if (user[0]) {
+				UserImg = {
+					src: "https://ya-praktikum.tech/api/v2/resources" + user[0].avatar,
+					alt: "аватар пользователя"
+				}
+			}
+
+			return UserImg
+		}
+	}
+
+	 createMessages(message: Message, users: UserData[]): any {
 
 		const myId = store.getState().user!.data.id
 
-		const user = store.getState().selected_chat_data!.users.filter((user) => {return user.id === message.user_id})
-
 		const cls: "from" | "to" = message.user_id !== myId ? "to" : "from"
 
-		let UserImg
-
-		if (user) {
-			UserImg = {
-				src: "https://ya-praktikum.tech/api/v2/resources" + user[0].avatar,
-				alt: "аватар пользователя"
-			}
-		}
+		let UserImg = this.returnUsersAvatar(users, message.user_id)
 
 		const imgProps = UserImg ? UserImg : {src: no_avatar, alt: "аватар пользователя"}
 
@@ -73,7 +77,6 @@ class ChatBase extends Block<ChatProps> {
 	}
 
 	async init() {
-		console.log(this.props, 'chat props')
 		let newMessage = ""
 
 		this.children.ChatLogo = new Img({
@@ -83,12 +86,11 @@ class ChatBase extends Block<ChatProps> {
 		})
 
 		if (this.props.messages && this.props.messages[0]) {
-			const m = this.props.messages.sort((a, b) => {
-				return new Date(b.time).getTime() - new Date(a.time).getTime()
-			})
 
-			this.messages = m.map((mess) => {
-				return this.createMessages(mess)
+			this.messages = this.props.messages.sort((a, b) => {
+				return new Date(b.time).getTime() - new Date(a.time).getTime()
+			}).map((mess) => {
+				return this.createMessages(mess, this.props.contacts)
 			})
 		}
 
@@ -169,12 +171,7 @@ class ChatBase extends Block<ChatProps> {
 					src: send,
 					alt: "отправить"
 				}),
-				events: {
-					// submit: (event: any) => {
-					// 	event.preventDefault()
-					// 	console.log(event)
-					// }
-				},
+				events: {},
 			},
 			events: {
 				submit: (event: any) => {
@@ -190,10 +187,8 @@ class ChatBase extends Block<ChatProps> {
 			class: "chat__form"
 		})
 
-		console.log(this.props, 'contacts')
-
 		if (this.props.contacts && this.props.contacts[0]) {
-			console.log("block if")
+
 			this.Contacts = this.props.contacts.map((contact ) => {
 				let props = {
 					img: {
@@ -204,70 +199,44 @@ class ChatBase extends Block<ChatProps> {
 
 				return new ChatContact(props)
 			})
-		} else {
-			console.log('block else')
-
-			let active_id = store.getState().selected_chat_data!.chat.id
-
-			let usrs = await chatController.getUsers(active_id);
-			console.log(usrs)
-
-			if (usrs) {
-				this.Contacts = usrs.map((usr) => {
-					let props = {
-						img: {
-							src: usr.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + usr.avatar : no_avatar,
-							alt: "аватар пользователя"},
-						name: usr.display_name
-					};
-
-					return new ChatContact(props)
-				})
-			}
 		}
 
 		if (this.Contacts) {
 			this.children.Contacts = this.Contacts
 		}
 
-		// this.ChatWrapper = new ChatWrapper({
-		// 	messages: this.props.messages,
-		// 	events: {
-		// 		scroll: (event: any) => {
-		// 			// event.target.scrollTop = this.props.messages?.length ? this.props.messages.length * 50 : 0
-		// 		}
-		// 	}
-		// })
-
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
-		if (this.Contacts && !isEqual(oldProps.contacts, newProps.contacts)) {
+		if (newProps.contacts !== oldProps.contacts) {
+
 			this.Contacts = newProps.contacts.map((contact: UserData) => {
 				let props = {img: {src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar, alt: "аватар пользователя"}, name: contact.display_name}
 				return new ChatContact(props)
 			})
 
-			this.children.Contacts = this.Contacts!
+			if (this.Contacts) {
+				this.children.Contacts = this.Contacts
+			}
 		}
 
-		if (!oldProps.messages || !isEqual(oldProps.messages, newProps.messages)) {
+		if (oldProps.messages !== newProps.messages) {
 
-			const m = oldProps.messages.sort((a:Message, b:Message) => {
+			this.messages = newProps.messages.sort((a:Message, b:Message) => {
 				return new Date(b.time).getTime() - new Date(a.time).getTime()
+			}).map((mess: Message) => {
+				return this.createMessages(mess, newProps.contacts)
 			})
 
-			this.messages = m.map((mess: Message) => {
-				return this.createMessages(mess)
-			})
-
-			this.children.messages = this.messages!
+			if (this.messages) {
+				this.children.messages = this.messages
+			}
 		}
 
 		return true
 	}
 }
 
-const Chat = withStore((state) => {return {messages: state.messages![state.selected_chat!], contacts: state.selected_chat_data?.users} || {}})(ChatBase)
+export const Chat = withStore((state) => {return {messages: state.messages![state.selected_chat!], contacts: state.selected_chat_data?.users} || {}})(ChatBase)
 
-export default Chat;
+// export default Chat;

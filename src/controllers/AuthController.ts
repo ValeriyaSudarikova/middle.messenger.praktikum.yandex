@@ -13,16 +13,11 @@ class AuthController {
 
 	async getUser() {
 		try {
-			store.set("user.isLoading", true)
-
 			const user = await this.api.getUser()
 
-			store.set("user.isLoading", false)
 			store.set("user.data", user)
-
-			Router.go(Routes.menu)
 		} catch (e) {
-			// Router.go(Routes.signIn)
+			console.log(e)
 		}
 	}
 
@@ -49,10 +44,6 @@ class AuthController {
 			await this.api.signup(data)
 
 			await this.getUser()
-
-			Router.go(Routes.menu)
-
-			window.location.reload()
 
 		} catch (e) {
 

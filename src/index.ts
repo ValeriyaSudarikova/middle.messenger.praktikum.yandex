@@ -5,6 +5,7 @@ import Signin from "./pages/signin/signin"
 import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController"
 import Registration from "./pages/registration/registration"
+import ChatController from "./controllers/ChatController";
 
 export enum Routes {
 	homepage = "/",

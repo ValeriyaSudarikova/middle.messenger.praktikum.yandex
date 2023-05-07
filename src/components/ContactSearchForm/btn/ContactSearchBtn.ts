@@ -3,6 +3,7 @@ import template from "./ContactSearchBtn.hbs"
 
 export interface BtnProps {
     events?: Record<string, any>
+	innerText?: string
 }
 
 export default class ContactSearchBtn extends Block<BtnProps> {
@@ -13,6 +14,7 @@ export default class ContactSearchBtn extends Block<BtnProps> {
 	protected render(): DocumentFragment {
 		return this.compile(template, {
 			...this.props,
+			innerText: this.props.innerText? this.props.innerText : "поиск"
 		})
 	}
 }

@@ -42,9 +42,6 @@ export default class ContactsBase extends Block<ContactsProps> {
 		if (this.chats && this.props.flag === "chat") {
 			this.CreateChat(this.chats)
 		}
-		// if (this.contacts && this.props.flag === "contact") {
-		// 	this.CreateContact(this.contacts)
-		// }
 
 		this.children.SearchForm = new ContactSearchForm({...this.props.search})
 	}
@@ -69,7 +66,7 @@ export default class ContactsBase extends Block<ContactsProps> {
 
 }
 
-export const ContactsWithStore = withStore((state) => {return {chats: state.chats, contacts: state.contacts}})(ContactsBase)
+export const ContactsWithStore = withStore((state) => {return {chats: state.chats}})(ContactsBase)
 
 
 
