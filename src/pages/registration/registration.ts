@@ -129,5 +129,4 @@ export default class Registration extends Block<RegistrationProps> {
 		})
 	}
 }
-export const RegistrationWithStore = withStore((state) => {return state.user?.data ? state.user.data : {}})(Registration)
 

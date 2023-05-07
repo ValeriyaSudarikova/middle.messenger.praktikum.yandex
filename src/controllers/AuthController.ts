@@ -71,11 +71,6 @@ class AuthController {
 
 			await this.api.logout()
 
-			store.set("user.data", undefined)
-			store.set("chats.data", undefined)
-			store.set("selected_chat", undefined)
-			store.set("selected_chat_data", undefined)
-
 			Router.go(Routes.homepage)
 		} catch (e) {
 			console.error(e)

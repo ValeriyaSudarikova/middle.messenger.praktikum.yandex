@@ -4,8 +4,6 @@ import Img, {ImgProps} from "../img/img"
 import BtnSubmit from "../btnSubmit/btnSubmit"
 import mess from "../../icons/message.svg"
 import delIcon from "../../icons/trash.svg"
-import Chat from "../chat/chat"
-import contactsController from "../../controllers/ContactsController"
 
 export interface ContactItemProps {
 	class?: string,
@@ -58,7 +56,6 @@ class ContactItem extends Block<ContactItemProps> {
 			class: "contacts__list_item-btn trash",
 			label: new Img({src:delIcon, alt:"удаление"}),
 			events: {
-				click: (Event: any, id:number = this.props.contactID) => {contactsController.deleteUser(id)}
 			}
 		})
 	}

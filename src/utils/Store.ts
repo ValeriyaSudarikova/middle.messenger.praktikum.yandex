@@ -1,6 +1,6 @@
 import {UserData} from "../api/auth/types"
 import {set} from "./helpers"
-import EventBus from "./EventBus"
+import {EventBus} from "./EventBus"
 import Block from "./Block"
 import {ChatItem} from "../api/chats/types"
 import {Message} from "../controllers/MessageController"
@@ -8,14 +8,10 @@ import {Message} from "../controllers/MessageController"
 export interface State {
     user?: {
         data: UserData,
-        error?: string,
-        isLoading: boolean
     },
     chats?: {
         data: ChatItem[],
         users: Record<number, UserData[]>
-        error: string,
-        isLoading: boolean
     },
     selected_chat?: number,
     selected_chat_data?: {
@@ -23,14 +19,7 @@ export interface State {
         users: UserData[],
         messages: Message[],
     }
-    messages?: Record<number, Message[]>
-    contacts?: {
-        data: UserData[],
-        error: string,
-        isLoading: false
-    },
-    new_message?: string | undefined
-
+    messages?: Record<number, Message[]>,
 }
 
 enum StoreEvents {
@@ -51,6 +40,8 @@ export class Store extends EventBus {
 	}
 }
 
+const store = new Store()
+
 interface BlockConstructor<P = any> {
     new(props: any): Block<P & any>;
 }
@@ -64,7 +55,9 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 
 				store.on(StoreEvents.update, () => {
 					const stateProps = mapStateToProps(store.getState())
+
 					previousState = stateProps
+
 					this.setProps({
 						...stateProps
 					})
@@ -76,7 +69,5 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 
 	}
 }
-
-const store = new Store()
 
 export default store

@@ -1,5 +1,3 @@
-import {Router} from "../utils/Router"
-import {Routes} from "../index"
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
 import {UserData, UserDataToChange} from "../api/auth/types"

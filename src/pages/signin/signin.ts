@@ -7,8 +7,6 @@ import SigninForm, {SigninFormProps} from "./signinForm/signinForm"
 import {login, ShowFocusMessage} from "../../utils/helpers"
 //img
 import logo from "../../img/logo.svg"
-import {InputWrapperProps} from "../../components/input/inputWrapper"
-import {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
 import AuthController from "../../controllers/AuthController"
 import {SignInData} from "../../api/auth/types"
 import Router from "../../utils/Router"
@@ -31,6 +29,7 @@ export default class Signin extends Block<SigninProps> {
 
 	init() {
 		const loginData: SignInData = {login: "", password: ""}
+
 		this.children.Form = new SigninForm({
 			inputs: [
 				{
@@ -66,12 +65,14 @@ export default class Signin extends Block<SigninProps> {
 			events: {
 				submit: (Event: any) => {
 					Event.preventDefault()
+
 					if (loginData.login && loginData.password) {
 						AuthController.signin(loginData)
 					}
 				}
 			}
 		})
+
 		this.children.Logo = new Img({
 			src: logo,
 			alt: "логотип приложения",
@@ -80,14 +81,7 @@ export default class Signin extends Block<SigninProps> {
 		this.children.ResetPassLink = new Link({
 			class: "signin__link fz-30 colored",
 			text: "еще не зарегистрированы?",
-			// href: "/sign-up",
-			events: {
-				click: (event: any) => {
-					event.preventDefault()
-
-					Router.go(Routes.registration)
-				}
-			}
+			href: Routes.registration,
 		})
 	}
 }

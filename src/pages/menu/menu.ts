@@ -12,7 +12,7 @@ import friends from "../../icons/friends.svg"
 import exit from "../../icons/exit.svg"
 import settingsIcon from "../../icons/settings.svg"
 import next from "../../icons/next.svg"
-
+//utils
 import AuthController from "../../controllers/AuthController"
 import {changeData, CloseMenu, findProperty, isEqual, login, OpenMenu} from "../../utils/helpers"
 import Contacts from "../../components/chatFriendsSections/contacts"
@@ -24,7 +24,6 @@ import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
 import {Message} from "../../controllers/MessageController"
 import {Chat, ChatProps} from "../../components/chat/chat"
-import chatsController from "../../controllers/ChatController";
 
 interface MenuProps {
 	UserImg: ImgProps,
@@ -111,7 +110,6 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	async init() {
-		await chatsController.getChats()
 
 		if (!this.UserData) {
 			this.UserData = store.getState().user!.data
@@ -439,13 +437,13 @@ class MenuBase extends Block<MenuProps> {
 		let messages: Message[] | [];
 
 		if (props && props.chat && !props.messages) {
-			const id = props.chat.id;
 
-			messages = store.getState().messages![id];
+			messages = store.getState().selected_chat_data!.messages;
 		}
 		else {
 			messages = props.messages
 		}
+
 		return messages
 	}
 

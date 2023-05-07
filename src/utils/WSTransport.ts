@@ -1,7 +1,4 @@
-import EventBus from "./EventBus"
-import store from "./Store"
-import {Message} from "../controllers/MessageController"
-import {isNumber} from "util"
+import {EventBus} from "./EventBus"
 
 export enum WSTransportEvents {
     connected = "connected",
@@ -20,25 +17,24 @@ export default class WSTransport extends EventBus {
 
 	public send(data: unknown) {
 		if (!this.socket) {
-			throw new Error("Socket is not connected")
+			throw new Error('Socket is not connected');
 		}
 
 		this.socket.send(JSON.stringify(data))
 	}
 
 	public connect(): Promise<void> {
+		this.socket = new WebSocket(this.url);
 
-		this.socket = new WebSocket(this.url)
+		this.subscribe(this.socket);
 
-		this.subscribe(this.socket)
-
-		this.setupPing()
+		this.setupPing();
 
 		return new Promise((resolve) => {
 			this.on(WSTransportEvents.connected, () => {
-				resolve()
-			})
-		})
+				resolve();
+			});
+		});
 	}
 
 	public close() {
@@ -47,36 +43,36 @@ export default class WSTransport extends EventBus {
 
 	private setupPing() {
 		this.pingInterval = setInterval(() => {
-			this.send({ type: "ping" })
+			this.send({ type: 'ping' });
 		}, 5000)
 
 		this.on(WSTransportEvents.close, () => {
-			clearInterval(this.pingInterval)
+			clearInterval(this.pingInterval);
 
-			this.pingInterval = 0
+			this.pingInterval = 0;
 		})
 	}
 
 	private subscribe(socket: WebSocket) {
-		socket.addEventListener("open", () => {
+		socket.addEventListener('open', () => {
 			this.emit(WSTransportEvents.connected)
-		})
-		socket.addEventListener("close", () => {
+		});
+		socket.addEventListener('close', () => {
 			this.emit(WSTransportEvents.close)
-		})
+		});
 
-		socket.addEventListener("error", (e) => {
+		socket.addEventListener('error', (e) => {
 			this.emit(WSTransportEvents.error, e)
-		})
+		});
 
-		socket.addEventListener("message", (message) => {
-			const data = JSON.parse(message.data)
+		socket.addEventListener('message', (message) => {
+			const data = JSON.parse(message.data);
 
-			if (data.type && data.type === "pong") {
-				return
+			if (data.type && data.type === 'pong') {
+				return;
 			}
 
 			this.emit(WSTransportEvents.message, data)
-		})
+		});
 	}
 }

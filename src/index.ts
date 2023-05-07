@@ -2,10 +2,9 @@ import Homepage from "./pages/homepage/homepage"
 import {menu} from "./pages/menu/menu"
 import Router from "./utils/Router"
 import Signin from "./pages/signin/signin"
-import ResetPassword from "./pages/ResetPassword/resetPassword"
 import AuthController from "./controllers/AuthController"
 import Registration from "./pages/registration/registration"
-import ChatController from "./controllers/ChatController";
+import chatsController from "./controllers/ChatController";
 
 export enum Routes {
 	homepage = "/",
@@ -43,6 +42,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 		Router.start()
 
 		if (isProtectedRoute) {
+			await chatsController.getChats()
+
 			Router.go(Routes.menu)
 		}
 

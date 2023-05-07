@@ -13,10 +13,10 @@ import add from "../../icons/add.svg"
 import no_avatar from "../../icons/no_avatar.svg"
 import no_chat_avatar from "../../img/chat.png"
 //utils
-import messageController, {Message} from "../../controllers/MessageController"
+import messagesController, {Message} from "../../controllers/MessageController"
 import store, {withStore} from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
-import {dateFormatter, isEqual} from "../../utils/helpers"
+import {dateFormatter} from "../../utils/helpers"
 import {UserData} from "../../api/auth/types";
 
 export interface ChatProps {
@@ -178,7 +178,7 @@ class ChatBase extends Block<ChatProps> {
 					event.preventDefault()
 
 					if (newMessage) {
-						messageController.sendMessage(this.props.selectedChat.id, newMessage)
+						messagesController.sendMessage(this.props.selectedChat.id, newMessage)
 
 						event.target.reset()
 					}
@@ -220,23 +220,26 @@ class ChatBase extends Block<ChatProps> {
 			}
 		}
 
-		if (oldProps.messages !== newProps.messages) {
+		if (oldProps.messages && newProps.messages && Object.values(oldProps.messages) !== Object.values(newProps.messages)) {
 
-			this.messages = newProps.messages.sort((a:Message, b:Message) => {
-				return new Date(b.time).getTime() - new Date(a.time).getTime()
-			}).map((mess: Message) => {
-				return this.createMessages(mess, newProps.contacts)
-			})
+			let state = store.getState()
+
+			if (state.messages && state.messages[state.selected_chat_data?.chat.id!]) {
+				this.messages = state.messages[state.selected_chat_data?.chat.id!].sort((a: Message, b: Message) => {
+					return new Date(b.time).getTime() - new Date(a.time).getTime()
+				}).map((mess: Message) => {
+					return this.createMessages(mess, newProps.contacts)
+				})
+			}
 
 			if (this.messages) {
 				this.children.messages = this.messages
 			}
 		}
-
 		return true
 	}
 }
 
-export const Chat = withStore((state) => {return {messages: state.messages![state.selected_chat!], contacts: state.selected_chat_data?.users} || {}})(ChatBase)
+export const Chat = withStore((state) => {return {messages: state.messages, contacts: state.selected_chat_data?.users} || {}})(ChatBase)
 
 // export default Chat;
