@@ -24,6 +24,7 @@ import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
 import {Message} from "../../controllers/MessageController"
 import {Chat, ChatProps} from "../../components/chat/chat"
+import chatsController from "../../controllers/ChatController";
 
 interface MenuProps {
 	UserImg: ImgProps,
@@ -110,6 +111,7 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	async init() {
+		chatsController.getChats()
 
 		if (!this.UserData) {
 			this.UserData = store.getState().user!.data

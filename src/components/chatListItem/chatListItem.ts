@@ -30,32 +30,23 @@ export default class ChatListItem extends Block<ChatItem> {
 	}
 
 	protected render(): DocumentFragment {
-
-		const user_avatar = this.props.last_message?.user.avatar
+		const avatar = this.props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : icon
 
 		return this.compile(template, {
-			img: {
-				class: "",
-				src: user_avatar ? "https://ya-praktikum.tech/api/v2/resources/" + user_avatar : icon,
-				alt: "аватар чата"},
+			img: {class: "", src: avatar, alt: "аватар чата"},
 			id: this.props.id,
 			name: this.props.title,
 			statusClass: "offline",
 			date: !this.props.last_message?.time ? dateFormatter(new Date((new Date()).toISOString())) : dateFormatter(new Date(this.props.last_message.time)),
 			messageText: this.props.last_message?.content ?  this.checkMessageLength(this.props.last_message?.content) : "",
-			events: {
-				click: (Event: any) => {
-					console.log(Event.target)
-				}
-			}
 		})
 
 	}
 
 	init() {
 		this.children.activeContactImg = new Img({
-			class: "",
-			src: this.props.avatar ? this.props.avatar : icon,
+			class: "user",
+			src: this.props.last_message?.user.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.last_message?.user.avatar}` : icon,
 			alt: "иконка чата"
 		})
 		this.children.message = new BtnSubmit({

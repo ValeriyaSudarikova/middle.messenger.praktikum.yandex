@@ -41,6 +41,7 @@ export default class ContactsBase extends Block<ContactsProps> {
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any) {
+		console.log('chat list upd', oldProps.chats, newProps.chats)
 
 		if (oldProps.chats !== newProps.chats ) {
 			this.chats = [...newProps.chats]

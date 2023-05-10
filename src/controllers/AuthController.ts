@@ -4,6 +4,7 @@ import store from "../utils/Store"
 import {Routes} from "../index"
 import Router from "../utils/Router"
 import messageController from "./MessageController"
+import chatsController from "./ChatController";
 
 class AuthController {
 	private api: AuthAPI
@@ -16,6 +17,7 @@ class AuthController {
 			const user = await this.api.getUser()
 
 			store.set("user.data", user)
+
 		} catch (e) {
 			console.log(e)
 		}

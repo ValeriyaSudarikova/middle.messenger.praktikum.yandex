@@ -1,5 +1,7 @@
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
 import store from '../utils/Store';
+import {isEqual} from "../utils/helpers";
+import chatsController from "./ChatController";
 
 export interface Message {
 	chat_id: number;
@@ -26,7 +28,7 @@ class MessagesController {
 			return;
 		}
 
-		const userId = store.getState().user?.data.id;
+		const userId = store.getState().user!.data.id;
 
 		const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
 
@@ -35,6 +37,7 @@ class MessagesController {
 		await wsTransport.connect();
 
 		this.subscribe(wsTransport, id);
+
 		this.fetchOldMessages(id);
 	}
 
@@ -76,9 +79,13 @@ class MessagesController {
 
 		const currentMessages = (store.getState().messages || {})[id] || [];
 
-		messagesToAdd = [...currentMessages, ...messagesToAdd];
+		if (!isEqual(currentMessages, messagesToAdd)) {
+			messagesToAdd = [...currentMessages, ...messagesToAdd]
+		}
 
 		store.set(`messages.${id}`, messagesToAdd);
+
+		chatsController.getChats()
 	}
 
 	private onClose(id: number) {

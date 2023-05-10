@@ -42,8 +42,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 		Router.start()
 
 		if (isProtectedRoute) {
-			await chatsController.getChats()
-
 			Router.go(Routes.menu)
 		}
 
