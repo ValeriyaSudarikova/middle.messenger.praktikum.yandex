@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/index.html -p 3000 --no-cache",
     "start": "node src/server.js -p 3000 --open",
-    "build": "parcel build src/index.html --no-scope-hoist",
+    "build": "parcel build src/index.html",
     "eslint": "node_modules/.bin/eslint . --fix"
   },
   "repository": {
