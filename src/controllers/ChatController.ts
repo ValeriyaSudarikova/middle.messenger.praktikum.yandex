@@ -33,6 +33,7 @@ class ChatController {
 			store.set("selected_chat_data.users", users)
 
 			return users
+			
 		} catch (error) {
 			console.log(error)
 		}

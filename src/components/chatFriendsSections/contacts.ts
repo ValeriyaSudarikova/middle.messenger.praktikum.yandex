@@ -1,20 +1,15 @@
 import Block from "../../utils/Block"
 import template from "./contacts.hbs"
-import ContactItem, {ContactItemProps, createChat} from "../contactItem/contactItem"
 import ChatListItem from "../chatListItem/chatListItem"
 import ContactSearchForm, {ContactSearchFormProps} from "../ContactSearchForm/ContactSearchForm"
 import {ChatItem} from "../../api/chats/types"
 import store, {withStore} from "../../utils/Store"
 import {UserData} from "../../api/auth/types"
 
-import user from "../../img/user.png"
-import ChatController from "../../controllers/ChatController"
-
 export interface ContactsProps {
 	header: string,
 	flag: "contact" | "chat",
 	chats?: ChatItem[] | undefined,
-	contacts?: ContactItemProps[] | undefined
 	search: ContactSearchFormProps,
 	events: Record<string, any>
 }
@@ -25,7 +20,6 @@ export default class ContactsBase extends Block<ContactsProps> {
 	constructor(props: ContactsProps) {
 		super("div", props)
 		this.chats = store.getState().chats?.data
-		this.contacts = store.getState().contacts?.data
 	}
 
 	private CreateChat(items: ChatItem[]) {

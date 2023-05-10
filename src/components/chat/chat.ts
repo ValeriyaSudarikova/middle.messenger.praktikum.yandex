@@ -21,9 +21,9 @@ import {UserData} from "../../api/auth/types";
 
 export interface ChatProps {
 	selectedChat: ChatItem,
-	ChatName: string | undefined,
-	contacts:  UserData[] | [],
-	messages: Message[] | undefined,
+	ChatName?: string,
+	contacts?:  UserData[],
+	messages?: Message[],
 }
 
 class ChatBase extends Block<ChatProps> {
@@ -90,7 +90,9 @@ class ChatBase extends Block<ChatProps> {
 			this.messages = this.props.messages.sort((a, b) => {
 				return new Date(b.time).getTime() - new Date(a.time).getTime()
 			}).map((mess) => {
-				return this.createMessages(mess, this.props.contacts)
+				if (this.props.contacts) {
+					return this.createMessages(mess, this.props.contacts)
+				}
 			})
 		}
 
@@ -104,7 +106,6 @@ class ChatBase extends Block<ChatProps> {
 				type: "number",
 				events: {
 					blur: (Event: any) => {
-						console.log(Event.target.value)
 						this.newID = Event.target.value
 					}
 				}
@@ -113,6 +114,7 @@ class ChatBase extends Block<ChatProps> {
 				label: "добавить контакт"
 			},
 			btn: {
+				innerText: "добавить",
 				events: {}
 			},
 			events: {
@@ -146,8 +148,6 @@ class ChatBase extends Block<ChatProps> {
 				events: {
 					change: (event: any) => {
 						event.preventDefault()
-
-						console.log(event)
 					},
 				}
 			},
@@ -155,7 +155,7 @@ class ChatBase extends Block<ChatProps> {
 				type: "text",
 				class: "chat__input-mess",
 				events: {
-					blur: (event: any) => {
+					change: (event: any) => {
 						event.preventDefault()
 
 						if (event.target.value) {
@@ -174,6 +174,14 @@ class ChatBase extends Block<ChatProps> {
 				events: {},
 			},
 			events: {
+				keyup: (event: any) => {
+					if (event.code === 'Enter' && newMessage) {
+
+						event.target.submit()
+
+						newMessage = "";
+					}
+				},
 				submit: (event: any) => {
 					event.preventDefault()
 

@@ -6,15 +6,15 @@ import BtnSubmit from "../btnSubmit/btnSubmit"
 //icons
 import delImg from "../../icons/trash.svg"
 import mesImg from "../../icons/message.svg"
-import Popup from "../popup/popup"
 import icon from "../../icons/no_avatar.svg"
 
-import {createChat} from "../contactItem/contactItem"
 import {ChatItem, Message} from "../../api/chats/types"
 import {dateFormatter} from "../../utils/helpers"
 import chatsController from "../../controllers/ChatController"
 import store from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
+import Router from "../../utils/Router";
+import {Routes} from "../../index";
 
 export default class ChatListItem extends Block<ChatItem> {
 	constructor(props: ChatItem) {
@@ -30,10 +30,14 @@ export default class ChatListItem extends Block<ChatItem> {
 	}
 
 	protected render(): DocumentFragment {
-		const avatar = this.props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : icon
+
+		const user_avatar = this.props.last_message?.user.avatar
 
 		return this.compile(template, {
-			img: {class: "", src: avatar, alt: "аватар чата"},
+			img: {
+				class: "",
+				src: user_avatar ? "https://ya-praktikum.tech/api/v2/resources/" + user_avatar : icon,
+				alt: "аватар чата"},
 			id: this.props.id,
 			name: this.props.title,
 			statusClass: "offline",
@@ -60,10 +64,7 @@ export default class ChatListItem extends Block<ChatItem> {
 			label: new Img({src: mesImg, alt: "Сообщение"}),
 			events: {
 				click: (Event: any) => {
-
 					chatController.selectChat(this.props.id)
-
-					store.set("selected_chat", this.props.id)
 				}
 			}
 		})
@@ -74,7 +75,6 @@ export default class ChatListItem extends Block<ChatItem> {
 			events: {
 				click: (Event: any) => {
 					if (this.props.id) {
-						console.log(this.props.id)
 						chatsController.delete(this.props.id)
 					}
 				}

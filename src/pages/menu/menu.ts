@@ -204,9 +204,6 @@ class MenuBase extends Block<MenuProps> {
 						}
 
 						userController.ChangeUserData(options)
-
-						const input: HTMLButtonElement = document.querySelector(".input__submit")!
-						input.disabled = true
 					}
 				},
 				bodyInputs: [
@@ -214,7 +211,6 @@ class MenuBase extends Block<MenuProps> {
 						label: {
 							text: "Имя",
 							subtitle: "",
-							// forClass: string
 						},
 						input: {
 							type: "text",
@@ -231,7 +227,6 @@ class MenuBase extends Block<MenuProps> {
 						label: {
 							text: "Фамилия",
 							subtitle: "",
-							// forClass: string
 						},
 						input: {
 							type: "text",
@@ -248,7 +243,6 @@ class MenuBase extends Block<MenuProps> {
 						label: {
 							text: "Логин",
 							subtitle: "по которому вас можно будет найти в поиске",
-							// forClass: string
 						},
 						input: {
 							type: "text",
@@ -265,7 +259,6 @@ class MenuBase extends Block<MenuProps> {
 						label: {
 							text: "Адрес эл. почты",
 							subtitle: "используемый при регистрации",
-							// forClass: string
 						},
 						input: {
 							type: "email",
@@ -449,6 +442,13 @@ class MenuBase extends Block<MenuProps> {
 
 	async componentDidUpdate(oldProps: any, newProps: any): Promise<boolean> {
 		let ChatName: string
+		let selected_bool: boolean
+
+		if (oldProps.selected_chat) {
+			selected_bool = isEqual(oldProps.selected_chat, newProps.selected_chat)
+		} else {
+			selected_bool = !oldProps.selected_chat
+		}
 
 		if (newProps.chats && this.chats_data !== newProps.chats.data) {
 
@@ -503,15 +503,27 @@ class MenuBase extends Block<MenuProps> {
 			}
 		}
 
-		if (oldProps.selected_chat !== newProps.selected_chat) {
+		if (newProps.selected_chat && newProps.selected_chat.chat && selected_bool) {
 
-			if ((!this.active_chat && !this.active_chat_data) ||
-				(this.active_chat_data && this.active_chat_data.chat.id !== newProps.selected_chat.chat.id)) {
-
+			if (!oldProps.selected_chat) {
 				this.active_chat = new Chat({
 					selectedChat: newProps.selected_chat.chat,
 					ChatName: newProps.selected_chat.chat.title,
 					contacts:  newProps.selected_chat.users,
+					messages: this.getMessages(newProps.selected_chat),
+				})
+			} else if (oldProps.selected_chat.chat && this.active_chat && oldProps.selected_chat.chat.id === newProps.selected_chat.chat.id) {
+				this.active_chat.setProps({
+					selectedChat: newProps.selected_chat.chat,
+					ChatName: newProps.selected_chat.chat.title,
+					contacts:  newProps.selected_chat.users,
+					messages: this.getMessages(newProps.selected_chat)
+				})
+			} else if (oldProps.selected_chat.chat && this.active_chat && oldProps.selected_chat.chat.id !== newProps.selected_chat.chat.id) {
+				this.active_chat = new Chat({
+					selectedChat: newProps.selected_chat.chat,
+					ChatName: newProps.selected_chat.chat.title,
+					Contacts:  newProps.selected_chat.users,
 					messages: this.getMessages(newProps.selected_chat),
 				})
 			}
@@ -522,6 +534,7 @@ class MenuBase extends Block<MenuProps> {
 
 			this.active_chat_data = newProps.selected_chat;
 		}
+
 		return true
 	}
 }

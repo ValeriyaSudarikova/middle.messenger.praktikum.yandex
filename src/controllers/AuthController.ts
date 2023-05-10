@@ -1,5 +1,5 @@
 import {AuthAPI} from "../api/auth/AuthAPI"
-import {SignInData, SignUpData, UserData} from "../api/auth/types"
+import {SignInData, SignUpData} from "../api/auth/types"
 import store from "../utils/Store"
 import {Routes} from "../index"
 import Router from "../utils/Router"
@@ -44,6 +44,8 @@ class AuthController {
 			await this.api.signup(data)
 
 			await this.getUser()
+
+			Router.go(Routes.menu)
 
 		} catch (e) {
 

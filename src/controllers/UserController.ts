@@ -1,6 +1,7 @@
 import {UserAPI} from "../api/userAPI"
 import authController from "./AuthController"
 import {UserData, UserDataToChange} from "../api/auth/types"
+import store from "../utils/Store";
 
 class UserController {
 	private api: UserAPI
