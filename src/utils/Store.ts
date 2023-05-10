@@ -1,9 +1,9 @@
 import {UserData} from "../api/auth/types"
 import {set} from "./helpers"
-import {EventBus} from "./EventBus"
 import Block from "./Block"
 import {ChatItem} from "../api/chats/types"
 import {Message} from "../controllers/MessageController"
+import EventBus from "./EventBus";
 
 export interface State {
     user?: {

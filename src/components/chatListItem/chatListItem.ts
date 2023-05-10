@@ -7,14 +7,11 @@ import BtnSubmit from "../btnSubmit/btnSubmit"
 import delImg from "../../icons/trash.svg"
 import mesImg from "../../icons/message.svg"
 import icon from "../../icons/no_avatar.svg"
-
+//utils
 import {ChatItem, Message} from "../../api/chats/types"
 import {dateFormatter} from "../../utils/helpers"
 import chatsController from "../../controllers/ChatController"
-import store from "../../utils/Store"
 import chatController from "../../controllers/ChatController"
-import Router from "../../utils/Router";
-import {Routes} from "../../index";
 
 export default class ChatListItem extends Block<ChatItem> {
 	constructor(props: ChatItem) {
