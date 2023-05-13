@@ -5,7 +5,7 @@ import Label, {LabelProps} from "./label/label"
 //icons
 import add from "../../../icons/add.svg"
 
-interface ChatFileInputProps {
+export interface ChatFileInputProps {
 	name: string,
 	type: string,
 	id: string,

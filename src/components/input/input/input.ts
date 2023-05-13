@@ -1,5 +1,6 @@
 import Block from "../../../utils/Block"
 import template from "./input.hbs"
+import {login, ShowFocusMessage} from "../../../utils/helpers"
 
 export interface InputProps {
 	type: string,
@@ -14,6 +15,8 @@ export default class Input extends Block<InputProps> {
 	}
 
 	protected render(): DocumentFragment {
-		return this.compile(template, {...this.props})
+		return this.compile(template, {
+			...this.props
+		})
 	}
 }

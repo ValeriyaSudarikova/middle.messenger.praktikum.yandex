@@ -1,20 +1,18 @@
 {
-	"extends": "stylelint-config-standard-scss",
+	"extends": "stylelint-config-recommended",
 	"plugins": [
 		"stylelint-scss"
 	],
+	"customSyntax": "postcss-scss",
 	"rules": {
-		"color-hex-case": "lower",
-		"at-rule-no-unknown": null,
-		"scss/at-rule-no-unknown": true,
-		"scss/dollar-variable-pattern": "^foo",
-		"scss/selector-no-redundant-nesting-selector": true
+		"no-invalid-position-at-import-rule": null
 	},
 	"ignoreFiles": [
 		"build/*",
 		"public/*",
 		"dist/*",
 		"node-modules/*",
-		".github/*"
+		".github/*",
+		".parcel-cache/*"
 	]
 }

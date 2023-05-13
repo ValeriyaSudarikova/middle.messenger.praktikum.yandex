@@ -9,12 +9,17 @@
   &__navigation {
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 350px;
     height: 90vh;
     background: $sub-color;
     box-shadow: -4px 17px 30px rgba(0 0 0 / 0.1);
     border-radius: 30px;
     position: relative;
+
+    &-active {
+      display: flex;
+      flex-direction: row;
+    }
 
     &_header {
       padding: 16px 45px 50px 16px;
@@ -23,12 +28,22 @@
       justify-content: space-between;
       align-items: center;
 
-      &-text .hidden {
+      &-text {
+        text-align: left;
+        width: 200px;
+        &.hidden {
         display: none;
+      }
+      }
+      &-img {
+        width: 95px;
+        height: 95px;
+        border-radius: 100%;
       }
     }
 
     &-close {
+      display: none;
       cursor: pointer;
       width: 250px;
       text-align: center;
@@ -42,14 +57,17 @@
     }
 
     &-open {
-      width: 66px;
-      height: 60px;
-      background: $main-color;
+      width: 66px !important;
+      height: 60px !important;
+      background: #5B6976;
       box-shadow: -8px 8px 4px rgba(0 0 0 / 0.25);
       border-radius: 30px;
+      border: none;
       cursor: pointer;
-      margin: 0 auto;
-      margin-top: 200px;
+      margin-left: 35px;
+      position: absolute;
+      bottom: 21px;
+//      margin-top: 20px;
     }
     &-open:hover {
       box-shadow: -8px 8px 4px rgba(100 99 99 / 0.25);

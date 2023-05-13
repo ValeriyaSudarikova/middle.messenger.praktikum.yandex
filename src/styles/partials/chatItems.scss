@@ -4,9 +4,10 @@
     &__item {
         display: flex;
         flex-direction: row;
-        width: 255px;
+        width: 225px;
         &_body {
-            margin-top: 30px;
+            margin-top: 10px;
+            color: #5b6976;
         }
         &_wrapper {
             padding-left: 10px;
@@ -34,7 +35,8 @@
                 }
                 &.deleting img {
                     width: 20px;
-                    height: 30px;
+                    height: 20px;
+                    margin-top: 4px;
                 }
                 &:hover {
                     background: rgba(80, 86, 103, 0.22);

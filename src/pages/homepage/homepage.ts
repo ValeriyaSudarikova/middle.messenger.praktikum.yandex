@@ -1,9 +1,13 @@
 import Block from "../../utils/Block"
 import template from "./homepage.hbs"
 //components
-import Btn, {BtnProps} from "../../components/btn/btn"
+import {BtnProps, Btn} from "../../components/btn/btn"
 import Img, {ImgProps} from "../../components/img/img"
-
+//img
+import mainImg from "../../img/homepage.png"
+import logo from "../../img/logo.svg"
+import Router from "../../utils/Router"
+import {Routes} from "../../index"
 export interface HomepageProps {
 	circledImg: ImgProps,
 	logo: ImgProps,
@@ -21,9 +25,27 @@ export default class Homepage extends Block<HomepageProps> {
 	}
 
 	init() {
-		this.children.CircledImg = new Img({...this.props.circledImg})
-		this.children.Logo = new Img({...this.props.logo})
-		this.children.btnSignIn = new Btn({...this.props.signin})
-		this.children.btnRegistration = new Btn({...this.props.registration})
+		this.children.CircledImg = new Img({
+			class: "homepage__circle_img",
+			src: mainImg,
+			alt: "изображние домашней страницы"
+		})
+		this.children.Logo = new Img({
+			class: "homepage__logo",
+			src: logo,
+			alt: "логотип приложения"
+		})
+		this.children.btnSignIn = new Btn({
+			type: "button",
+			class: "homepage",
+			label: "Вход",
+			href: Routes.signIn,
+		})
+		this.children.btnRegistration = new Btn({
+			type: "button",
+			class: "homepage",
+			label: "Регистрация",
+			href: Routes.registration,
+		})
 	}
 }

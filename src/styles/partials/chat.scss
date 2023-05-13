@@ -1,38 +1,73 @@
 @import "../base/variables";
 
 .chat {
-  width: 100%;
+  display: block;
+  width: 73vw;
   height: 90vh;
   background: $sub-color;
   box-shadow: -4px 17px 30px rgba(0 0 0 / 9%);
   border-radius: 30px;
   margin-left: 27px;
-  padding: 29px;
-
+  padding: 20px;
   &__title {
-    width: 300px;
-
-    button {
-      display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__avatar {
+    margin-right: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+  }
+  &__header {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &-contacts-section {
+      margin-top: -15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 69px;
+    }
+    & form {
+      margin-top: 0px;
+      & label {
+        width: 230px;
+      }
     }
   }
 
   &__wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-end;
+    display: block;
     height: 60vh;
     width: 100%;
-    margin-bottom: 30px;
+    border-bottom: 1px solid $main-color;
+    overflow-y: scroll !important;
+    transform: scaleY(-1);
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      width: 11px;
+      border: 1px solid #DCDDE0;
+      background: #EDF0F3;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #263238;
+      border-radius: 18px;
+    }
   }
 
   &__form {
       position: relative;
+      margin-bottom: 10px;
   }
 
   &__input {
-
     &-mess {
       width: 100%;
       height: 67px;
@@ -56,9 +91,12 @@
 }
 
 .message {
+  margin-top: 13px;
+  margin-right: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: start;
+  transform: scaleY(-1);
 
   img {
     width: 53px;
@@ -74,6 +112,15 @@
     margin: 5px 27px;
     border-radius: 30px;
     padding: 15px 25px;
+    position: relative;
+    & .date {
+      position: absolute;
+      font-size: 12px;
+      font-weight: 300;
+      top: -13px;
+      right: 30px;
+      color: #5b6976;
+    }
   }
 
   &.from {
@@ -82,15 +129,20 @@
 
   &.to {
     flex-direction: row;
+    .message__inner {
+      .date {
+        right: 0;
+        left: 30px;
+      }
+    }
   }
 }
 
 .input {
-
   &__wrapper {
     width: 100%;
     position: relative;
-    margin: 15px 0;
+    margin: 15px 0px;
     text-align: center;
   }
 
@@ -102,7 +154,7 @@
     &-icon-wrapper {
       height: 60px;
       width: 60px;
-      display: block;
+      display: none;
       position: absolute;
       cursor: pointer;
       left: 10px;
@@ -129,5 +181,24 @@
       position: absolute;
       left: 0;
     }
+  }
+}
+.chat__title-contacts {
+  display: flex;
+  flex-direction: row;
+}
+.chat__contact-wrapper {
+  margin-top: 20px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: default;
+  &-img {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    border-radius: 100%;
   }
 }
