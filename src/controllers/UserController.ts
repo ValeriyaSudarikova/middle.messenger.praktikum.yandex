@@ -1,7 +1,7 @@
 import {UserAPI} from "../api/userAPI"
-import authController from "./AuthController"
-import {UserData, UserDataToChange} from "../api/auth/types"
+import {UserDataToChange} from "../api/auth/types"
 import store from "../utils/Store";
+import {isEqual} from "../utils/helpers";
 
 class UserController {
 	private api: UserAPI
@@ -11,13 +11,13 @@ class UserController {
 	}
 
 	async ChangeUserData(data: UserDataToChange) {
-
 		try {
-			await this.api.changeUserData(data)
+			const newUserData = await this.api.changeUserData(data)
 
-			await authController.getUser()
-
-			location.reload()
+			//@ts-ignore
+			if (newUserData) {
+				store.set("user.data", newUserData)
+			}
 
 		} catch (e) {
 			console.log(e)
@@ -26,11 +26,17 @@ class UserController {
 
 	async setUserAvatar(avatar: object) {
 		try {
-			await this.api.changeUserAvatar(avatar)
 
-			await authController.getUser()
+			const newUserData = await this.api.changeUserAvatar(avatar)
 
-			location.reload()
+			//@ts-ignore
+			// if (newUserData) {
+				store.set("user.data", newUserData)
+			// }
+
+			// await authController.getUser()
+
+			// location.reload()
 
 		} catch (e) {
 			console.log(e)

@@ -19,14 +19,15 @@ import Contacts from "../../components/chatFriendsSections/contacts"
 import Settings, {SettingsProps} from "../../components/settings/settings"
 import store, { withStore} from "../../utils/Store"
 import {UsedDataKeys, UserData, UserDataToChange} from "../../api/auth/types"
-import ChatController from "../../controllers/ChatController"
+import {chatsController} from "../../controllers/ChatController"
 import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
 import {Message} from "../../controllers/MessageController"
 import {Chat, ChatProps} from "../../components/chat/chat"
-import chatsController from "../../controllers/ChatController";
+import authController from "../../controllers/AuthController";
 
 interface MenuProps {
+	user: UserData
 	UserImg: ImgProps,
 	HeaderTextP: HeaderTextProps,
 	NavItems: NavItemProps[],
@@ -44,6 +45,7 @@ class MenuBase extends Block<MenuProps> {
 	public newUserData: UserData | undefined
 	public UserImg: Block<ImgProps> | undefined
 	public Header: Block<HeaderTextProps> | undefined
+	public UserAvatar: any | undefined
 	constructor(props: MenuProps) {
 		super("div", props)
 
@@ -57,6 +59,8 @@ class MenuBase extends Block<MenuProps> {
 			"phone": "",
 			"avatar": ""
 		}
+		this.UserData = {...this.props.user}
+		this.UserAvatar = this.props.user.avatar
 	}
 
 	closeAll() {
@@ -114,7 +118,7 @@ class MenuBase extends Block<MenuProps> {
 		chatsController.getChats()
 
 		if (!this.UserData) {
-			this.UserData = store.getState().user!.data
+			this.UserData = this.props.user
 		}
 
 		let ChatName: string
@@ -155,7 +159,7 @@ class MenuBase extends Block<MenuProps> {
 								err.remove()
 							}, 3000)
 						} else {
-							ChatController.create(ChatName)
+							chatsController.create(ChatName)
 
 							this.chats_data = store.getState().chats!.data
 
@@ -193,7 +197,7 @@ class MenuBase extends Block<MenuProps> {
 			},
 			form: {
 				events: {
-					submit: (Event: any) => {
+					submit: async (Event: any) => {
 						Event.preventDefault()
 
 						const options: UserDataToChange = {
@@ -205,7 +209,12 @@ class MenuBase extends Block<MenuProps> {
 							phone: this.newUserData!.phone? this.newUserData!.phone : this.UserData!.phone,
 						}
 
-						userController.ChangeUserData(options)
+						await userController.ChangeUserData(options)
+
+						this.Header?.setProps({
+							userName: options.first_name + " " + options.second_name,
+							userStatus: "online"
+						})
 					}
 				},
 				bodyInputs: [
@@ -340,17 +349,17 @@ class MenuBase extends Block<MenuProps> {
 					}
 				}
 			},
-			{
-				link: "active",
-				text:"Активный чат",
-				img: {src: chatIcon, alt: "иконка сообщений"},
-				events: {
-					click: (Event: any) => {
-						Event.preventDefault()
-						this.closeUnactive(Event)
-					}
-				}
-			},
+			// {
+			// 	link: "active",
+			// 	text:"Активный чат",
+			// 	img: {src: chatIcon, alt: "иконка сообщений"},
+			// 	events: {
+			// 		click: (Event: any) => {
+			// 			Event.preventDefault()
+			// 			this.closeUnactive(Event)
+			// 		}
+			// 	}
+			// },
 			{
 				link: "settings",
 				text:"Настройки",
@@ -491,7 +500,7 @@ class MenuBase extends Block<MenuProps> {
 										err.remove()
 									}, 3000)
 								} else {
-									ChatController.create(ChatName)
+									chatsController.create(ChatName)
 
 									this.chats_data = store.getState().chats!.data
 
@@ -537,8 +546,29 @@ class MenuBase extends Block<MenuProps> {
 			this.active_chat_data = newProps.selected_chat;
 		}
 
+		if (newProps.user !== this.UserData) {
+
+			this.Header?.setProps({
+				userName: newProps.user!.first_name + " " + newProps.user.second_name,
+				userStatus: "online"
+			})
+
+			this.UserData = newProps.user;
+		}
+
+		if (newProps.user.avatar !== this.UserAvatar) {
+			this.UserImg!.setProps({
+				src:  "https://ya-praktikum.tech/api/v2/resources" + newProps.user.avatar,
+				alt: "аватар пользователя"
+			})
+
+			this.children.UserImage = this.UserImg!
+			this.UserAvatar = newProps.user.avatar
+
+		}
+
 		return true
 	}
 }
 
-export const menu = withStore((state) => {return {chats: state.chats, selected_chat: state.selected_chat_data} || {}})(MenuBase)
+export const menu = withStore((state) => {return {user: state.user?.data, chats: state.chats, selected_chat: state.selected_chat_data} || {}})(MenuBase)

@@ -25,4 +25,13 @@ export default class HeaderText extends Block<HeaderTextProps> {
 		this.children.userName = new Text({text: this.props.userName})
 		this.children.userStatus = new Text({text: this.props.userStatus})
 	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+
+		if (this.props.userName !== oldProps.userName) {
+			this.children.userName = new Text({text: newProps.userName})
+		}
+
+		return true
+	}
 }

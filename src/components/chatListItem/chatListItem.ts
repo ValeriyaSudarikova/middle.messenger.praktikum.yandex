@@ -10,8 +10,7 @@ import icon from "../../icons/no_avatar.svg"
 //utils
 import {ChatItem, Message} from "../../api/chats/types"
 import {dateFormatter} from "../../utils/helpers"
-import chatsController from "../../controllers/ChatController"
-import chatController from "../../controllers/ChatController"
+import {chatsController} from "../../controllers/ChatController"
 
 export default class ChatListItem extends Block<ChatItem> {
 	constructor(props: ChatItem) {
@@ -52,7 +51,7 @@ export default class ChatListItem extends Block<ChatItem> {
 			label: new Img({src: mesImg, alt: "Сообщение"}),
 			events: {
 				click: (Event: any) => {
-					chatController.selectChat(this.props.id)
+					chatsController.selectChat(this.props.id)
 				}
 			}
 		})

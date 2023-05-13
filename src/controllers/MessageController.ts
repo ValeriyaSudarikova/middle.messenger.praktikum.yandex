@@ -1,7 +1,7 @@
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
 import store from '../utils/Store';
 import {isEqual} from "../utils/helpers";
-import chatsController from "./ChatController";
+import {chatsController} from "./ChatController";
 
 export interface Message {
 	chat_id: number;
@@ -98,6 +98,4 @@ class MessagesController {
 	}
 }
 
-const messagesController = new MessagesController()
-
-export default messagesController;
+export const messagesController = new MessagesController()

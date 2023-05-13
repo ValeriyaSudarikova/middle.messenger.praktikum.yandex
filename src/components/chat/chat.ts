@@ -6,18 +6,19 @@ import ContactSearchForm from "../ContactSearchForm/ContactSearchForm"
 import ChatContact from "./chatContact/ChatContact"
 import MessageItem from "./chatItem/chatItem"
 import ChatMessageForm from "./chatForm/ChatForm"
-import Img from "../img/img"
+import Img, {ImgProps} from "../img/img"
 //icons
 import send from "../../icons/send.svg"
 import add from "../../icons/add.svg"
 import no_avatar from "../../icons/no_avatar.svg"
 import no_chat_avatar from "../../img/chat.png"
 //utils
-import messagesController, {Message} from "../../controllers/MessageController"
+import {messagesController, Message} from "../../controllers/MessageController"
 import store, {withStore} from "../../utils/Store"
-import chatController from "../../controllers/ChatController"
-import {dateFormatter} from "../../utils/helpers"
+import {chatsController} from "../../controllers/ChatController"
+import {dateFormatter, isEqual} from "../../utils/helpers"
 import {UserData} from "../../api/auth/types";
+
 
 export interface ChatProps {
 	selectedChat: ChatItem,
@@ -45,7 +46,7 @@ class ChatBase extends Block<ChatProps> {
 		return this.compile(template, {...this.props})
 	}
 
-	returnUsersAvatar(users: UserData[], id: number) {
+	returnUsersAvatar(users: UserData[], id: number): ImgProps | undefined {
 		if (users && users[0]) {
 			const user = users.filter((user) => {return user.id === id})
 
@@ -62,7 +63,7 @@ class ChatBase extends Block<ChatProps> {
 		}
 	}
 
-	 createMessages(message: Message, users: UserData[]): any {
+	 createMessages(message: Message, users: UserData[]): MessageItem {
 
 		const myId = store.getState().user!.data.id
 
@@ -90,9 +91,7 @@ class ChatBase extends Block<ChatProps> {
 			this.messages = this.props.messages.sort((a, b) => {
 				return new Date(b.time).getTime() - new Date(a.time).getTime()
 			}).map((mess) => {
-				if (this.props.contacts) {
-					return this.createMessages(mess, this.props.contacts)
-				}
+				return this.createMessages(mess, this.props.contacts!)
 			})
 		}
 
@@ -122,7 +121,7 @@ class ChatBase extends Block<ChatProps> {
 					Event.preventDefault()
 
 					if (this.newID) {
-						chatController.addUserToChat(this.props.selectedChat.id, this.newID!)
+						chatsController.addUserToChat(this.props.selectedChat.id, this.newID!)
 					} else {
 						throw new Error("введите ID пользователя")
 					}

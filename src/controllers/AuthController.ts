@@ -3,8 +3,7 @@ import {SignInData, SignUpData} from "../api/auth/types"
 import store from "../utils/Store"
 import {Routes} from "../index"
 import Router from "../utils/Router"
-import messageController from "./MessageController"
-import chatsController from "./ChatController";
+import {messagesController} from "./MessageController"
 
 class AuthController {
 	private api: AuthAPI
@@ -17,6 +16,8 @@ class AuthController {
 			const user = await this.api.getUser()
 
 			store.set("user.data", user)
+
+			return user
 
 		} catch (e) {
 			console.log(e)
@@ -71,7 +72,7 @@ class AuthController {
 
 	async logout() {
 		try {
-			messageController.closeAll()
+			messagesController.closeAll()
 
 			await this.api.logout()
 
