@@ -110,6 +110,11 @@ class Router {
 		this.history.forward();
 	}
 
+	public reset() {
+		this.routes = [];
+		this.currentRoute = null;
+	}
+
 	private getRoute(pathname: string) {
 		return this.routes.find(route => route.match(pathname));
 	}
