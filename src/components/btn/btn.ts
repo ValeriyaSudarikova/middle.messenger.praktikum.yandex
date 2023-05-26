@@ -25,6 +25,7 @@ class BaseBtn extends Block<BtnProps> {
 
 	protected render():DocumentFragment {
 		return this.compile(template, {...this.props})
+
 	}
 }
 export const Btn = withRouter(BaseBtn)

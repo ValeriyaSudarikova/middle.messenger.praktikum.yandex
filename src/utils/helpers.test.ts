@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {set} from "./helpers";
+import {checkOnErrors, set} from "./helpers";
 
 describe("helpers functions",() => {
     describe('method set ', function () {
@@ -47,7 +47,27 @@ describe("helpers functions",() => {
         });
 
     });
-    describe("method merge", () => {
+    describe("function checkOnError", () => {
+        it("in case first name is in lower case should return obj.check = true (errored)", () => {
+            const first_name = "maks2"
 
+            const result = checkOnErrors("first_name", first_name);
+
+            expect(result.check).to.eq(false)
+        })
+        it("in case phone has letters should return obj.check = false", () => {
+            const phone = "11122maks"
+
+            const result = checkOnErrors("phone", phone);
+
+            expect(result.check).to.be.false
+        })
+        it("In case email hasn't @ and domain should return obj.check = false", () => {
+            const email = "maks.e"
+
+            const result = checkOnErrors("email", email);
+
+            expect(result.check).to.be.false
+        })
     })
 })
