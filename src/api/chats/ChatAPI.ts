@@ -37,5 +37,5 @@ export class ChatAPI extends BaseAPI {
 		return this.http.put("/users", { users, chatId: id })
 	}
 
-	update = undefined
+	update: any = undefined
 }

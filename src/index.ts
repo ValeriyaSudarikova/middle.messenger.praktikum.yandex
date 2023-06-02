@@ -5,53 +5,54 @@ import Signin from "./pages/signin/signin"
 import AuthController from "./controllers/AuthController"
 import Registration from "./pages/registration/registration"
 
+import  "./style.scss"
+
 export enum Routes {
-	homepage = "/",
-	registration = "/sign-up",
-	signIn = "/sign-in",
-	resetPass = "/reset-password",
-	menu = "/menu",
-	chats = "/menu/chats",
-	contacts = "/menu/contacts",
-	settings = "/menu/settings"
+    homepage = "/",
+    registration = "/sign-up",
+    signIn = "/sign-in",
+    resetPass = "/reset-password",
+    menu = "/menu",
+    chats = "/menu/chats",
+    contacts = "/menu/contacts",
+    settings = "/menu/settings"
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
 
-	Router
-		.use(Routes.homepage, Homepage)
-		.use(Routes.registration, Registration)
-		.use(Routes.signIn, Signin)
-		.use(Routes.menu, menu)
+    Router
+        .use(Routes.homepage, Homepage)
+        .use(Routes.registration, Registration)
+        .use(Routes.signIn, Signin)
+        .use(Routes.menu, menu)
 
-	let isProtectedRoute = true
+    let isProtectedRoute = true
 
-	switch (window.location.pathname) {
+    switch (window.location.pathname) {
 
-	case Routes.homepage:
-	case Routes.registration:
-	case Routes.signIn:
-		isProtectedRoute = false
-		break
-	}
+        case Routes.homepage:
+        case Routes.registration:
+        case Routes.signIn:
+            isProtectedRoute = false
+            break
+    }
 
-	try {
-		await AuthController.getUser()
+    try {
+        await AuthController.getUser()
 
-		Router.start()
+        Router.start()
 
-		if (isProtectedRoute) {
-			Router.go(Routes.menu)
-		}
+        if (isProtectedRoute) {
+            Router.go(Routes.menu)
+        }
 
-	} catch (e) {
+    } catch (e) {
 
-		Router.start()
+        Router.start()
 
-		if (!isProtectedRoute) {
-			Router.go(Routes.homepage)
-		}
-	}
+        if (!isProtectedRoute) {
+            Router.go(Routes.homepage)
+        }
+    }
 
 })
-

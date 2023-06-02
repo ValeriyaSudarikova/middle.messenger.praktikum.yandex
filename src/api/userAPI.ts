@@ -20,8 +20,8 @@ export class UserAPI extends BaseAPI {
 	}
 
 
-	create = undefined
-	read = undefined
-	update = undefined
-	delete = undefined
+	create: any = undefined
+	read: any = undefined
+	update: any = undefined
+	delete: any = undefined
 }

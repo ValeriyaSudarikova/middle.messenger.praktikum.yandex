@@ -13,7 +13,7 @@ describe("helpers functions",() => {
         });
         it('should return passed null if null is passed', function () {
             //arrange
-            const obj = null
+            const obj: unknown = null
             //act
             const result = set(obj, 'test.test', 1)
             //assert
