@@ -31,7 +31,6 @@ describe("button tests", () => {
         })
 
         const elem = instance.element
-        console.log(elem?.innerText)
 
         expect(elem?.innerHTML).to.eq(label)
     });

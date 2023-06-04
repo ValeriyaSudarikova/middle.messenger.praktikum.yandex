@@ -2,9 +2,10 @@ const { JSDOM } = require('jsdom');
 const Handlebars = require('handlebars');
 const fs = require('fs');
 
-const { window } = new JSDOM('<div id="app"></div>', {
+const { window } = new JSDOM('<!DOCTYPE html><html lang="ru"><body></body></html>', {
   url: 'http://localhost:3000'
 });
+
 
 global.window = window;
 global.document = window.document;
