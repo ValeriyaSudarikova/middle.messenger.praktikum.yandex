@@ -1,6 +1,6 @@
 import {nanoid} from "nanoid"
 import {TemplateDelegate} from "handlebars"
-import EventBus from "./EventBus";
+import EventBus from "./EventBus"
 
 class Block<props = any> {
 	static EVENTS = {

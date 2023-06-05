@@ -30,8 +30,6 @@ export default class ChatMessageForm extends Block<FormProps> {
 	}
 
 	init() {
-		this.children.fileInput = new ChatFileInput(this.props.file)
-
 		this.children.chatInput = new ChatInput(this.props.input)
 		this.children.submitBtn = new BtnSubmit(this.props.btn)
 	}

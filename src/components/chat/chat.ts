@@ -17,7 +17,7 @@ import {messagesController, Message} from "../../controllers/MessageController"
 import store, {withStore} from "../../utils/Store"
 import {chatsController} from "../../controllers/ChatController"
 import {dateFormatter, isEqual} from "../../utils/helpers"
-import {UserData} from "../../api/auth/types";
+import {UserData} from "../../api/auth/types"
 
 
 export interface ChatProps {
@@ -50,7 +50,7 @@ class ChatBase extends Block<ChatProps> {
 		if (users && users[0]) {
 			const user = users.filter((user) => {return user.id === id})
 
-			let UserImg;
+			let UserImg
 
 			if (user[0]) {
 				UserImg = {
@@ -69,7 +69,7 @@ class ChatBase extends Block<ChatProps> {
 
 		const cls: "from" | "to" = message.user_id !== myId ? "to" : "from"
 
-		let UserImg = this.returnUsersAvatar(users, message.user_id)
+		const UserImg = this.returnUsersAvatar(users, message.user_id)
 
 		const imgProps = UserImg ? UserImg : {src: no_avatar, alt: "аватар пользователя"}
 
@@ -174,11 +174,11 @@ class ChatBase extends Block<ChatProps> {
 			},
 			events: {
 				keyup: (event: any) => {
-					if (event.code === 'Enter' && newMessage) {
+					if (event.code === "Enter" && newMessage) {
 
 						event.target.submit()
 
-						newMessage = "";
+						newMessage = ""
 					}
 				},
 				submit: (event: any) => {
@@ -197,12 +197,12 @@ class ChatBase extends Block<ChatProps> {
 		if (this.props.contacts && this.props.contacts[0]) {
 
 			this.Contacts = this.props.contacts.map((contact ) => {
-				let props = {
+				const props = {
 					img: {
 						src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar,
 						alt: "аватар пользователя"},
 					name: contact.display_name
-				};
+				}
 
 				return new ChatContact(props)
 			})
@@ -218,7 +218,7 @@ class ChatBase extends Block<ChatProps> {
 		if (newProps.contacts !== oldProps.contacts) {
 
 			this.Contacts = newProps.contacts.map((contact: UserData) => {
-				let props = {img: {src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar, alt: "аватар пользователя"}, name: contact.display_name}
+				const props = {img: {src: contact.avatar ? "https://ya-praktikum.tech/api/v2/resources/" + contact.avatar : no_avatar, alt: "аватар пользователя"}, name: contact.display_name}
 				return new ChatContact(props)
 			})
 
@@ -229,7 +229,7 @@ class ChatBase extends Block<ChatProps> {
 
 		if (oldProps.messages && newProps.messages && Object.values(oldProps.messages) !== Object.values(newProps.messages)) {
 
-			let state = store.getState()
+			const state = store.getState()
 
 			if (state.messages && state.messages[state.selected_chat_data?.chat.id!]) {
 				this.messages = state.messages[state.selected_chat_data?.chat.id!].sort((a: Message, b: Message) => {

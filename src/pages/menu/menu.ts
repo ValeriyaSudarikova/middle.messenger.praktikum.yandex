@@ -24,7 +24,7 @@ import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
 import {Message} from "../../controllers/MessageController"
 import {Chat, ChatProps} from "../../components/chat/chat"
-import authController from "../../controllers/AuthController";
+import authController from "../../controllers/AuthController"
 
 interface MenuProps {
 	user: UserData
@@ -64,7 +64,7 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	closeAll() {
-		let components = []
+		const components = []
 
 		if (this.settings && this.chats) {
 			components.push(this.chats, this.settings)
@@ -98,15 +98,15 @@ class MenuBase extends Block<MenuProps> {
 		})
 
 		switch (target) {
-			case "Список чатов":
+		case "Список чатов":
 				this.chats!.show()
-				break
-			case "Активный чат":
-				this.active_chat?.show()
-				break
-			case "Настройки":
+			break
+		case "Активный чат":
+			this.active_chat?.show()
+			break
+		case "Настройки":
 				this.settings!.show()
-				break
+			break
 		}
 	}
 
@@ -438,11 +438,11 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	getMessages(props: {messages: Message[], chat: ChatItem | undefined, users: UserData[]}) {
-		let messages: Message[] | [];
+		let messages: Message[] | []
 
 		if (props && props.chat && !props.messages) {
 
-			messages = store.getState().selected_chat_data!.messages;
+			messages = store.getState().selected_chat_data!.messages
 		}
 		else {
 			messages = props.messages
@@ -543,7 +543,7 @@ class MenuBase extends Block<MenuProps> {
 				this.children.ActiveChat = this.active_chat
 			}
 
-			this.active_chat_data = newProps.selected_chat;
+			this.active_chat_data = newProps.selected_chat
 		}
 
 		if (newProps.user !== this.UserData) {
@@ -553,7 +553,7 @@ class MenuBase extends Block<MenuProps> {
 				userStatus: "online"
 			})
 
-			this.UserData = newProps.user;
+			this.UserData = newProps.user
 		}
 
 		if (newProps.user.avatar !== this.UserAvatar) {

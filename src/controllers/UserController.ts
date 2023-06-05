@@ -1,7 +1,7 @@
 import {UserAPI} from "../api/userAPI"
 import {UserDataToChange} from "../api/auth/types"
-import store from "../utils/Store";
-import {isEqual} from "../utils/helpers";
+import store from "../utils/Store"
+import {isEqual} from "../utils/helpers"
 
 class UserController {
 	private api: UserAPI
@@ -31,7 +31,7 @@ class UserController {
 
 			//@ts-ignore
 			// if (newUserData) {
-				store.set("user.data", newUserData)
+			store.set("user.data", newUserData)
 			// }
 
 			// await authController.getUser()

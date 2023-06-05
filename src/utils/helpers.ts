@@ -51,38 +51,38 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
 
 export function checkOnErrors(name: string, value = ""): {check: boolean, error: string} {
 	switch (name) {
-		case "first_name": {
-			const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
-			return {check: Boolean(regexp.test(value)), error: "Имя должно начинаться с заглавной буквы и иметь не менее 2 символов"}
-		}
-		case "second_name": {
-			const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
-			return {check: Boolean(regexp.test(value)), error: "Фамилия должна начинаться с заглавной буквы и иметь не менее 2 символов"}
-		}
-		case "display_name": {
-			const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
-			return {check: Boolean(regexp.test(value)), error: "Отображаемое имя должно начинаться с заглавной буквы и иметь не менее 2 символов"}
-		}
-		case "phone": {
-			const regexp = new RegExp(/^\+?\d{10,15}$/)
-			return {check: Boolean(regexp.test(value)), error: "Номер телефона должен состоять из 10-15 цифр"}
-		}
-		case "email" : {
-			const regexp = new RegExp(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)
-			return {check: Boolean(regexp.test(value)), error: "Эл. адрес должен содержать @ и иметь домен (пример .ru)"}
-		}
-		case "login" : {
-			const regexp = new RegExp(/^(?!\\d+$)[A-Za-z_-]{3,20}$/)
-			return {check: Boolean(regexp.test(value)), error: "Логин может содержать заглавные буквы или цифры, длина - 3-20 символов"}
-		}
-		case "password" : {
-			const regexp = new RegExp(/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,40}$/)
-			return {check: Boolean(regexp.test(value)), error: "Пароль должен содержать минимум 8 символов латиницы, включая цифры и заглавные буквы"}
-		}
-		case "repeat_password" : {
-			const regexp = new RegExp(/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,40}$/)
-			return {check: Boolean(regexp.test(value)), error: "Пароль должен содержать минимум 8 символов латиницы, включая цифры и заглавные буквы"}
-		}
+	case "first_name": {
+		const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
+		return {check: Boolean(regexp.test(value)), error: "Имя должно начинаться с заглавной буквы и иметь не менее 2 символов"}
+	}
+	case "second_name": {
+		const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
+		return {check: Boolean(regexp.test(value)), error: "Фамилия должна начинаться с заглавной буквы и иметь не менее 2 символов"}
+	}
+	case "display_name": {
+		const regexp = new RegExp(/^(?=.{2,50}$)[A-Za-zА-ЯЁ][a-zа-яё]*(?:-[A-Za-zА-ЯЁ][a-zа-яё]*)?$/)
+		return {check: Boolean(regexp.test(value)), error: "Отображаемое имя должно начинаться с заглавной буквы и иметь не менее 2 символов"}
+	}
+	case "phone": {
+		const regexp = new RegExp(/^\+?\d{10,15}$/)
+		return {check: Boolean(regexp.test(value)), error: "Номер телефона должен состоять из 10-15 цифр"}
+	}
+	case "email" : {
+		const regexp = new RegExp(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)
+		return {check: Boolean(regexp.test(value)), error: "Эл. адрес должен содержать @ и иметь домен (пример .ru)"}
+	}
+	case "login" : {
+		const regexp = new RegExp(/^(?!\\d+$)[A-Za-z_-]{3,20}$/)
+		return {check: Boolean(regexp.test(value)), error: "Логин может содержать заглавные буквы или цифры, длина - 3-20 символов"}
+	}
+	case "password" : {
+		const regexp = new RegExp(/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,40}$/)
+		return {check: Boolean(regexp.test(value)), error: "Пароль должен содержать минимум 8 символов латиницы, включая цифры и заглавные буквы"}
+	}
+	case "repeat_password" : {
+		const regexp = new RegExp(/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{8,40}$/)
+		return {check: Boolean(regexp.test(value)), error: "Пароль должен содержать минимум 8 символов латиницы, включая цифры и заглавные буквы"}
+	}
 	}
 	return {check: false, error: "имя объекта не передано"}
 }

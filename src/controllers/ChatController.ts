@@ -87,8 +87,8 @@ class ChatController {
 				store.set("selected_chat_data.chat", selectedChat)
 			}
 
-			const token = await this.getToken(selectedChat.id);
-			await messagesController.connect(selectedChat.id, token);
+			const token = await this.getToken(selectedChat.id)
+			await messagesController.connect(selectedChat.id, token)
 
 			if (users) {
 				store.set("selected_chat_data.users", users)

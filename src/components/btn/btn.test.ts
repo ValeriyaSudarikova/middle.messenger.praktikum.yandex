@@ -1,37 +1,37 @@
-import {Btn} from "./btn";
-import {expect} from "chai";
-import sinon from "sinon";
+import {Btn} from "./btn"
+import {expect} from "chai"
+import sinon from "sinon"
 
 describe("button tests", () => {
-    it('Should call router.go on click', function () {
-        let navigateMock = sinon.mock()
+	it("Should call router.go on click", function () {
+		const navigateMock = sinon.mock()
 
-        const instance = new Btn({
-            type: "link",
-            class: "btn",
-            href: "/menu",
-            label: "click",
-            navigate: navigateMock
-        })
+		const instance = new Btn({
+			type: "link",
+			class: "btn",
+			href: "/menu",
+			label: "click",
+			navigate: navigateMock
+		})
 
-        const elem = instance.element
+		const elem = instance.element
 
-        elem?.click()
+		elem?.click()
 
-        expect(navigateMock.callCount).to.eq(1)
-    })
-    it('should render button with correct label', function () {
-        let label = ' click me '
+		expect(navigateMock.callCount).to.eq(1)
+	})
+	it("should render button with correct label", function () {
+		const label = " click me "
 
-        const instance = new Btn({
-            type: "link",
-            class: "btn",
-            href: "/menu",
-            label: label,
-        })
+		const instance = new Btn({
+			type: "link",
+			class: "btn",
+			href: "/menu",
+			label: label,
+		})
 
-        const elem = instance.element
+		const elem = instance.element
 
-        expect(elem?.innerHTML).to.eq(label)
-    });
+		expect(elem?.innerHTML).to.eq(label)
+	})
 })

@@ -1,34 +1,34 @@
-import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
-import HTTPTransport from "./httpTransport";
-import { expect } from 'chai';
+import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from "sinon"
+import HTTPTransport from "./httpTransport"
+import { expect } from "chai"
 
-describe('HTTPTransport', () => {
-    let xhr: SinonFakeXMLHttpRequestStatic;
-    let instance: HTTPTransport;
-    const requests: SinonFakeXMLHttpRequest[] = [];
+describe("HTTPTransport", () => {
+	let xhr: SinonFakeXMLHttpRequestStatic
+	let instance: HTTPTransport
+	const requests: SinonFakeXMLHttpRequest[] = []
 
-    beforeEach(() => {
-        xhr = sinon.useFakeXMLHttpRequest();
+	beforeEach(() => {
+		xhr = sinon.useFakeXMLHttpRequest()
 
-        // @ts-ignore
-        global.XMLHttpRequest = xhr;
+		// @ts-ignore
+		global.XMLHttpRequest = xhr
 
-        xhr.onCreate = ((request: SinonFakeXMLHttpRequest) => {
-            requests.push(request);
-        });
+		xhr.onCreate = ((request: SinonFakeXMLHttpRequest) => {
+			requests.push(request)
+		})
 
-        instance = new HTTPTransport('/auth');
-    });
+		instance = new HTTPTransport("/auth")
+	})
 
-    afterEach(() => {
-        requests.length = 0;
-    })
+	afterEach(() => {
+		requests.length = 0
+	})
 
-    it('.get() should send GET request', () => {
-        instance.get('/user');
+	it(".get() should send GET request", () => {
+		instance.get("/user")
 
-        const [request] = requests;
+		const [request] = requests
 
-        expect(request.method).to.eq('GET');
-    });
-});
+		expect(request.method).to.eq("GET")
+	})
+})

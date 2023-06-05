@@ -5,7 +5,7 @@ interface InputLabelProps {
 	label: string
 }
 
-export default class InputLabel extends Block<InputLabelProps> {
+export class InputLabel extends Block<InputLabelProps> {
 	constructor(props: InputLabelProps) {
 		super("div", props)
 	}
