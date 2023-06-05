@@ -1,4 +1,4 @@
-import sinon, {assert} from "sinon"
+import sinon from "sinon"
 import Router from "./Router"
 import {expect} from "chai"
 import {describe} from "mocha"

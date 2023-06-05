@@ -4,7 +4,7 @@ import template from "./ContactSearchForm.hbs"
 import ContactSearchInput, {InputProps} from "./input/ContactSearchInput"
 import ContactSearchBtn, {BtnProps} from "./btn/ContactSearchBtn"
 import {LabelProps} from "./label/label"
-import {InputLabel} from "../input/label/inputLabel";
+import {InputLabel} from "../input/label/inputLabel"
 
 export interface ContactSearchFormProps {
     input: InputProps,

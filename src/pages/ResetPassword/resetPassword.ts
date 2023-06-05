@@ -4,7 +4,7 @@ import Img, {ImgProps} from "../../components/img/img"
 import ResetPassForm, {ResetPassFormProps} from "./resetPassForm/resetPassForm"
 //img
 import logoblack from "../../img/logo_black.svg"
-import {getData, InputNames, login, ShowFocusMessage} from "../../utils/helpers"
+import {getData, InputNames, ShowFocusMessage} from "../../utils/helpers"
 interface ResetPasswordProps {
 	logo: ImgProps
 	form: ResetPassFormProps
@@ -74,8 +74,7 @@ export default class ResetPassword extends Block<ResetPasswordProps> {
 			events: {
 				submit: (Event: any) => {
 					Event.preventDefault()
-					if (formData[InputNames.pass] === formData[InputNames.repPass]) {
-					} else {
+					if (formData[InputNames.pass] !== formData[InputNames.repPass]) {
 						const elem = document.querySelector("button")
 						const error = document.createElement("span")
 						error.classList.add("errored_message")

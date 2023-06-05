@@ -1,5 +1,5 @@
 import BaseAPI from "./baseApi"
-import {UserData, UserDataToChange} from "./auth/types"
+import { UserDataToChange} from "./auth/types"
 
 export class UserAPI extends BaseAPI {
 	constructor() {

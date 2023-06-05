@@ -16,7 +16,7 @@ import no_chat_avatar from "../../img/chat.png"
 import {messagesController, Message} from "../../controllers/MessageController"
 import store, {withStore} from "../../utils/Store"
 import {chatsController} from "../../controllers/ChatController"
-import {dateFormatter, isEqual} from "../../utils/helpers"
+import {dateFormatter} from "../../utils/helpers"
 import {UserData} from "../../api/auth/types"
 
 
@@ -63,7 +63,7 @@ class ChatBase extends Block<ChatProps> {
 		}
 	}
 
-	 createMessages(message: Message, users: UserData[]): MessageItem {
+	createMessages(message: Message, users: UserData[]): MessageItem {
 
 		const myId = store.getState().user!.data.id
 

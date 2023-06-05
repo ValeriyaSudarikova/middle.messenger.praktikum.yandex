@@ -1,14 +1,9 @@
 import Block from "../../../utils/Block"
 import template from "./chatForm.hbs"
 //components
-import ChatFileInput, {ChatFileInputProps} from "../chatFileInput/chatFileInput"
+import {ChatFileInputProps} from "../chatFileInput/chatFileInput"
 import ChatInput, {ChatInputProps} from "../chatInput/chatInput"
 import BtnSubmit, {BtnSubmitProps} from "../../btnSubmit/btnSubmit"
-//icons
-import add from "../../../icons/add.svg"
-import Img from "../../img/img"
-import send from "../../../icons/send.svg"
-import store from "../../../utils/Store"
 
 export interface FormProps {
     class: string,

@@ -2,9 +2,6 @@ import Block from "../../../utils/Block"
 import template from "./chatItem.hbs"
 //components
 import Img from "../../img/img"
-import {Message} from "../../../controllers/MessageController"
-import store from "../../../utils/Store"
-import {dateFormatter} from "../../../utils/helpers"
 
 export interface MessageProps {
 	class: "from" | "to",

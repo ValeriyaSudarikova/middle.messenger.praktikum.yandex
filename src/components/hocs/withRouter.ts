@@ -7,8 +7,7 @@ export function withRouter(Component: BlockConstructable) {
 
     return class WithRouter extends Component {
     	constructor(props: Props & PropsWithRouter) {
-    		super({ ...props, router: Router })
-    	}
+    		super({ ...props, router: Router })}
     }
 }
 

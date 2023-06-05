@@ -234,57 +234,6 @@ export const dateFormatter = (date: Date) => {
 	return `${day}.${month}.${year}, ${hours}:${minutes}`
 }
 
-type StringIndexed = Record<string, any>;
-
-function queryStringify(data: StringIndexed): string | never {
-	const isObject = (value: any): boolean => {
-		return typeof value === "object" && !Array.isArray(value)
-	}
-
-	if (!isObject(data)) {
-		throw new Error("input must be an object")
-	}
-
-	let result = ""
-	const createObjectWithIndexedKeys = (object: StringIndexed, prefix: string): StringIndexed => {
-		const keys = Object.keys(object)
-		return keys.reduce((accumulator, key) => {
-			accumulator[`${prefix}[${key}]`] = object[key]
-			return accumulator
-		}, {} as StringIndexed)
-	}
-
-	for (const [key, value] of Object.entries(data)) {
-		const prefix = decodeURI(key)
-
-		if (Array.isArray(value)) {
-			value.forEach((element: any, index: number) => {
-				if (isObject(element)) {
-					const subObject = createObjectWithIndexedKeys(element, `${prefix}[${index}]`)
-					result += queryStringify(subObject)
-				} else {
-					result += `&${prefix}[${index}]=${element}`
-				}
-			})
-		} else if (isObject(value)) {
-			const subObject = createObjectWithIndexedKeys(value, prefix)
-			result += queryStringify(subObject)
-		} else {
-			result += `&${prefix}=${value}`
-		}
-	}
-
-	if (result.length > 0) {
-		result = result.substring(1)
-	}
-
-	return result
-}
-
- interface AnyObject {
-	[key: string]: any;
-}
-
 export function isEqual(obj1: any, obj2: any): boolean {
 
 	if (obj1 === obj2) {
