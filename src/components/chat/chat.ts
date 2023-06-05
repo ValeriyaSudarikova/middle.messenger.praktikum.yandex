@@ -2,7 +2,7 @@ import Block from "../../utils/Block"
 import template from "./chat.hbs"
 //components
 import {ChatItem} from "../../api/chats/types"
-import ContactSearchForm from "../ContactSearchForm/ContactSearchForm"
+import {ContactSearchForm} from "../ContactSearchForm/ContactSearchForm"
 import ChatContact from "./chatContact/ChatContact"
 import MessageItem from "./chatItem/chatItem"
 import ChatMessageForm from "./chatForm/ChatForm"

@@ -1,7 +1,7 @@
 import Block from "../../utils/Block"
 import template from "./contacts.hbs"
 import ChatListItem from "../chatListItem/chatListItem"
-import ContactSearchForm, {ContactSearchFormProps} from "../ContactSearchForm/ContactSearchForm"
+import {ContactSearchForm, ContactSearchFormProps} from "../ContactSearchForm/ContactSearchForm"
 import {ChatItem} from "../../api/chats/types"
 import store, {withStore} from "../../utils/Store"
 import {UserData} from "../../api/auth/types"

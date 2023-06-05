@@ -2,7 +2,8 @@ import Block from "../../../utils/Block"
 import template from "./inputLabel.hbs"
 
 interface InputLabelProps {
-	label: string
+	label: string,
+	class?: string
 }
 
 export class InputLabel extends Block<InputLabelProps> {
@@ -14,3 +15,4 @@ export class InputLabel extends Block<InputLabelProps> {
 		return this.compile(template, {...this.props})
 	}
 }
+
