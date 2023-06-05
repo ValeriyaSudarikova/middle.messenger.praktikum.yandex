@@ -7,10 +7,9 @@
     "build": "webpack --mode=production --node-env=production",
     "test": "mocha --require ts-node/register --require tsconfig-paths/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "eslint": "node_modules/.bin/eslint . --fix",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -64,7 +63,8 @@
     "util": "^0.12.5",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack-dev-server": "^4.15.0",
+    "husky": "^8.0.0"
   },
   "dependencies": {
     "eslint-webpack-plugin": "^4.0.1",
