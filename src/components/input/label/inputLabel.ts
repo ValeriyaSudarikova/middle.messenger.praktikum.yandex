@@ -2,10 +2,11 @@ import Block from "../../../utils/Block"
 import template from "./inputLabel.hbs"
 
 interface InputLabelProps {
-	label: string
+	label: string,
+	class?: string
 }
 
-export default class InputLabel extends Block<InputLabelProps> {
+export class InputLabel extends Block<InputLabelProps> {
 	constructor(props: InputLabelProps) {
 		super("div", props)
 	}
@@ -14,3 +15,4 @@ export default class InputLabel extends Block<InputLabelProps> {
 		return this.compile(template, {...this.props})
 	}
 }
+

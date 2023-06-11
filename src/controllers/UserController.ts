@@ -1,7 +1,6 @@
 import {UserAPI} from "../api/userAPI"
 import {UserDataToChange} from "../api/auth/types"
-import store from "../utils/Store";
-import {isEqual} from "../utils/helpers";
+import store from "../utils/Store"
 
 class UserController {
 	private api: UserAPI
@@ -29,14 +28,7 @@ class UserController {
 
 			const newUserData = await this.api.changeUserAvatar(avatar)
 
-			//@ts-ignore
-			// if (newUserData) {
-				store.set("user.data", newUserData)
-			// }
-
-			// await authController.getUser()
-
-			// location.reload()
+			store.set("user.data", newUserData)
 
 		} catch (e) {
 			console.log(e)

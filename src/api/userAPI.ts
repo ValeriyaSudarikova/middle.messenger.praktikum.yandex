@@ -1,5 +1,5 @@
 import BaseAPI from "./baseApi"
-import {UserData, UserDataToChange} from "./auth/types"
+import { UserDataToChange} from "./auth/types"
 
 export class UserAPI extends BaseAPI {
 	constructor() {
@@ -20,8 +20,8 @@ export class UserAPI extends BaseAPI {
 	}
 
 
-	create = undefined
-	read = undefined
-	update = undefined
-	delete = undefined
+	create: any = undefined
+	read: any = undefined
+	update: any = undefined
+	delete: any = undefined
 }

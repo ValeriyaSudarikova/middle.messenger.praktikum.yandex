@@ -1,14 +1,14 @@
 import Block from "../../utils/Block"
 import template from "./chatListItem.hbs"
 //components
-import Img, {ImgProps} from "../img/img"
+import Img from "../img/img"
 import BtnSubmit from "../btnSubmit/btnSubmit"
 //icons
 import delImg from "../../icons/trash.svg"
 import mesImg from "../../icons/message.svg"
 import icon from "../../icons/no_avatar.svg"
 //utils
-import {ChatItem, Message} from "../../api/chats/types"
+import {ChatItem} from "../../api/chats/types"
 import {dateFormatter} from "../../utils/helpers"
 import {chatsController} from "../../controllers/ChatController"
 
@@ -50,7 +50,7 @@ export default class ChatListItem extends Block<ChatItem> {
 			class: "messaging",
 			label: new Img({src: mesImg, alt: "Сообщение"}),
 			events: {
-				click: (Event: any) => {
+				click: () => {
 					chatsController.selectChat(this.props.id)
 				}
 			}
@@ -60,7 +60,7 @@ export default class ChatListItem extends Block<ChatItem> {
 			class: "deleting",
 			label: new Img({src: delImg, alt: "удаление"}),
 			events: {
-				click: (Event: any) => {
+				click: () => {
 					if (this.props.id) {
 						chatsController.delete(this.props.id)
 					}

@@ -38,10 +38,10 @@ class Route {
 
 	render() {
 		if (!this.block) {
-			this.block = new this.blockClass({});
+			this.block = new this.blockClass({})
 
-			render(this.query, this.block);
-			return;
+			render(this.query, this.block)
+			return
 		}
 	}
 }
@@ -64,54 +64,59 @@ class Router {
 	}
 
 	public use(pathname: string, block: BlockConstructable) {
-		const route = new Route(pathname, block, this.rootQuery);
-		this.routes.push(route);
+		const route = new Route(pathname, block, this.rootQuery)
+		this.routes.push(route)
 
-		return this;
+		return this
 	}
 
 	public start() {
 		window.onpopstate = (event: PopStateEvent) => {
-			const target = event.currentTarget as Window;
+			const target = event.currentTarget as Window
 
-			this._onRoute(target.location.pathname);
+			this._onRoute(target.location.pathname)
 		}
 
-		this._onRoute(window.location.pathname);
+		this._onRoute(window.location.pathname)
 	}
 
 	private _onRoute(pathname: string) {
-		const route = this.getRoute(pathname);
+		const route = this.getRoute(pathname)
 
 		if (!route) {
-			return;
+			return
 		}
 
 		if (this.currentRoute && this.currentRoute !== route) {
-			this.currentRoute.leave();
+			this.currentRoute.leave()
 		}
 
-		this.currentRoute = route;
+		this.currentRoute = route
 
-		route.render();
+		route.render()
 	}
 
 	public go(pathname: string) {
-		this.history.pushState({}, '', pathname);
+		this.history.pushState({}, "", pathname)
 
-		this._onRoute(pathname);
+		this._onRoute(pathname)
 	}
 
 	public back() {
-		this.history.back();
+		this.history.back()
 	}
 
 	public forward() {
-		this.history.forward();
+		this.history.forward()
+	}
+
+	public reset() {
+		this.routes = []
+		this.currentRoute = null
 	}
 
 	private getRoute(pathname: string) {
-		return this.routes.find(route => route.match(pathname));
+		return this.routes.find(route => route.match(pathname))
 	}
 }
 

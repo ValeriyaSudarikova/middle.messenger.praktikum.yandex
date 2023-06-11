@@ -3,7 +3,7 @@ import {set} from "./helpers"
 import Block from "./Block"
 import {ChatItem} from "../api/chats/types"
 import {Message} from "../controllers/MessageController"
-import EventBus from "./EventBus";
+import EventBus from "./EventBus"
 
 export interface State {
     user?: {

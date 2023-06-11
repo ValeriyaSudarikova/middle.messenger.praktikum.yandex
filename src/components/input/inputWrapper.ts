@@ -1,6 +1,6 @@
 import Block from "../../utils/Block"
 import template from "./inputWrapper.hbs"
-import InputLabel from "./label/inputLabel"
+import {InputLabel} from "./label/inputLabel"
 import Input from "./input/input"
 
 export interface InputWrapperProps {
@@ -27,6 +27,7 @@ export default class InputWrapper extends Block<InputWrapperProps> {
 		this.children.label = new InputLabel({
 			label: this.props.label
 		})
+
 		this.children.Input = new Input({
 			...this.props.input
 		})

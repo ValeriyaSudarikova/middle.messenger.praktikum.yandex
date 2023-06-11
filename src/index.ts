@@ -4,17 +4,18 @@ import Router from "./utils/Router"
 import Signin from "./pages/signin/signin"
 import AuthController from "./controllers/AuthController"
 import Registration from "./pages/registration/registration"
-import chatsController from "./controllers/ChatController";
+
+import  "./style.scss"
 
 export enum Routes {
-	homepage = "/",
-	registration = "/sign-up",
-	signIn = "/sign-in",
-	resetPass = "/reset-password",
-	menu = "/menu",
-	chats = "/menu/chats",
-	contacts = "/menu/contacts",
-	settings = "/menu/settings"
+    homepage = "/",
+    registration = "/sign-up",
+    signIn = "/sign-in",
+    resetPass = "/reset-password",
+    menu = "/menu",
+    chats = "/menu/chats",
+    contacts = "/menu/contacts",
+    settings = "/menu/settings"
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -55,4 +56,3 @@ window.addEventListener("DOMContentLoaded", async () => {
 	}
 
 })
-

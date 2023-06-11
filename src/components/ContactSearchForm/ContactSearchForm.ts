@@ -3,7 +3,8 @@ import template from "./ContactSearchForm.hbs"
 //components
 import ContactSearchInput, {InputProps} from "./input/ContactSearchInput"
 import ContactSearchBtn, {BtnProps} from "./btn/ContactSearchBtn"
-import ContactSearchLabel, {LabelProps} from "./label/label"
+import {LabelProps} from "./label/label"
+import {InputLabel} from "../input/label/inputLabel"
 
 export interface ContactSearchFormProps {
     input: InputProps,
@@ -12,7 +13,7 @@ export interface ContactSearchFormProps {
     events: Record<string, any>
 }
 
-class ContactSearchForm extends Block<ContactSearchFormProps> {
+export class ContactSearchForm extends Block<ContactSearchFormProps> {
 	constructor(props: ContactSearchFormProps) {
 		super("div", props)
 	}
@@ -24,10 +25,8 @@ class ContactSearchForm extends Block<ContactSearchFormProps> {
 	}
 
 	protected init() {
-		this.children.Label = new ContactSearchLabel({...this.props.label})
+		this.children.Label = new InputLabel({...this.props.label, class: "contacts__footer-label"})
 		this.children.Input = new ContactSearchInput({...this.props.input})
 		this.children.Btn = new ContactSearchBtn({...this.props.btn})
 	}
 }
-
-export default ContactSearchForm

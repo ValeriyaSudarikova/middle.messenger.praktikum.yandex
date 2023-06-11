@@ -7,14 +7,13 @@ import BtnSubmit, {BtnSubmitProps} from "../../components/btnSubmit/btnSubmit"
 import HeaderText, {HeaderTextProps} from "./headerText/headerText"
 //img
 import no_icon from "../../icons/no_avatar.svg"
-import chatIcon from "../../icons/message.svg"
 import friends from "../../icons/friends.svg"
 import exit from "../../icons/exit.svg"
 import settingsIcon from "../../icons/settings.svg"
 import next from "../../icons/next.svg"
 //utils
 import AuthController from "../../controllers/AuthController"
-import {changeData, CloseMenu, findProperty, isEqual, login, OpenMenu} from "../../utils/helpers"
+import {changeData, CloseMenu, findProperty, isEqual, OpenMenu} from "../../utils/helpers"
 import Contacts from "../../components/chatFriendsSections/contacts"
 import Settings, {SettingsProps} from "../../components/settings/settings"
 import store, { withStore} from "../../utils/Store"
@@ -24,7 +23,6 @@ import {userController} from "../../controllers/UserController"
 import {ChatItem} from "../../api/chats/types"
 import {Message} from "../../controllers/MessageController"
 import {Chat, ChatProps} from "../../components/chat/chat"
-import authController from "../../controllers/AuthController";
 
 interface MenuProps {
 	user: UserData
@@ -64,7 +62,7 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	closeAll() {
-		let components = []
+		const components = []
 
 		if (this.settings && this.chats) {
 			components.push(this.chats, this.settings)
@@ -98,15 +96,15 @@ class MenuBase extends Block<MenuProps> {
 		})
 
 		switch (target) {
-			case "Список чатов":
+		case "Список чатов":
 				this.chats!.show()
-				break
-			case "Активный чат":
-				this.active_chat?.show()
-				break
-			case "Настройки":
+			break
+		case "Активный чат":
+			this.active_chat?.show()
+			break
+		case "Настройки":
 				this.settings!.show()
-				break
+			break
 		}
 	}
 
@@ -229,7 +227,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "Введите имя",
 							value: this.UserData!.first_name ? findProperty(this.UserData!, UsedDataKeys.first_name) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -245,7 +242,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "введите фамилию",
 							value: this.UserData!.second_name ? findProperty(this.UserData!, UsedDataKeys.second_name) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -261,7 +257,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "введите имя пользователя",
 							value: this.UserData!.login ? findProperty(this.UserData!, UsedDataKeys.login) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -277,7 +272,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "адрес эл. почты",
 							value: this.UserData!.email ? findProperty(this.UserData!, UsedDataKeys.email) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -293,7 +287,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "введите имя",
 							value: this.UserData!.display_name ? findProperty(this.UserData!, UsedDataKeys.display_name) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -309,7 +302,6 @@ class MenuBase extends Block<MenuProps> {
 							placeholder: "",
 							value: this.UserData!.phone ? findProperty(this.UserData!, UsedDataKeys.phone) : "",
 							events: {
-								focus: () => {},
 								blur: (Event: any) => {changeData(Event, {}, this.newUserData, Event.target.name, Event.target.value)}
 							}
 						}
@@ -438,11 +430,11 @@ class MenuBase extends Block<MenuProps> {
 	}
 
 	getMessages(props: {messages: Message[], chat: ChatItem | undefined, users: UserData[]}) {
-		let messages: Message[] | [];
+		let messages: Message[] | []
 
 		if (props && props.chat && !props.messages) {
 
-			messages = store.getState().selected_chat_data!.messages;
+			messages = store.getState().selected_chat_data!.messages
 		}
 		else {
 			messages = props.messages
@@ -543,7 +535,7 @@ class MenuBase extends Block<MenuProps> {
 				this.children.ActiveChat = this.active_chat
 			}
 
-			this.active_chat_data = newProps.selected_chat;
+			this.active_chat_data = newProps.selected_chat
 		}
 
 		if (newProps.user !== this.UserData) {
@@ -553,7 +545,7 @@ class MenuBase extends Block<MenuProps> {
 				userStatus: "online"
 			})
 
-			this.UserData = newProps.user;
+			this.UserData = newProps.user
 		}
 
 		if (newProps.user.avatar !== this.UserAvatar) {

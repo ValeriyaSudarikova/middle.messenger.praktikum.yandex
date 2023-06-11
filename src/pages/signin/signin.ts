@@ -9,13 +9,12 @@ import {login, ShowFocusMessage} from "../../utils/helpers"
 import logo from "../../img/logo.svg"
 import AuthController from "../../controllers/AuthController"
 import {SignInData} from "../../api/auth/types"
-import Router from "../../utils/Router"
 import {Routes} from "../../index"
 
 export interface SigninProps {
-	form: SigninFormProps,
-	logo: ImgProps,
-	link: linkProps
+	form?: SigninFormProps,
+	logo?: ImgProps,
+	link?: linkProps
 }
 
 export default class Signin extends Block<SigninProps> {

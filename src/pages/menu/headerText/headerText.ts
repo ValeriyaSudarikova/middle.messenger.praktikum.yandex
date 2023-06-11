@@ -1,7 +1,6 @@
 import Block from "../../../utils/Block"
 import template from "./headerText.hbs"
-import Text, {TextProps} from "../../../components/header/text/headerText"
-import {isEqual} from "../../../utils/helpers"
+import Text from "../../../components/header/text/headerText"
 
 export interface HeaderTextProps {
 	userName: string,

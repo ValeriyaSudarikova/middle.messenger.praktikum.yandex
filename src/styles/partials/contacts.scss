@@ -4,7 +4,7 @@
   background: $sub-color;
   width: 418px;
   height: 90vh;
-  box-shadow: -4px 17px 30px rgba(0, 0, 0 / 0.09);
+  box-shadow: -4px 17px 30px rgba(0, 0, 0, 0.09);
   border-radius: 30px;
   margin-left: 27px;
   padding: 10px 27px;
@@ -132,7 +132,7 @@
     &-label {
       display: block;
       position: absolute;
-      top: -10px;
+      height: 40px;
       width: 160px;
       text-align: center;
       background: $sub-color;

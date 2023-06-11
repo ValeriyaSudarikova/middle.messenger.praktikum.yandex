@@ -65,8 +65,12 @@ class AuthController {
 
 			Router.go(Routes.menu)
 
-		} catch (e) {
-			this.createErrorMessage("Проверьте корректность данных и повторите попытку входа", ".errored__message-dark", "button")
+		} catch (error: any) {
+			if (error.reason === "User already in system") {
+				Router.go(Routes.menu)
+			} else {
+				this.createErrorMessage("Проверьте корректность данных и повторите попытку входа", ".errored__message-dark", "button")
+			}
 		}
 	}
 

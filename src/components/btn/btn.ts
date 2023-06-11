@@ -6,6 +6,7 @@ export interface BtnProps extends PropsWithRouter{
 	class: string,
 	href: string,
 	label: string,
+	navigate?: () => void
 	events?: Record<string, any>
 }
 class BaseBtn extends Block<BtnProps> {
@@ -13,7 +14,7 @@ class BaseBtn extends Block<BtnProps> {
 		super("div", {
 			...props,
 			events: {
-				click: () => this.navigate()
+				click: () => this.props.navigate ? this.props.navigate() : this.navigate()
 			}
 		})
 	}
@@ -24,6 +25,7 @@ class BaseBtn extends Block<BtnProps> {
 
 	protected render():DocumentFragment {
 		return this.compile(template, {...this.props})
+
 	}
 }
 export const Btn = withRouter(BaseBtn)

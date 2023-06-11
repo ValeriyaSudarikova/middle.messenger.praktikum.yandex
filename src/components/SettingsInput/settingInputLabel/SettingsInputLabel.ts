@@ -8,7 +8,7 @@ export interface SettingsInputLabelProps {
 }
 
 export default class SettingsInputLabel extends Block<SettingsInputLabelProps> {
-	constructor(props) {
+	constructor(props: SettingsInputLabelProps) {
 		super("div", props)
 	}
 

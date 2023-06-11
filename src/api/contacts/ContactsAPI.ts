@@ -1,5 +1,5 @@
 import BaseAPI from "../baseApi"
-import {SignInData, SignUpData, UserData} from "../auth/types"
+import {UserData} from "../auth/types"
 
 export class ContactsAPI extends BaseAPI {
 	constructor() {

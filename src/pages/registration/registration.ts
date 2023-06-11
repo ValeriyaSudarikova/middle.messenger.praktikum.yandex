@@ -4,10 +4,9 @@ import Img, {ImgProps} from "../../components/img/img"
 import RegForm, {RegFormProps} from "./regForm/RegForm"
 //img
 import logo from "../../img/logo_black.svg"
-import {checkOnErrors, getData, ShowFocusMessage} from "../../utils/helpers"
+import {getData, ShowFocusMessage} from "../../utils/helpers"
 import {SignUpData} from "../../api/auth/types"
 import AuthController from "../../controllers/AuthController"
-import store, {withStore} from "../../utils/Store"
 
 export interface RegistrationProps {
 	logo?: ImgProps,
